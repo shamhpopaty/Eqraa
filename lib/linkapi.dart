@@ -16,8 +16,7 @@ class AppLink {
 
   //--------------resetPassword=============
   static const String checkEmail = "$server/forgetpassword/checkemail.php";
-  static const String resetPassword =
-      "$server/auth/password-reset.php";
+  static const String resetPassword = "$server/auth/password-reset.php";
   static const String verifyCodePassword =
       "$server/forgetpassword/verifycode.php";
 

@@ -14,12 +14,14 @@ class SignupData {
     const maxRetries = 5;
     for (var i = 0; i < maxRetries; i++) {
       try {
-        var response = await crud.postData(AppLink.signUp, {
-          "name": username,
-          "email": email,
-          "password": password,
-
-        });
+        var response = await crud.postData(
+          AppLink.signUp,
+          {
+            "name": username,
+            "email": email,
+            "password": password,
+          },
+        );
         return response.fold((l) => l, (r) => r);
       } catch (e) {
         await Future.delayed(const Duration(seconds: 2));

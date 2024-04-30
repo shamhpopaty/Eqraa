@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:eqraa/core/app_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'binding/initinalbinding.dart';
+
+import 'core/binding/initinalbinding.dart';
 import 'core/constant/apptheme.dart';
 import 'core/localization/changelocal.dart';
 import 'core/localization/translation.dart';

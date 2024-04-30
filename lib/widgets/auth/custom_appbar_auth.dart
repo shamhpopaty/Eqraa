@@ -18,7 +18,7 @@ class CustomAppBarAuth extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       title: Text(
         title,
-        style: MyTextStyle().title,
+        style: MyTextStyle.title,
       ),
     );
   }

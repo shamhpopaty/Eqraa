@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../routes.dart';
 import '../constant/color.dart';
-import '../../routes.dart';
 import '../services/services.dart';
 
 @override

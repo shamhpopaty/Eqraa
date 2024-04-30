@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../core/constant/imageassets.dart';
-import 'onboardingmodel.dart';
+import '../../models/onboardingmodel.dart';
 
 List<OnBoardingModel> onBoardingList = [
   OnBoardingModel(

@@ -7,7 +7,6 @@ import 'package:eqraa/core/functions/alert_exit_app.dart';
 import 'package:eqraa/core/functions/valid_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../widgets/auth/custom_button_auth.dart';
 import '../../../widgets/auth/custom_forgot_password.dart';
 import '../../../widgets/auth/custom_password_textform.dart';

@@ -11,7 +11,7 @@ class CustomTextBodyAuth extends StatelessWidget {
       margin: const EdgeInsets.only(top: 15),
       child: Text(
         body!,
-        style: MyTextStyle().body,
+        style: MyTextStyle.body,
       ),
     );
   }

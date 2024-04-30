@@ -11,7 +11,7 @@ class CustomTitleAuth extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title!,
-      style: MyTextStyle().title,
+      style: MyTextStyle.title,
     );
   }
 }

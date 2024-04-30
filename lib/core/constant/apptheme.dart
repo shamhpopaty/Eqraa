@@ -133,29 +133,41 @@ ThemeData themeArabic = ThemeData(
 );
 
 class MyTextStyle {
-  TextStyle title = theme.textTheme.headline6!.copyWith(
+  static TextStyle title = theme.textTheme.headline6!.copyWith(
     color: AppColor.primaryColor,
-    fontSize: 24.fSize,
+    fontSize: 24,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle titleSmall = theme.textTheme.headline6!.copyWith(
+    color: AppColor.primaryColor,
+    fontSize: 22,
+    fontFamily: 'Inter',
+    fontWeight: FontWeight.w700,
+  );
+  static TextStyle titleLarge = theme.textTheme.headline6!.copyWith(
+    color: AppColor.primaryColor,
+    fontSize: 26,
     fontFamily: 'Inter',
     fontWeight: FontWeight.w700,
   );
 
-  TextStyle body = theme.textTheme.bodyText1!.copyWith(
+  static TextStyle body = theme.textTheme.bodyText1!.copyWith(
     color: AppColor.gray,
-    fontSize: 18.fSize,
+    fontSize: 18,
     fontFamily: 'Inter',
     fontWeight: FontWeight.w500,
   );
 
-  TextStyle bodyLarge = theme.textTheme.headline5!.copyWith(
+  static TextStyle bodyLarge = theme.textTheme.headline5!.copyWith(
     color: AppColor.thirdColor,
-    fontSize: 20.fSize,
+    fontSize: 20,
     fontFamily: 'Inter',
     fontWeight: FontWeight.w600,
   );
-  TextStyle bodySmall = theme.textTheme.headline4!.copyWith(
+  static TextStyle bodySmall = theme.textTheme.headline4!.copyWith(
     color: AppColor.gray,
-    fontSize: 16.fSize,
+    fontSize: 16,
     fontFamily: 'Inter',
     fontWeight: FontWeight.w400,
   );
