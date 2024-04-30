@@ -65,7 +65,7 @@ class LoginControllerImp extends LoginController {
       print("=============================== Controller $response ");
       statusRequest = handlingData(response);
       if (StatusRequest.success == statusRequest) {
-        if (response['status'] == "success") {
+
           userModel = UserModel.fromJson(response['data']);
           if (userModel.usersApprove == "1") {
             // data.addAll(response['data']);
@@ -110,7 +110,7 @@ class LoginControllerImp extends LoginController {
           //     title: "ُWarning", middleText: "Email Or Password Not Correct");
           statusRequest = StatusRequest.failure;
         }
-      }
+
       update();
     } else {}
   }

@@ -10,15 +10,15 @@ class SignupData {
   Crud crud;
   SignupData(this.crud);
 
-  postData(String username, String email, String password, phone) async {
+  postData(String username, String email, String password) async {
     const maxRetries = 5;
     for (var i = 0; i < maxRetries; i++) {
       try {
         var response = await crud.postData(AppLink.signUp, {
-          "username": username,
+          "name": username,
           "email": email,
           "password": password,
-          "phone": phone,
+
         });
         return response.fold((l) => l, (r) => r);
       } catch (e) {

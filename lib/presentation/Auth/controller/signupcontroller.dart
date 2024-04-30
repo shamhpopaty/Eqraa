@@ -4,6 +4,7 @@ import 'package:cool_alert/cool_alert.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../../core/class/status_request.dart';
 import '../../../core/constant/color.dart';
@@ -25,7 +26,7 @@ class SignUpControllerImp extends SignUpController {
   late TextEditingController password;
   late TextEditingController repassword;
   late TextEditingController username;
-  late TextEditingController phone;
+
   GlobalKey<FormState> formState = GlobalKey<FormState>();
   late RxBool? secure = true.obs;
   StatusRequest statusRequest = StatusRequest.none;
@@ -42,11 +43,14 @@ class SignUpControllerImp extends SignUpController {
       statusRequest = StatusRequest.loading;
       update();
       var response = await signupData.postData(
-          username.text, email.text, password.text, phone.text);
+          username.text, email.text, password.text);
       statusRequest = handlingData(response);
+ print("Printing before-----------------");
+      print(response);
+      print (statusRequest);
       if (StatusRequest.success == statusRequest) {
-        if (response['status'] == "success") {
-          print(response['status']);
+
+          print(response);
           Get.rawSnackbar(
               title: "32".tr,
               icon: const Icon(
@@ -56,8 +60,7 @@ class SignUpControllerImp extends SignUpController {
               messageText: Text("58".tr),
               backgroundColor: AppColor.primaryColor,
               isDismissible: true);
-          // Get.offAndToNamed(AppRoutes.verifyCodeSignUp,
-          //     arguments: {"email": email.text});
+          verifyCodeSignUp();
         } else {
           print("Email: ");
           print(email.text);
@@ -72,13 +75,13 @@ class SignUpControllerImp extends SignUpController {
               });
           statusRequest = StatusRequest.failure;
         }
-      }
+
       update();
     } else {
       print("Not Valid");
     }
     update();
-    throw UnimplementedError();
+
   }
 
   @override
@@ -92,7 +95,7 @@ class SignUpControllerImp extends SignUpController {
     email = TextEditingController();
     password = TextEditingController();
     repassword = TextEditingController();
-    phone = TextEditingController();
+
     username = TextEditingController();
 
     super.onInit();
@@ -105,7 +108,7 @@ class SignUpControllerImp extends SignUpController {
     password.dispose();
     repassword.dispose();
     username.dispose();
-    phone.dispose();
+
     super.dispose();
   }
 
@@ -117,8 +120,26 @@ class SignUpControllerImp extends SignUpController {
   }
 
   @override
-  verifyCodeSignUp() {
-    // TODO: implement checkEmail
-    throw UnimplementedError();
+  verifyCodeSignUp(){
+    showMaterialModalBottomSheet(
+      backgroundColor: AppColor.primaryColor,
+      context: Get.context!,
+      builder: (context) =>  Column(
+        children: [
+          Container(
+           child:  Text("VeriFyCode")
+          ),
+
+          Text("UserName is : ${username.text}"),
+          Text("email is : ${email.text}"),
+          Text("pass is : ${password.text}"),
+        ],
+      ),
+
+    );
+    
+    
   }
+  
+
 }
