@@ -13,14 +13,14 @@ class LoginData {
   LoginData(this.crud);
 
   postdata(
-    String username,
+    String email,
     String password,
   ) async {
     const maxRetries = 20;
     for (var i = 0; i < maxRetries; i++) {
       try {
         var response = await crud.postData(AppLink.signIn, {
-          "username": username,
+          "email": email,
           "password": password,
         });
         return response.fold((l) => l, (r) => r);

@@ -5,31 +5,48 @@ import '../functions/check_internet.dart';
 import 'status_request.dart';
 
 class Crud {
-  Future<Either<StatusRequest, Map>> postData(
-    String linkurl,
-    Map<String, String> data,
-  ) async {
-    var headers = {
-      'Accept': 'application/json',
-      // Since you're using bodyFields, you don't need to set the Content-Type header here.
-      // The http package will automatically set it to application/x-www-form-urlencoded.
-    };
-    var request = http.Request('POST', Uri.parse(linkurl));
-    request.bodyFields = data; // Use bodyFields for URL-encoded form data
-    request.headers.addAll(headers);
-
-    http.StreamedResponse response = await request.send();
+  // Future<Either<StatusRequest, Map>> postData(
+  //   String linkurl,
+  //   Map<String, String> data,
+  // ) async {
+  //   var headers = {
+  //     'Accept': 'application/json',
+  //     // Since you're using bodyFields, you don't need to set the Content-Type header here.
+  //     // The http package will automatically set it to application/x-www-form-urlencoded.
+  //   };
+  //   var request = http.Request('POST', Uri.parse(linkurl));
+  //   request.bodyFields = data; // Use bodyFields for URL-encoded form data
+  //   request.headers.addAll(headers);
+  //
+  //   http.StreamedResponse response = await request.send();
+  //   print(response.statusCode);
+  //   if (response.statusCode == 200 || response.statusCode == 201) {
+  //     String responseBody = await response.stream.bytesToString();
+  //     Map responsebody = jsonDecode(responseBody);
+  //     print(responsebody);
+  //     return Right(responsebody);
+  //   } else {
+  //     print(response.reasonPhrase);
+  //     return const Left(StatusRequest.serverFailure);
+  //   }
+  // }
+  Future<Either<StatusRequest, Map>> postData(String linkurl, Map data) async {
+    // if (await checkInternet()) {
+    var response = await http.post(Uri.parse(linkurl), body: data);
     print(response.statusCode);
+
     if (response.statusCode == 200 || response.statusCode == 201) {
-      String responseBody = await response.stream.bytesToString();
-      Map responsebody = jsonDecode(responseBody);
+      Map responsebody = jsonDecode(response.body);
       print(responsebody);
       return Right(responsebody);
     } else {
-      print(response.reasonPhrase);
       return const Left(StatusRequest.serverFailure);
     }
   }
+  // else {
+  //   return const Left(StatusRequest.offlineFailure);
+  // }
+  // }
 
   Future<Either<StatusRequest, Map>> getDataWithToken(
     String linkurl,

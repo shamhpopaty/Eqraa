@@ -1,15 +1,11 @@
 // ignore_for_file: avoid_print, unused_local_variable
 
 import 'package:cool_alert/cool_alert.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-
 // import 'package:firebase_messaging/firebase_messaging.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
 import '../../../core/class/handlingdataview.dart';
 import '../../../core/class/status_request.dart';
 import '../../../core/constant/apptheme.dart';
@@ -44,12 +40,12 @@ class LoginControllerImp extends LoginController {
   @override
   void onInit() {
     userModel = UserModel();
-    FirebaseMessaging.instance.getToken().then((value) {
-      print("Token is : ");
-      print(value);
-      String? token = value;
-      update();
-    });
+    // FirebaseMessaging.instance.getToken().then((value) {
+    //   print("Token is : ");
+    //   print(value);
+    //   String? token = value;
+    //   update();
+    // });
 
     email = TextEditingController();
     password = TextEditingController();
@@ -70,11 +66,11 @@ class LoginControllerImp extends LoginController {
       print("=============================== Controller $response ");
       statusRequest = handlingData(response);
       if (StatusRequest.success == statusRequest) {
-        if (response['status'] == "success") {
-          userModel = UserModel.fromJson(response['data']);
-          // if (userModel.usersApprove == "1") {
+        // if (response['status'] == "success") {
+        userModel = UserModel.fromJson(response['data']);
+        if (userModel.verifiedAt != null) {
           // data.addAll(response['data']);
-
+          print("Success  $response");
           myServices.sharedPreferences.setString("id", userModel.usersId!);
           myServices.sharedPreferences
               .setString("username", userModel.usersName!);
@@ -85,8 +81,8 @@ class LoginControllerImp extends LoginController {
           String? userid = myServices.sharedPreferences.getString("id");
 
           ///TODO: FireBase Subscribe to topic
-          FirebaseMessaging.instance.subscribeToTopic("admin");
-          FirebaseMessaging.instance.subscribeToTopic("admin$userid");
+          // FirebaseMessaging.instance.subscribeToTopic("admin");
+          // FirebaseMessaging.instance.subscribeToTopic("admin$userid");
 
           Get.snackbar(
               "Welcome ${myServices.sharedPreferences.getString("username")} !",
@@ -116,8 +112,9 @@ class LoginControllerImp extends LoginController {
         //     title: "ُWarning", middleText: "Email Or Password Not Correct");
         statusRequest = StatusRequest.failure;
       }
+      // }
+      update();
     }
-    update();
   }
 
   @override
