@@ -6,11 +6,11 @@ class VerifyCodeSignupData {
   VerifyCodeSignupData(this.crud);
 
   postdata(
-    String verifycode,
+    String code,
     String email,
   ) async {
     var response = await crud.postData(AppLink.verifycode, {
-      "verifycode": verifycode,
+      "code": code,
       "email": email,
     });
     return response.fold((l) => l, (r) => r);

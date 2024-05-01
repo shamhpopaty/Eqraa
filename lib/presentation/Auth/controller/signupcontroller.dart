@@ -49,8 +49,9 @@ class SignUpControllerImp extends SignUpController {
           await signupData.postData(username.text, email.text, password.text);
       statusRequest = handlingData(response);
       print("Printing before-----------------");
-      print(response);
-      print(statusRequest);
+      print("Response : $response");
+      print("status request  : $statusRequest");
+      // print(statusRequest);
       if (StatusRequest.success == statusRequest) {
         print(response);
         Get.rawSnackbar(
@@ -63,7 +64,7 @@ class SignUpControllerImp extends SignUpController {
             backgroundColor: AppColor.primaryColor,
             isDismissible: true);
         verifyCodeSignUp();
-      } else {
+      } else  if (StatusRequest.failure == statusRequest){
         print("Email: ");
         print(email.text);
         CoolAlert.show(
@@ -71,7 +72,20 @@ class SignUpControllerImp extends SignUpController {
             context: Get.overlayContext!,
             type: CoolAlertType.info,
             confirmBtnColor: AppColor.primaryColor,
-            text: Strings.existed,
+            text: "${Strings.existed} Response : $response",
+            onConfirmBtnTap: () {
+              statusRequest = StatusRequest.failure;
+            });
+        statusRequest = StatusRequest.failure;
+      } else  if (StatusRequest.serverFailure == statusRequest){
+        print("Email: ");
+        print(email.text);
+        CoolAlert.show(
+            backgroundColor: AppColor.primaryColor,
+            context: Get.overlayContext!,
+            type: CoolAlertType.info,
+            confirmBtnColor: AppColor.primaryColor,
+            text: "Server Failure $response",
             onConfirmBtnTap: () {
               statusRequest = StatusRequest.failure;
             });
@@ -152,7 +166,7 @@ class SignUpControllerImp extends SignUpController {
                   textStyle: MyTextStyle.body.copyWith(color: AppColor.white),
                   fieldWidth: 50.0,
                   borderRadius: BorderRadius.circular(20),
-                  numberOfFields: 5,
+                  numberOfFields: 6,
                   borderColor: const Color(0xFF512DA8),
                   //set to true to show as box or false to show as dash
                   showFieldAsBox: true,
@@ -197,7 +211,7 @@ class SignUpControllerImp extends SignUpController {
     var response = await verifyCodeSignupData.postdata(verifyCode, email.text);
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
-      if (response['status'] == "success") {
+      // if (response['status'] == "success") {
         Get.back();
         success();
       } else {
@@ -214,7 +228,7 @@ class SignUpControllerImp extends SignUpController {
 
         return statusRequest = StatusRequest.none;
       }
-    }
+
     update();
   }
 
@@ -262,5 +276,7 @@ class SignUpControllerImp extends SignUpController {
     );
     await Future.delayed(const Duration(seconds: 2));
     Get.back();
+    await Future.delayed(const Duration(seconds:1));
+    Get.offNamed(AppRoutes.login);
   }
 }

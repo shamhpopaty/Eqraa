@@ -39,7 +39,7 @@ class Crud {
       Map responsebody = jsonDecode(response.body);
       print(responsebody);
       return Right(responsebody);
-    } else {
+    } else if (response.statusCode == 400){ return const Left(StatusRequest.failure);}else{
       return const Left(StatusRequest.serverFailure);
     }
   }

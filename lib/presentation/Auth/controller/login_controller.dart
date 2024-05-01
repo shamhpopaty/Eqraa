@@ -10,6 +10,7 @@ import '../../../core/class/handlingdataview.dart';
 import '../../../core/class/status_request.dart';
 import '../../../core/constant/apptheme.dart';
 import '../../../core/constant/color.dart';
+import '../../../core/constant/strings.dart';
 import '../../../core/functions/handling_data_controller.dart';
 import '../../../core/services/services.dart';
 import '../../../routes.dart';
@@ -95,24 +96,38 @@ class LoginControllerImp extends LoginController {
               backgroundColor: AppColor.primaryColor,
               isDismissible: true);
           Get.offAllNamed(AppRoutes.homePage);
-        } else {
-          statusRequest = StatusRequest.success;
-          //verify ..
-          showBottomSheet();
+        } else if (StatusRequest.failure == statusRequest) {
+          print("Email: ");
+          print(email.text);
+          CoolAlert.show(
+              backgroundColor: AppColor.primaryColor,
+              context: Get.overlayContext!,
+              type: CoolAlertType.info,
+              confirmBtnColor: AppColor.primaryColor,
+              text: "${Strings.existed} Response : $response",
+              onConfirmBtnTap: () {
+                // statusRequest = StatusRequest.failure;
+              });
+          statusRequest = StatusRequest.failure;
+        } else if (StatusRequest.serverFailure == statusRequest) {
+          print("Email: ");
+          print(email.text);
+          CoolAlert.show(
+              backgroundColor: AppColor.primaryColor,
+              context: Get.overlayContext!,
+              type: CoolAlertType.info,
+              confirmBtnColor: AppColor.primaryColor,
+              text: "Server Failure $response",
+              onConfirmBtnTap: () {
+                statusRequest = StatusRequest.failure;
+              });
+          statusRequest = StatusRequest.failure;
         }
+
+        update();
       } else {
-        CoolAlert.show(
-          context: Get.overlayContext!,
-          type: CoolAlertType.error,
-          backgroundColor: AppColor.primaryColor,
-          confirmBtnColor: AppColor.primaryColor,
-          text: "Email Or Password Not Correct",
-        );
-        // Get.defaultDialog(
-        //     title: "ُWarning", middleText: "Email Or Password Not Correct");
-        statusRequest = StatusRequest.failure;
+        print("Not Valid");
       }
-      // }
       update();
     }
   }
