@@ -68,7 +68,7 @@ class LoginControllerImp extends LoginController {
       statusRequest = handlingData(response);
       if (StatusRequest.success == statusRequest) {
         // if (response['status'] == "success") {
-        userModel = UserModel.fromJson(response['data']);
+        userModel = UserModel.fromJson(response['user']);
         if (userModel.verifiedAt != null) {
           // data.addAll(response['data']);
           print("Success  $response");
