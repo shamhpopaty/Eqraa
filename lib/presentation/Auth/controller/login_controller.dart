@@ -33,6 +33,7 @@ class LoginControllerImp extends LoginController {
   late TextEditingController email;
   late TextEditingController password;
   late UserModel userModel = UserModel();
+  List messageFailure = [];
   RxBool secure = true.obs;
 
   StatusRequest statusRequest = StatusRequest.none;
@@ -71,7 +72,7 @@ class LoginControllerImp extends LoginController {
         userModel = UserModel.fromJson(response['user']);
         if (userModel.verifiedAt != null) {
           // data.addAll(response['data']);
-          print("Success  $response");
+          print("Success Response :  $response");
           myServices.sharedPreferences.setString("id", userModel.usersId!);
           myServices.sharedPreferences
               .setString("username", userModel.usersName!);
@@ -96,35 +97,42 @@ class LoginControllerImp extends LoginController {
               backgroundColor: AppColor.primaryColor,
               isDismissible: true);
           Get.offAllNamed(AppRoutes.homePage);
-        } else if (StatusRequest.failure == statusRequest) {
-          print("Email: ");
-          print(email.text);
-          CoolAlert.show(
-              backgroundColor: AppColor.primaryColor,
-              context: Get.overlayContext!,
-              type: CoolAlertType.info,
-              confirmBtnColor: AppColor.primaryColor,
-              text: "${Strings.existed} Response : $response",
-              onConfirmBtnTap: () {
-                // statusRequest = StatusRequest.failure;
-              });
-          statusRequest = StatusRequest.failure;
-        } else if (StatusRequest.serverFailure == statusRequest) {
-          print("Email: ");
-          print(email.text);
-          CoolAlert.show(
-              backgroundColor: AppColor.primaryColor,
-              context: Get.overlayContext!,
-              type: CoolAlertType.info,
-              confirmBtnColor: AppColor.primaryColor,
-              text: "Server Failure $response",
-              onConfirmBtnTap: () {
-                statusRequest = StatusRequest.failure;
-              });
-          statusRequest = StatusRequest.failure;
+          // Case the account is not verified.
+        } else {
+          verifyCodeSignUp();
         }
-
-        update();
+      }
+      // Case Status Code is Failure ( email or password wrong )
+      else if (StatusRequest.failure == statusRequest) {
+        // messageFailure.addAll(response['password']);
+        // messageFailure.isEmpty
+        //     ? messageFailure.addAll(response['email'])
+        //     : ['invalid'];
+        print("Email: ");
+        print(email.text);
+        CoolAlert.show(
+            backgroundColor: AppColor.primaryColor,
+            context: Get.overlayContext!,
+            type: CoolAlertType.info,
+            confirmBtnColor: AppColor.primaryColor,
+            text: "${Strings.existed} Response : $response ",
+            onConfirmBtnTap: () {
+              // statusRequest = StatusRequest.failure;
+            });
+        statusRequest = StatusRequest.failure;
+      } else if (StatusRequest.serverFailure == statusRequest) {
+        print("Email: ");
+        print(email.text);
+        CoolAlert.show(
+            backgroundColor: AppColor.primaryColor,
+            context: Get.overlayContext!,
+            type: CoolAlertType.info,
+            confirmBtnColor: AppColor.primaryColor,
+            text: "Server Failure $response",
+            onConfirmBtnTap: () {
+              statusRequest = StatusRequest.failure;
+            });
+        statusRequest = StatusRequest.failure;
       } else {
         print("Not Valid");
       }
@@ -150,24 +158,24 @@ class LoginControllerImp extends LoginController {
     var response = await verifyCodeSignupData.postdata(verifyCode, email.text);
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
-      if (response['status'] == "success") {
-        Get.back();
-        success();
-      } else {
-        CoolAlert.show(
-            context: Get.overlayContext!,
-            type: CoolAlertType.error,
-            text: "Verify Code Is Not Correct",
-            confirmBtnText: "Try Again",
-            confirmBtnColor: AppColor.primaryColor,
-            onConfirmBtnTap: () {
-              statusRequest = StatusRequest.none;
-              update();
-            });
+      // if (response['status'] == "success") {
+      Get.back();
+      success();
+    } else {
+      CoolAlert.show(
+          context: Get.overlayContext!,
+          type: CoolAlertType.error,
+          text: "Verify Code Is Not Correct",
+          confirmBtnText: "Try Again",
+          confirmBtnColor: AppColor.primaryColor,
+          onConfirmBtnTap: () {
+            statusRequest = StatusRequest.none;
+            update();
+          });
 
-        return statusRequest = StatusRequest.none;
-      }
+      return statusRequest = StatusRequest.none;
     }
+
     update();
   }
 
@@ -187,42 +195,39 @@ class LoginControllerImp extends LoginController {
         isDismissible: true);
   }
 
-  logOutDefault() {
-    CoolAlert.show(
-        context: Get.context!,
-        cancelBtnText: "62".tr,
-        confirmBtnText: "61".tr,
-        showCancelBtn: true,
-        backgroundColor: AppColor.primaryColor,
-        animType: CoolAlertAnimType.rotate,
-        borderRadius: BorderSide.strokeAlignCenter,
-        type: CoolAlertType.warning,
-        loopAnimation: true,
-        confirmBtnColor: AppColor.primaryColor,
-        title: "63".tr,
-        text: "64".tr,
-        onConfirmBtnTap: () async {
-          myServices.sharedPreferences.clear();
-
-          Get.rawSnackbar(
-            title: "32".tr,
-            backgroundColor: AppColor.secondColor,
-            icon: const Icon(
-              Icons.logout_outlined,
-              color: AppColor.white,
-            ),
-            messageText: Text(
-              "55".tr,
-              style: const TextStyle(color: AppColor.white),
-            ),
-          );
-          await Future.delayed(const Duration(milliseconds: 500));
-          Get.toNamed(AppRoutes.language);
-          // update();
-        });
+  void success() async {
+    showMaterialModalBottomSheet(
+      backgroundColor: AppColor.secondColor,
+      // duration: const Duration(seconds: 3),
+      animationCurve: const ElasticInCurve(),
+      context: Get.context!,
+      builder: (context) => Container(
+        height: 400,
+        padding: const EdgeInsets.all(15),
+        child: Column(children: [
+          const Center(
+              child: Icon(
+            Icons.check_circle_outline,
+            size: 200,
+            color: AppColor.green,
+          )),
+          Text("37".tr,
+              style: MyTextStyle.titleLarge
+                  .copyWith(fontSize: 30, color: AppColor.white)),
+          Text("38".tr,
+              style: MyTextStyle.title
+                  .copyWith(fontSize: 30, color: AppColor.white)),
+          const Spacer(),
+        ]),
+      ),
+    );
+    await Future.delayed(const Duration(seconds: 2));
+    Get.back();
+    await Future.delayed(const Duration(seconds: 1));
+    Get.offNamed(AppRoutes.login);
   }
 
-  showBottomSheet() {
+  verifyCodeSignUp() {
     showMaterialModalBottomSheet(
       backgroundColor: AppColor.secondColor,
       animationCurve: const ElasticInCurve(),
@@ -257,7 +262,7 @@ class LoginControllerImp extends LoginController {
                   textStyle: MyTextStyle.body.copyWith(color: AppColor.white),
                   fieldWidth: 50.0,
                   borderRadius: BorderRadius.circular(20),
-                  numberOfFields: 5,
+                  numberOfFields: 6,
                   borderColor: const Color(0xFF512DA8),
                   //set to true to show as box or false to show as dash
                   showFieldAsBox: true,
@@ -294,36 +299,6 @@ class LoginControllerImp extends LoginController {
         ),
       ),
     );
-  }
-
-  void success() async {
-    showMaterialModalBottomSheet(
-      backgroundColor: AppColor.secondColor,
-      // duration: const Duration(seconds: 3),
-      animationCurve: const ElasticInCurve(),
-      context: Get.context!,
-      builder: (context) => Container(
-        height: 400,
-        padding: const EdgeInsets.all(15),
-        child: Column(children: [
-          const Center(
-              child: Icon(
-            Icons.check_circle_outline,
-            size: 200,
-            color: AppColor.green,
-          )),
-          Text("37".tr,
-              style: MyTextStyle.titleLarge
-                  .copyWith(fontSize: 30, color: AppColor.white)),
-          Text("38".tr,
-              style: MyTextStyle.title
-                  .copyWith(fontSize: 30, color: AppColor.white)),
-          const Spacer(),
-        ]),
-      ),
-    );
-    await Future.delayed(const Duration(seconds: 2));
-    Get.back();
   }
 
   @override

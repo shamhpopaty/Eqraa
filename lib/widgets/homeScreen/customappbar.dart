@@ -14,6 +14,7 @@ class CustomAppBarHome extends GetView<HomeScreenControllerImp>
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: AppColor.primaryColor,
       title: Shimmer.fromColors(
         baseColor: AppColor.white,
         highlightColor: AppColor.black,

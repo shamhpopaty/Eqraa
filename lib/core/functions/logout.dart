@@ -24,8 +24,8 @@ logOut() {
     // text: "64".tr,
     onConfirmBtnTap: () async {
       String? userid = myServices.sharedPreferences.getString("id");
-      FirebaseMessaging.instance.unsubscribeFromTopic("admin");
-      FirebaseMessaging.instance.unsubscribeFromTopic("admin$userid");
+      // FirebaseMessaging.instance.unsubscribeFromTopic("user");
+      // FirebaseMessaging.instance.unsubscribeFromTopic("user$userid");
       myServices.sharedPreferences.setString("step", "1");
       if (myServices.sharedPreferences.getString("step") == "1") {
         Get.rawSnackbar(
