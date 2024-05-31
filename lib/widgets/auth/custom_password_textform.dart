@@ -14,7 +14,7 @@ class AuthPasswordTextFormField extends StatelessWidget {
     required this.hintText,
     this.mycontroller,
     this.onIconPressed,
-    required this.validator,
+    required this.validator, required String textBox,
   });
 
   @override

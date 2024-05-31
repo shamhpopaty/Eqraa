@@ -20,7 +20,6 @@ import '../data/datasource/signup_data.dart';
 abstract class SignUpController extends GetxController {
   signUp();
   secures(bool secure);
-
   toLogin();
   verifyCodeSignUp();
 }

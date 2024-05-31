@@ -1,3 +1,8 @@
+import 'package:eqraa/presentation/Auth/view/login.dart';
+import 'package:eqraa/presentation/Auth/view/signup.dart';
+import 'package:eqraa/presentation/My_Profile/view/my_profile.dart';
+import 'package:eqraa/presentation/forgot_password/screens/forgotpassword.dart';
+import 'package:eqraa/presentation/homeScreens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/services/services.dart';
@@ -16,7 +21,11 @@ class HomeScreenControllerImp extends HomeScreenController {
   MyServices myServices = Get.find();
 
   List<Widget> listPage = [
-    const HomePage(),
+
+    Classification(),
+    SignUp(),
+    MyProfile(),
+    ForgotPassword(),
   ];
 
   List bottomAppBar = [
@@ -25,9 +34,18 @@ class HomeScreenControllerImp extends HomeScreenController {
       "icon": Icons.home,
     },
     {
-      "title": "44".tr,
-      "icon": Icons.settings,
+      "title": "45".tr,
+      "icon": Icons.favorite,
     },
+    {
+      "title": "46".tr,
+      "icon": Icons.person,
+    },
+    {
+      "title": "143".tr,
+      "icon": Icons.chat,
+    },
+
   ];
   initialData() {
     lang = myServices.sharedPreferences.getString("lang");

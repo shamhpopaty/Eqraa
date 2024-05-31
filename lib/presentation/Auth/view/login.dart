@@ -5,6 +5,7 @@ import 'package:eqraa/core/class/status_request.dart';
 import 'package:eqraa/core/constant/color.dart';
 import 'package:eqraa/core/functions/alert_exit_app.dart';
 import 'package:eqraa/core/functions/valid_input.dart';
+import 'package:eqraa/presentation/forgot_password/screens/forgotpassword.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../widgets/auth/custom_button_auth.dart';
@@ -15,6 +16,7 @@ import '../../../widgets/auth/custom_text_form.dart';
 import '../../../widgets/auth/custom_title_auth.dart';
 import '../../../widgets/auth/logo_auth.dart';
 import '../../../widgets/auth/no_account_auth.dart';
+import '../../forgot_password/screens/forgotpassword.dart';
 import '../controller/login_controller.dart';
 
 class Login extends StatelessWidget {
@@ -22,7 +24,7 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => LoginControllerImp());
+  Get.lazyPut(() => LoginControllerImp());
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: AppColor.white,
@@ -59,7 +61,7 @@ class Login extends StatelessWidget {
                         validator: (String? val) {
                           print(val);
                           return validInput(val!, 5, 50, "email");
-                        },
+                        }, textBox: '',
                       ),
                       //Enter Password
                       AuthPasswordTextFormField(
@@ -70,14 +72,14 @@ class Login extends StatelessWidget {
                         // secure: controller.secure.value,
                         // onIconPressed: controller.secures(controller.secure.value),
                         mycontroller: controller.password,
-                        hintText: "lbl10".tr,
+                        hintText: "lbl10".tr, textBox: '',
                       ),
 
                       const SizedBox(
                         height: 10,
                       ),
                       CustomForgotPassword(onTap: () {
-                        controller.toForgotPassword();
+                        controller.ForgotPassword();
                       }),
                       CustomBottomAuth(
                         text: '15'.tr,

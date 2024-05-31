@@ -22,7 +22,7 @@ class CustomButtonOnBoarding extends GetView<OnBoardingControllerImp> {
           children: [
             SvgPicture.asset(
               AppImageAssets.onboardingbutton,
-              color: AppColor.primaryColor,
+              color: AppColor.secondColor,
               height: 53.v,
               width: 53.h,
             ),

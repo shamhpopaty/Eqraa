@@ -15,7 +15,7 @@ class OnBoardingControllerImp extends OnBoardingController {
 
   int currentPage = 0;
   MyServices myServices = Get.find();
-  @override
+
   @override
   next() {
     if (currentPage >= onBoardingList.length - 1) {

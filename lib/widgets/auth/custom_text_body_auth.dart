@@ -12,6 +12,7 @@ class CustomTextBodyAuth extends StatelessWidget {
       child: Text(
         body!,
         style: MyTextStyle.body,
+        textAlign: TextAlign.center,
       ),
     );
   }

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:eqraa/presentation/forgot_password/screens/forgotpassword.dart';
+
 import '../../../core/class/handlingdataview.dart';
 import '../../../core/class/status_request.dart';
 import '../../../core/constant/apptheme.dart';
@@ -14,6 +16,7 @@ import '../../../core/constant/strings.dart';
 import '../../../core/functions/handling_data_controller.dart';
 import '../../../core/services/services.dart';
 import '../../../routes.dart';
+import '../../forgot_password/screens/forgotpassword.dart';
 import '../data/datasource/login_data.dart';
 import '../data/datasource/verifycodesignup_data.dart';
 import '../../../models/user_model.dart';
@@ -22,6 +25,7 @@ abstract class LoginController extends GetxController {
   login();
   toForgotPassword();
   toSignUp();
+  ForgotPassword();
 }
 
 class LoginControllerImp extends LoginController {
@@ -36,9 +40,12 @@ class LoginControllerImp extends LoginController {
   List messageFailure = [];
   RxBool secure = true.obs;
 
+
   StatusRequest statusRequest = StatusRequest.none;
 
   MyServices myServices = Get.find();
+
+  get books => null;
   @override
   void onInit() {
     userModel = UserModel();
@@ -71,6 +78,9 @@ class LoginControllerImp extends LoginController {
         // if (response['status'] == "success") {
         userModel = UserModel.fromJson(response['user']);
         if (userModel.verifiedAt != null) {
+          String? token= response['token'];
+          myServices.sharedPreferences
+              .setString("token", token!);
           // data.addAll(response['data']);
           print("Success Response :  $response");
           myServices.sharedPreferences.setString("id", userModel.usersId!);
@@ -78,6 +88,7 @@ class LoginControllerImp extends LoginController {
               .setString("username", userModel.usersName!);
           myServices.sharedPreferences
               .setString("email", userModel.usersEmail!);
+
 
           myServices.sharedPreferences.setString("step", "2");
           String? userid = myServices.sharedPreferences.getString("id");
@@ -96,7 +107,12 @@ class LoginControllerImp extends LoginController {
               colorText: AppColor.white,
               backgroundColor: AppColor.primaryColor,
               isDismissible: true);
-          Get.offAllNamed(AppRoutes.homePage);
+
+          if(userModel.isAdmin==0){Get.offAllNamed(AppRoutes.homePage);}else {
+            //TODO: Admin Home Page
+
+          }
+
           // Case the account is not verified.
         } else {
           verifyCodeSignUp();
@@ -130,9 +146,9 @@ class LoginControllerImp extends LoginController {
             confirmBtnColor: AppColor.primaryColor,
             text: "Server Failure $response",
             onConfirmBtnTap: () {
-              statusRequest = StatusRequest.failure;
+              statusRequest = StatusRequest.serverFailure;
             });
-        statusRequest = StatusRequest.failure;
+        statusRequest = StatusRequest.serverFailure;
       } else {
         print("Not Valid");
       }
@@ -304,5 +320,10 @@ class LoginControllerImp extends LoginController {
   @override
   toSignUp() {
     Get.toNamed(AppRoutes.signUp);
+  }
+
+  @override
+  ForgotPassword() {
+    Get.toNamed(AppRoutes.forgotPassword);
   }
 }

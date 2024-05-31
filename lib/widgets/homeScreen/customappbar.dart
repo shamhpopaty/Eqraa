@@ -15,22 +15,13 @@ class CustomAppBarHome extends GetView<HomeScreenControllerImp>
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: AppColor.primaryColor,
-      title: Shimmer.fromColors(
-        baseColor: AppColor.white,
-        highlightColor: AppColor.black,
-        period: const Duration(seconds: 10),
-        child: Text(
-          "${controller.username}",
-        ),
-      ),
-      actions: [
-        Column(
-          children: [
-            Text("${controller.id}"),
-            Text("${controller.phone}"),
-          ],
-        )
-      ],
+/*title: Shimmer.fromColors(
+  baseColor: AppColor.white,
+  highlightColor: AppColor.black,
+  child:
+  Text('التصنيفات',
+    textDirection: TextDirection.ltr,),
+),*/
     );
   }
 }

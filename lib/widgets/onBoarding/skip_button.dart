@@ -1,3 +1,4 @@
+import 'package:eqraa/core/constant/color.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/app_export.dart';
@@ -21,7 +22,7 @@ class SkipButton extends StatelessWidget {
             text,
             style: theme.textTheme.titleMedium,
           ),
-          CustomImageView(
+          CustomImageView(color: AppColor.secondColor,
             imagePath: AppImageAssets.onBoardingButtonNext,
             height: 18.v,
             width: 10.h,

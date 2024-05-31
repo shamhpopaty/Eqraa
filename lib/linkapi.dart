@@ -1,5 +1,8 @@
 class AppLink {
-  static const String server = "http://192.168.1.106:8000/api";
+
+  static const String ip = "localhost";
+  static const String server = "http://$ip:8000/api";
+
 
   //============Image=============================
   static const String imageStatic = "";
@@ -12,13 +15,28 @@ class AppLink {
   static const String verifycode = "$server/auth/email-verify";
   static const String signIn = "$server/auth/sign-in";
   static const String resend = "$server/auth/resend";
-  static const String forgotPassword = "$server/auth/forgot-password";
 
   //--------------resetPassword=============
-  static const String checkEmail = "$server/forgetpassword/checkemail";
+  static const String forgotPassword = "$server/auth/forgot-password";
+
   static const String resetPassword = "$server/auth/password-reset";
-  static const String verifyCodePassword = "$server/forgetpassword/verifycode";
+  static const String verifyCodePassword =
+      "$server/auth/check-password-reset-code";
 
   //------home-----
-  static const String home = "$server/home";
+  static const String home = "$server/books/";
+
+  //------profile------
+  static const String profile = "$server/";
+
+  //------showbook-----
+  static const String showbook = "$server/";
+
+  //-------descriptionbook----
+  static const String descriptionbook = "$server/";
+
+  //-----bookscreen-----
+  static const String bookscreen = "$server/";
+
+
 }

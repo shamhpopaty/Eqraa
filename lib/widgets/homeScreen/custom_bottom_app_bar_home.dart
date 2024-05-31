@@ -16,11 +16,10 @@ class CustomBottomAppBarHome extends StatelessWidget {
             child: Row(
               // mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                ...List.generate(controller.listPage.length + 1, ((index) {
-                  int i = index > 2 ? index - 1 : index;
-                  return index == 2
-                      ? const Spacer()
-                      : Expanded(
+                ...List.generate(controller.listPage.length , ((index) {
+                  int i = index ;
+                  return  Expanded(
+                    flex: 1,
                           child: CustomBottomAppBarButton(
                               title: controller.bottomAppBar[i]['title'],
                               icon: controller.bottomAppBar[i]['icon'],

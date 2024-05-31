@@ -44,7 +44,7 @@ class SignUp extends StatelessWidget {
                       },
                       mycontroller: controller.username,
                       hintText: "20".tr,
-                      iconPrefix: Icons.person_outline,
+                      iconPrefix: Icons.person_outline, textBox: '',
                     ),
                     AuthTextFormField(
                       keyboardtype: TextInputType.emailAddress,
@@ -53,7 +53,7 @@ class SignUp extends StatelessWidget {
                       },
                       mycontroller: controller.email,
                       hintText: "18".tr,
-                      iconPrefix: Icons.email_outlined,
+                      iconPrefix: Icons.email_outlined, textBox: '',
                     ),
                     AuthPasswordTextFormField(
                       validator: (val) {
@@ -63,7 +63,7 @@ class SignUp extends StatelessWidget {
                       // onIconPressed: controller.secures(controller.secure.value),
                       mycontroller: controller.password,
 
-                      hintText: "19".tr,
+                      hintText: "19".tr, textBox: '',
                     ),
                     const SizedBox(
                       height: 10,

@@ -177,6 +177,32 @@ class MyTranslation extends Translations {
           "140": "ادخل اسم شارعك",
           "141": "يجب عليك إضافة عنوان للتوصيل",
           "142": "الإشعارات",
+          "143": "المحادثات",
+          "144": "اللغة",
+          "145": "ثيم التطبيق",
+          "146": "طلبات الصداقة",
+          "147": "المساعدة",
+          "148": "بحث",
+          "149": "الحساب الشخصي",
+          "150": "الإحصائيات",
+          "151": "عدد الأصدقاء",
+          "152": "الكتب المفضلة",
+          "153": "السيرة الذاتية",
+          "154": "رابط حساب تواصل اجتماعي",
+          "155": "عدد الكتب المقروءة",
+          "156": "التحديات",
+          "157": "اسم الكتاب",
+          "158": "اسم الكاتب",
+          "159": "الوصف",
+
+
+
+
+
+
+
+
+
         },
         "en": {
           "lbl": "إدارة شاملة ",
@@ -355,6 +381,30 @@ class MyTranslation extends Translations {
           "140": "Enter Your Street Name",
           "141": "You are required to include a delivery address.",
           "142": "Notifications",
+          "143": "Chat",
+          "144": "Language",
+          "145": "Theme",
+          "146": "Friendship requests",
+          "147": "Help",
+          "148": "Search",
+          "149": "My Profile",
+          "150": "statistics",
+          "151": "Number of friends",
+          "152": "Favorite books",
+          "153": "The Biography",
+          "154": "Social media account link",
+          "155": "Number of Reading books",
+          "156": "challenges",
+          "157": "BookName",
+          "158": "WriterBook",
+          "159": "Description",
+
+
+
+
+
+
+
         }
       };
 }

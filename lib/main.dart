@@ -13,6 +13,7 @@ import 'core/services/services.dart';
 import 'core/utils/logger.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   await initialServices();
   Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
             title: 'Eqraa',
             translations: MyTranslation(),
             theme: theme,
-            // routes: routes,
+            //routes: routes,
             getPages: routes,
             initialBinding: InitialBindings(),
           );

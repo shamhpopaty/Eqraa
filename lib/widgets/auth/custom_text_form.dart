@@ -16,7 +16,7 @@ class AuthTextFormField extends StatelessWidget {
     this.mycontroller,
     this.keyboardtype,
     this.validator,
-    this.iconPrefix,
+    this.iconPrefix, required String textBox,
   });
 
   @override

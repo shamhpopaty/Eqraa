@@ -20,7 +20,7 @@ class OnBoardingBody extends StatelessWidget {
       children: [
         SvgPicture.asset(
           AppImageAssets.onBoardingSubtract,
-          color: AppColor.thirdColor,
+          color: AppColor.secondColor,
           height: 228.v,
           width: 356.h,
         ),
@@ -49,7 +49,7 @@ class OnBoardingBody extends StatelessWidget {
                   padding: EdgeInsets.only(left: 50.h),
                   child: Text(
                     title,
-                    style: theme.textTheme.headlineSmall,
+                    style: MyTextStyle.title.copyWith(color: AppColor.white),
                   ),
                 ),
                 SizedBox(height: 16.v),
@@ -61,7 +61,7 @@ class OnBoardingBody extends StatelessWidget {
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyLarge,
+                    style: MyTextStyle.bodySmall.copyWith(color: AppColor.white),
                   ),
                 ),
                 SizedBox(height: 50.v)

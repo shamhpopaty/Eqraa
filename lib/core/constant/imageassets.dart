@@ -13,9 +13,14 @@ class AppImageAssets {
 
   static const String logo = "$root/logo.png";
   static const String book = "$root/book.jpg";
+  static const String islamicbook = "$root/islamicbook.jpg";
+  static const String forgotpassword = "$root/forgotpassword.jpg";
+
+
   static const String onBoardingImageOne = "$rootLottie/onboarding/1.json";
   static const String onBoardingImageTwo = "$rootLottie/onboarding/2.json";
   static const String onBoardingImageThree = "$rootLottie/onboarding/3.json";
+
 
   static const String loading = "$rootLottie/loading.json";
   static const String offline = "$rootLottie/offline.json";
@@ -26,4 +31,10 @@ class AppImageAssets {
   static const String splash = "$rootLottie/Splash.json";
 
   static const String logoSVG = "$root/logo.svg";
+  static const String profileimage = "$root/profile.jpg";
+  static const String camera = "$root/camera.jpg";
+  static const String coversh = "$root/coversh.png";
+
+
+
 }

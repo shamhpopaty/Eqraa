@@ -5,6 +5,7 @@ import '../functions/check_internet.dart';
 import 'status_request.dart';
 
 class Crud {
+
   // Future<Either<StatusRequest, Map>> postData(
   //   String linkurl,
   //   Map<String, String> data,
@@ -31,9 +32,11 @@ class Crud {
   //   }
   // }
   Future<Either<StatusRequest, Map>> postData(String linkurl, Map data) async {
+
     // if (await checkInternet()) {
     var response = await http.post(Uri.parse(linkurl), body: data);
     print(response.statusCode);
+
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       Map responsebody = jsonDecode(response.body);
@@ -51,11 +54,15 @@ class Crud {
   Future<Either<StatusRequest, Map>> getDataWithToken(
     String linkurl,
     String bearerToken,
+
   ) async {
     try {
-      var response = await http.get(
+
+
+    var response = await http.get(
         Uri.parse(linkurl),
         headers: {
+
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $bearerToken',
         },
@@ -63,7 +70,7 @@ class Crud {
 
       print('Response Status Code: ${response.statusCode}');
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
         Map responsebody = jsonDecode(response.body);
         print('Response Body: $responsebody');
         return Right(responsebody);
@@ -107,5 +114,69 @@ class Crud {
       print('Error: $e');
       return const Left(StatusRequest.failure);
     }
+  }
+}
+Future<Either<StatusRequest, Map>> get(
+    String linkurl,
+    String? bearerToken,
+    ) async {
+  try {
+    var response = await http.get(
+      Uri.parse(linkurl),
+      headers: {
+
+    'Content-Type': 'application/json',
+        'Authorization': 'Bearer $bearerToken',
+      },
+    );
+
+    print('Response Status Code: ${response.statusCode}');
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      Map responsebody = jsonDecode(response.body);
+      print('Response Body: $responsebody');
+      return Right(responsebody);
+    } else if (response.statusCode == 400) {
+      return const Left(StatusRequest.failure);
+    } else {
+      print('Error: Server Failure');
+      return const Left(StatusRequest.serverFailure);
+    }
+  } catch (e) {
+    print('Error: $e');
+    return const Left(StatusRequest.offlineFailure);
+  }
+}
+Future<Either<StatusRequest, Map>> post(
+    String linkurl,
+    String bearerToken, {
+      Map<String, dynamic>?
+      body, // Add an optional body parameter for POST requests
+    }) async {
+  try {
+    var response = await http.post(
+      Uri.parse(linkurl),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $bearerToken',
+      },
+      body: jsonEncode(body), // Encode the body as JSON
+    );
+
+    print('Response Status Code: ${response.statusCode}');
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      Map responsebody = jsonDecode(response.body);
+      print('Response Body: $responsebody');
+      return Right(responsebody);
+    } else if (response.statusCode == 400) {
+      return const Left(StatusRequest.failure);
+    } else {
+      print('Error: Server Failure');
+      return const Left(StatusRequest.serverFailure);
+    }
+  } catch (e) {
+    print('Error: $e');
+    return const Left(StatusRequest.failure);
   }
 }
