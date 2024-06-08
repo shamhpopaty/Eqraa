@@ -15,7 +15,7 @@ class LocaleController extends GetxController {
     appTheme = langcode == "en" ? themeEnglish : themeArabic;
     Get.updateLocale(locale);
     Get.changeTheme(appTheme);
-  }
+                }
 
   @override
   void onInit() {

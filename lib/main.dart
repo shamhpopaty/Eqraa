@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
             builder: DevicePreview.appBuilder,
             title: 'Eqraa',
             translations: MyTranslation(),
-            theme: theme,
+            theme: controller.appTheme,
             //routes: routes,
             getPages: routes,
             initialBinding: InitialBindings(),

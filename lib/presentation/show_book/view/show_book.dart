@@ -6,6 +6,7 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import '../../../core/constant/color.dart';
 import '../../../core/constant/imageassets.dart';
 import '../../../core/functions/logout.dart';
+import '../../../widgets/drop_down_list_drawer.dart';
 import '../../../widgets/homeScreen/customappbar.dart';
 import '../controller/show_book_controller.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -135,15 +136,16 @@ class _ShowBookState extends State<ShowBook> {
 
                       ],)
                   ),
-                  ListTile(
-                    title: Text("144".tr),
-                    onTap: () {},
-                  ),
-
-                  ListTile(
-                    title: Text("145".tr),
-                    onTap: () {},
-                  ),
+                  // ListTile(
+                  //   title: Text("144".tr),
+                  //   onTap: () {},
+                  // ),
+                  DropDownList(),
+                  DropDownList(isThemeApp:true),
+                  // ListTile(
+                  //   title: Text("145".tr),
+                  //   onTap: () {},
+                  // ),
                   ListTile(
                     title: Text("146".tr),
                     onTap: () {},
