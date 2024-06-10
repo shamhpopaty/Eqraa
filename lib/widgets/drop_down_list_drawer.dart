@@ -56,11 +56,22 @@ class DropDownList extends StatelessWidget {
       ))
           .toList(),
       borderRadius: BorderRadius.circular(15), onChanged: (String? value) {
-        if(value == 'Ar'){
-          changeLang('ar');
+        if(!isThemeApp)
+        {
+          if(value == 'Ar'){
+            changeLang('ar');
+          }else {
+            changeLang('en');
+          }
         }else {
-          changeLang('en');
+
+          if(value == 'light'){
+            // changeLang('ar');
+          }else {
+            // changeLang('en');
+          }
         }
+
     },
     );
   }
