@@ -93,13 +93,18 @@ class Description_Books extends StatelessWidget {
                 color: Colors.black,
                 fontSize: 20,
               ),),
-              Text("هذا الكتيب تلخيص لسلسلة الشمائل المحمدية للدكتور أدهم العاسمي وهو يتحدث عن صفات النبي محمد عليه الصلاة والسلام الخَلقية والخُلُقية"),
+              Text("هذا الكتيب تلخيص لسلسلة الشمائل المحمدية لفضيلة الشيخ أدهم العاسمي وهو يتحدث عن صفات النبي محمد عليه الصلاة والسلام الخَلقية والخُلُقية"),
               SizedBox(
                 height: 20,
               ),
-              MaterialButton(onPressed: (){
-                Get.toNamed(AppRoutes.showbook, parameters: {'pdfPath': 'assets/My_PDF/تلخيص_كتاب_السيرة_النبوية_الشريفة_1.pdf'});
 
+              MaterialButton(onPressed: (){
+
+                // Get.toNamed(AppRoutes.showbook, parameters: {'pdfPath': 'assets/My_PDF/sera.pdf'}
+                // );
+// Get.to(ShowBook(pdfPath: '',));
+
+Navigator.push(context, MaterialPageRoute(builder: (context) => ShowBook(pdfPath: '',)));
               },
               color: AppColor.secondColor,
                 child: Text("Open Book",
