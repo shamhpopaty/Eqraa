@@ -14,7 +14,7 @@ import flutter_local_notifications
 import path_provider_foundation
 import shared_preferences_foundation
 import sqflite
-import syncfusion_pdfviewer_macos
+import syncfusion_flutter_pdfviewer_macos
 import url_launcher_macos
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {

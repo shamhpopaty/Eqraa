@@ -1,275 +1,98 @@
-import 'package:eqraa/core/app_export.dart';
+
+import 'package:flutter/services.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 
-// import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import '../../../core/constant/color.dart';
-import '../../../core/constant/imageassets.dart';
-import '../../../core/functions/logout.dart';
-import '../../../widgets/drop_down_list_drawer.dart';
-import '../../../widgets/homeScreen/customappbar.dart';
-import '../controller/show_book_controller.dart';
-import 'package:permission_handler/permission_handler.dart';
-
-/*class ShowBook extends StatelessWidget {
-  const ShowBook({super.key});
+class BookListScreen extends StatelessWidget {
+  final List<Book> books = [
+    Book('Book 1', 'assets/pdf/doaa.pdf'),
+    Book('Book 2', 'assets/pdf/sera.pdf'),
+    Book('Book 3', 'assets/pdf/hart.pdf'),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ShowBookControllerImp());
-    return GetBuilder<ShowBookControllerImp>(
-        builder: (controller) {
-
-      return SafeArea(child: Scaffold(
-          appBar: const CustomAppBarHome(),
-    drawer: Drawer(
-    child: ListView(
-    padding: EdgeInsets.zero,
-    children: [
-    DrawerHeader(
-    decoration:const BoxDecoration(
-    color: AppColor.primaryColor,
-    ),
-    child: Column(children: [
-    const CircleAvatar(backgroundImage: AssetImage(AppImageAssets.profileimage),),
-    const SizedBox(height: 20,),
-    Text("${controller.myServices.sharedPreferences.getString("username")}"),
-
-    ],)
-    ),
-    ListTile(
-    title: Text( "144".tr),
-    onTap: () {
-    },
-    ),
-
-    ListTile(
-    title: Text("145".tr),
-    onTap: () {
-    },
-    ),
-    ListTile(
-    title: Text( "146".tr),
-    onTap: () {
-    },
-    ),
-    ListTile(
-    title: Text( "147".tr),
-    onTap: () {
-    },
-    ),
-    ListTile(
-    title: Text( "56".tr),
-    onTap: () {
-    logOut();
-    },
-    ),
-    ],
-    ),
-    ),
-    body:PDFView(
-      filePath: Uri.file("assets/My_PDF/تلخيص_كتاب_السيرة_النبوية_الشريفة_1.pdf").toString(),
-      enableSwipe: true,
-      swipeHorizontal: true,
-      autoSpacing: false,
-      pageFling: false,
-      pageSnap: true,
-      onError: (error) {
-        print(error.toString());
-      },
-      onPageError: (page, error) {
-        print('$page: ${error.toString()}');
-      },
-onPageChanged: (page, total)=> print("page change: $page/$total"),
-    ),
-    ) ,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Books'),
+      ),
+      body: ListView.builder(
+        itemCount: books.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(books[index].title),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BookDetailScreen(book: books[index]),
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
-    );
 }
+
+class Book {
+  final String title;
+  final String assetPath;
+
+  Book(this.title, this.assetPath);
 }
-*/
 
-class ShowBook extends StatefulWidget {
-  final String pdfPath;
+class BookDetailScreen extends StatefulWidget {
+  final Book book;
 
-  ShowBook({super.key, required this.pdfPath}) {
-    ;
-  }
+  BookDetailScreen({required this.book});
 
   @override
-  _ShowBookState createState() => _ShowBookState();
+  _BookDetailScreenState createState() => _BookDetailScreenState();
 }
 
-class _ShowBookState extends State<ShowBook> {
+class _BookDetailScreenState extends State<BookDetailScreen> {
+  String? localPath;
+
+  @override
   void initState() {
     super.initState();
-    // _requestPermissions();
+    fromAsset(widget.book.assetPath, 'temp.pdf').then((f) {
+      setState(() {
+        localPath = f.path;
+      });
+    });
   }
 
-  // late PDFViewController pdfViewController;
-  // Future<void> _requestPermissions() async {
-  //   if (await Permission.storage.request().isGranted) {
-  //     Get.toNamed(AppRoutes.showbook, parameters: {'pdfPath': '"assets/My_PDF/تلخيص_كتاب_السيرة_النبوية_الشريفة_1.pdf"'});
-  //   } else {
-  //     // الإذن مرفوض، قم بإظهار رسالة للمستخدم
-  //     print('Permission denied');
-  //   }
-  // }
+  Future<File> fromAsset(String asset, String filename) async {
+    try {
+      var dir = await getApplicationDocumentsDirectory();
+      var file = File("${dir.path}/$filename");
+      var data = await rootBundle.load(asset);
+      var bytes = data.buffer.asUint8List();
+      await file.writeAsBytes(bytes, flush: true);
+      return file;
+    } catch (e) {
+      throw Exception("Error copying asset to local storage: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Get.put(ShowBookControllerImp());
-    return SafeArea(
-      child: Scaffold(
-        appBar: const CustomAppBarHome(),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                  decoration: const BoxDecoration(
-                    color: AppColor.primaryColor,
-                  ),
-                  child: Column(
-                    children: [
-                      const CircleAvatar(
-                        backgroundImage:
-                            AssetImage(AppImageAssets.profileimage),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-
-                      // Text("${controller.myServices.sharedPreferences
-                      //     .getString("username")}"),
-                    ],
-                  )),
-              // ListTile(
-              //   title: Text("144".tr),
-              //   onTap: () {},
-              // ),
-              DropDownList(),
-              DropDownList(isThemeApp: true),
-              // ListTile(
-              //   title: Text("145".tr),
-              //   onTap: () {},
-              // ),
-              ListTile(
-                title: Text("146".tr),
-                onTap: () {},
-              ),
-              ListTile(
-                title: Text("147".tr),
-                onTap: () {},
-              ),
-              ListTile(
-                title: Text("56".tr),
-                onTap: () {
-                  logOut();
-                },
-              ),
-            ],
-          ),
-        ),
-        body: SfPdfViewer.asset('assets/pdf/sera.pdf'),
-
-        /*
-        body: SfPdfViewer.network(
-          'assets/pdf/sera.pdf'
-
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.book.title),
       ),
-       */
-      ),
+      body: localPath != null
+          ? PDFView(
+        filePath: localPath,
+      )
+          : Center(child: CircularProgressIndicator()),
     );
   }
-/*
-
-  @override
-  Widget build(BuildContext context) {
-    Get.put(ShowBookControllerImp());
-    return GetBuilder<ShowBookControllerImp>(
-        builder: (controller) {
-          return SafeArea(child: Scaffold(
-            appBar: const CustomAppBarHome(),
-            drawer: Drawer(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  DrawerHeader(
-                      decoration: const BoxDecoration(
-                        color: AppColor.primaryColor,
-                      ),
-                      child: Column(children: [
-                        const CircleAvatar(backgroundImage: AssetImage(
-                            AppImageAssets.profileimage),),
-                        const SizedBox(height: 20,),
-                        Text("${controller.myServices.sharedPreferences
-                            .getString("username")}"),
-
-                      ],)
-                  ),
-                  // ListTile(
-                  //   title: Text("144".tr),
-                  //   onTap: () {},
-                  // ),
-                  DropDownList(),
-                  DropDownList(isThemeApp:true),
-                  // ListTile(
-                  //   title: Text("145".tr),
-                  //   onTap: () {},
-                  // ),
-                  ListTile(
-                    title: Text("146".tr),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("147".tr),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("56".tr),
-                    onTap: () {
-                      logOut();
-                    },
-                  ),
-                ],
-              ),
-            ),
-            body:
-
-            PDFView(
-              filePath: widget.pdfPath,
-              autoSpacing: true,
-              enableSwipe: true,
-              pageSnap: true,
-              swipeHorizontal: true,
-              onError: (error) {
-                print(error);
-              },
-              onPageError: (page, error) {
-                print('$page: ${error.toString()}');
-              },
-              onViewCreated: (PDFViewController vc) {
-                pdfViewController = vc;
-              },
-              /*onPageChanged: (int page, int total) {
-          print('page change: $page/$total');
-        },*/
-            ),
-          ),
-          );
-        }
-    );
-  }
-   */
 }
-
-// Future<void> _requestPermissions() async {
-//   if (await Permission.storage.request().isGranted) {
-//     Get.toNamed(AppRoutes.showbook, parameters: {'pdfPath': '"assets/My_PDF/تلخيص_كتاب_السيرة_النبوية_الشريفة_1.pdf"'});
-//   } else {
-//     // الإذن مرفوض، قم بإظهار رسالة للمستخدم
-//     print('Permission denied');
-//   }
-// }

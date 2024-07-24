@@ -194,6 +194,7 @@ class MyTranslation extends Translations {
           "157": "اسم الكتاب",
           "158": "اسم الكاتب",
           "159": "الوصف",
+          "160": "طلبات الإرسال",
 
 
 
@@ -381,7 +382,7 @@ class MyTranslation extends Translations {
           "140": "Enter Your Street Name",
           "141": "You are required to include a delivery address.",
           "142": "Notifications",
-          "143": "Chat",
+          "143": "Friends",
           "144": "Language",
           "145": "Theme",
           "146": "Friendship requests",
@@ -398,6 +399,7 @@ class MyTranslation extends Translations {
           "157": "BookName",
           "158": "WriterBook",
           "159": "Description",
+          "160": "SendRequest",
 
 
 

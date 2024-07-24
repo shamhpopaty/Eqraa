@@ -9,13 +9,11 @@ import '../../../widgets/homeScreen/customappbar.dart';
 import '../../description_books/view/desc_books.dart';
 import '../controller/books_screen_controller.dart';
 
-
-
 List Books=[
-  {"NameBook": "الشمائل المحمدية"},
-  {"NameBook": "السيرة النبوية الشريفة"},
-  {"NameBook": "حياة القلوب"},
-  {"NameBook": "كتيب الادعية"}
+  {"NameBook": "shmail"},
+  {"NameBook": "sera"},
+  {"NameBook": "hart"},
+  {"NameBook": "doaa"}
 ];
 
 class Books_Screen extends StatelessWidget {

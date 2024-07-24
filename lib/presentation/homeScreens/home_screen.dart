@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/functions/logout.dart';
 import '../../widgets/drop_down_list_drawer.dart';
+import '../recieved_requestScreen/screen/recieved_request.dart';
+import '../send_requestsScreen/screens/send_requests.dart';
 import 'homescreen_controller.dart';
 import '../../../core/functions/alert_exit_app.dart';
 import '../../widgets/homeScreen/custom_bottom_app_bar_home.dart';
@@ -55,6 +57,13 @@ class HomeScreen extends StatelessWidget {
                   ListTile(
                     title: Text( "146".tr),
                     onTap: () {
+                      Get.to(()=>RecievedRequests());
+                    },
+                  ),
+                  ListTile(
+                    title: Text( "160".tr),
+                    onTap: () {
+                      Get.to(()=>Request());
                     },
                   ),
                   ListTile(
@@ -68,6 +77,7 @@ class HomeScreen extends StatelessWidget {
                       logOut();
                     },
                   ),
+
                 ],
               ),
             ),

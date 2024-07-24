@@ -63,7 +63,7 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoutes.forgotPassword, page: () => const ForgotPassword ()),
   GetPage(name: AppRoutes.myprofile, page: () => const MyProfile ()),
   GetPage(name: AppRoutes.editigprofile, page: () =>  EditProfile ()),
-  GetPage(name: AppRoutes.showbook, page: () =>   ShowBook (pdfPath: '',)),
+  //GetPage(name: AppRoutes.showbook, page: () =>   ShowBook (pdfPath: '',)),
   GetPage(name: AppRoutes.descriptionbook, page: () =>  const Description_Books ()),
   GetPage(name: AppRoutes.bookscreen, page: () =>   Books_Screen ()),
 
@@ -78,12 +78,5 @@ List<GetPage<dynamic>>? routes = [
 
 
 
-List<GetPage> getPages = [
-  GetPage(
-    name: AppRoutes.showbook,
-    page: () => ShowBook(
-      pdfPath: Get.parameters['pdfPath'] ?? '',
-    ),
-  ),
-];
+
 

@@ -46,7 +46,7 @@ class _ClassificationState extends State<Classification> {
                 mainAxisSpacing: 5.0,
                 crossAxisSpacing: 5.0,
               ),
-              itemCount: Books.length,
+              itemCount: Category.length,
               itemBuilder: (context,  i) {
                 return GestureDetector(
                   onTap: () {
@@ -74,7 +74,7 @@ class _ClassificationState extends State<Classification> {
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
-                          color: AppColor.primaryColor,
+                          color: AppColor.black,
                         ),
                       ),
                     ),

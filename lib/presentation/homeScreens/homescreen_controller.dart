@@ -6,6 +6,7 @@ import 'package:eqraa/presentation/homeScreens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/services/services.dart';
+import '../friendScreen/screen/friends.dart';
 import '../home/home.dart';
 
 abstract class HomeScreenController extends GetxController {
@@ -25,7 +26,7 @@ class HomeScreenControllerImp extends HomeScreenController {
     Classification(),
     SignUp(),
     MyProfile(),
-    ForgotPassword(),
+    Friends(),
   ];
 
   List bottomAppBar = [

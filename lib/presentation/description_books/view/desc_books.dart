@@ -5,6 +5,7 @@ import '../../../core/constant/imageassets.dart';
 import '../../../core/functions/logout.dart';
 import '../../../widgets/drop_down_list_drawer.dart';
 import '../../../widgets/homeScreen/customappbar.dart';
+import '../../send_requestsScreen/screens/send_requests.dart';
 import '../../show_book/view/show_book.dart';
 import '../controller/desc_books_controller.dart';
 
@@ -22,7 +23,9 @@ class Description_Books extends StatelessWidget {
             AppBar(
               backgroundColor: AppColor.primaryColor,
               actions: [
-                IconButton(onPressed: (){},
+                IconButton(onPressed: (){
+                  Get.back();
+                },
                     icon: Icon(Icons.arrow_forward)),
               ],
             ),
@@ -64,6 +67,12 @@ class Description_Books extends StatelessWidget {
                 onTap: () {},
               ),
               ListTile(
+                title: Text( "160".tr),
+                onTap: () {
+                  Get.to(()=>Request());
+                },
+              ),
+              ListTile(
                 title: Text("56".tr),
                 onTap: () {
                   logOut();
@@ -99,12 +108,16 @@ class Description_Books extends StatelessWidget {
               ),
 
               MaterialButton(onPressed: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookListScreen(),));
 
-                // Get.toNamed(AppRoutes.showbook, parameters: {'pdfPath': 'assets/My_PDF/sera.pdf'}
+                // Get.toNamed(AppRoutes.showbook, parameters: {'pdfPath': 'assets/pdf/sera.pdf'}
                 // );
 // Get.to(ShowBook(pdfPath: '',));
 
-Navigator.push(context, MaterialPageRoute(builder: (context) => ShowBook(pdfPath: '',)));
+//Navigator.push(context, MaterialPageRoute(builder: (context) => ShowBook(pdfPath: 'assets/pdf/sera.pdf',)));
               },
               color: AppColor.secondColor,
                 child: Text("Open Book",
