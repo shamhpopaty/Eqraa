@@ -6,7 +6,6 @@ import 'package:eqraa/core/app_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/binding/initinalbinding.dart';
-import 'core/constant/apptheme.dart';
 import 'core/localization/changelocal.dart';
 import 'core/localization/translation.dart';
 import 'core/services/services.dart';
@@ -28,9 +27,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    LocaleController controller = Get.put(LocaleController());
-
     return Sizer(builder: (context, orientation, screenType) {
+      LocaleController controller = Get.put(LocaleController());
       return SafeArea(
         child: GetMaterialApp(
           debugShowCheckedModeBanner: false,
