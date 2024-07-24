@@ -1,4 +1,4 @@
-import 'package:device_preview/device_preview.dart';
+// import 'package:device_preview/device_preview.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +13,10 @@ import 'core/services/services.dart';
 import 'core/utils/logger.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await initialServices();
   Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
-  SizeUtils.setScreenSize();
+  // SizeUtils.setScreenSize();
   // Obtain screen dimensions
 
   runApp(const MyApp());
@@ -31,23 +30,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     LocaleController controller = Get.put(LocaleController());
 
-    return ScreenUtilInit(
-        designSize: Size(MediaQuery.of(context).size.width,
-            MediaQuery.of(context).size.height),
-        builder: (context, child) {
-          print(MediaQuery.of(context).size.width);
-          print(MediaQuery.of(context).size.height);
-          return GetMaterialApp(
-            debugShowCheckedModeBanner: false,
-            locale: controller.language,
-            builder: DevicePreview.appBuilder,
-            title: 'Eqraa',
-            translations: MyTranslation(),
-            theme: controller.appTheme,
-            //routes: routes,
-            getPages: routes,
-            initialBinding: InitialBindings(),
-          );
-        });
+    return Sizer(builder: (context, orientation, screenType) {
+      return SafeArea(
+        child: GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          locale: controller.language,
+          // builder: DevicePreview.appBuilder,
+          title: 'Eqraa',
+          translations: MyTranslation(),
+          theme: controller.appTheme,
+          //routes: routes,
+          getPages: routes,
+          initialBinding: InitialBindings(),
+        ),
+      );
+    });
   }
 }

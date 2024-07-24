@@ -1,7 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +28,7 @@ class ResetPassword extends StatelessWidget {
         backgroundColor: AppColor.backGroundColor,
         title: Text(
           "Reset Password",
-          style: Theme.of(context).textTheme.headline1!.copyWith(
+          style: Theme.of(context).textTheme.displayLarge!.copyWith(
                 color: AppColor.gray,
               ),
         ),

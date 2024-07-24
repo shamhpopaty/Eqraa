@@ -65,7 +65,7 @@ dependencies:
   dartz: ^0.10.1
   # Google Auth
   #  google_sign_in: ^5.3.1
-  device_preview: ^0.7.5
+#  device_preview: ^0.7.5
   flutter_screenutil: ^5.9.0
   responsive_builder: ^0.4.2
   image_pickers: ^2.0.0+2
@@ -92,6 +92,7 @@ dependencies:
   permission_handler: ^11.3.1
   file_picker: ^4.6.1
   syncfusion_flutter_pdfviewer:
+  sizer: any
 
   
 

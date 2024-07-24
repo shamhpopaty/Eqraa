@@ -22,7 +22,7 @@ class SuccessResetPassword extends StatelessWidget {
         title: Text(
           "Success",
           // ignore: deprecated_member_use
-          style: Theme.of(context).textTheme.headline1!.copyWith(
+          style: Theme.of(context).textTheme.displayLarge!.copyWith(
                 color: AppColor.gray,
               ),
         ),
