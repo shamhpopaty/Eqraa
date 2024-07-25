@@ -1,15 +1,29 @@
 // ignore_for_file: avoid_print
 
+import 'package:eqraa/data/token_manager.dart';
+import 'package:eqraa/models/book_model.dart';
+
 import '../../core/class/crud.dart';
 import '../../linkapi.dart';
 
 class HomeData {
   Crud crud;
+
   HomeData(this.crud);
 
   /// you just need to use the link, and to insert the form data
   getData() async {
-    var response = await crud.postData(AppLink.home, {});
+    TokenManager tokenManager = TokenManager();
+    String token = await tokenManager.accessToken;
+    // TODO: delete
+    token = '2|ujyhkF4QVNFrqqYGyEeNThBFjQkT8vAY3EySvOmMcb7e580d';
+    var response = await crud.getDataWithToken(AppLink.home, token);
+    // var response2 = await crud.postData(AppLink.home, Book_Modele().toJson());
+    // var response3 = await crud.postDataWithToken(
+    //   AppLink.home,
+    //   token,
+    //   body: Book_Modele().toJson(),
+    // );
     return response.fold((l) => l, (r) => r);
   }
 }
@@ -30,7 +44,7 @@ class HomeData {
     for (var i = 0; i < maxRetries; i++) {
       try {
         var response = await crud.postData(AppLink.home, {
-          
+
         });
         return response.fold((l) => l, (r) => r);
       } catch (e) {

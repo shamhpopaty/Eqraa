@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
+import 'package:eqraa/data/token_manager.dart';
 import 'package:http/http.dart' as http;
 import '../functions/check_internet.dart';
 import 'status_request.dart';
 
 class Crud {
-
   // Future<Either<StatusRequest, Map>> postData(
   //   String linkurl,
   //   Map<String, String> data,
@@ -32,20 +32,27 @@ class Crud {
   //   }
   // }
   Future<Either<StatusRequest, Map>> postData(String linkurl, Map data) async {
-
     // if (await checkInternet()) {
     var response = await http.post(Uri.parse(linkurl), body: data);
     print(response.statusCode);
 
-
     if (response.statusCode == 200 || response.statusCode == 201) {
       Map responsebody = jsonDecode(response.body);
       print(responsebody);
+
+      if (responsebody['token'] != null) {
+        TokenManager tokenManager = TokenManager();
+        await tokenManager.setToken(access: responsebody['token']);
+      }
+
       return Right(responsebody);
-    } else if (response.statusCode == 400){ return const Left(StatusRequest.failure);}else{
+    } else if (response.statusCode == 400) {
+      return const Left(StatusRequest.failure);
+    } else {
       return const Left(StatusRequest.serverFailure);
     }
   }
+
   // else {
   //   return const Left(StatusRequest.offlineFailure);
   // }
@@ -54,15 +61,11 @@ class Crud {
   Future<Either<StatusRequest, Map>> getDataWithToken(
     String linkurl,
     String bearerToken,
-
   ) async {
     try {
-
-
-    var response = await http.get(
+      var response = await http.get(
         Uri.parse(linkurl),
         headers: {
-
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $bearerToken',
         },
@@ -70,7 +73,7 @@ class Crud {
 
       print('Response Status Code: ${response.statusCode}');
 
-    if (response.statusCode == 200 || response.statusCode == 201) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         Map responsebody = jsonDecode(response.body);
         print('Response Body: $responsebody');
         return Right(responsebody);
@@ -116,16 +119,16 @@ class Crud {
     }
   }
 }
+
 Future<Either<StatusRequest, Map>> get(
-    String linkurl,
-    String? bearerToken,
-    ) async {
+  String linkurl,
+  String? bearerToken,
+) async {
   try {
     var response = await http.get(
       Uri.parse(linkurl),
       headers: {
-
-    'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $bearerToken',
       },
     );
@@ -147,12 +150,13 @@ Future<Either<StatusRequest, Map>> get(
     return const Left(StatusRequest.offlineFailure);
   }
 }
+
 Future<Either<StatusRequest, Map>> post(
-    String linkurl,
-    String bearerToken, {
-      Map<String, dynamic>?
+  String linkurl,
+  String bearerToken, {
+  Map<String, dynamic>?
       body, // Add an optional body parameter for POST requests
-    }) async {
+}) async {
   try {
     var response = await http.post(
       Uri.parse(linkurl),

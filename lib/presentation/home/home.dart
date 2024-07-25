@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/auth/custom_text_form.dart';
 import '../booksScreen/view/books_screen.dart';
+import 'home_controller.dart';
 
 List Category=[
   {"CategoryName": "Religious"},
@@ -21,7 +22,7 @@ class Classification extends StatefulWidget {
 }
 
 class _ClassificationState extends State<Classification> {
-  //final CategoryController homeController = Get.put(CategoryController());
+  final HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {

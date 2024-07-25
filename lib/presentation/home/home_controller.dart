@@ -4,6 +4,10 @@ import '../../core/functions/handling_data_controller.dart';
 import 'home_data.dart';
 
 class HomeController extends GetxController {
+  HomeController(){
+    getData();
+  }
+
   HomeData homeData = HomeData(Get.find());
 
   List data = [];
@@ -14,9 +18,9 @@ class HomeController extends GetxController {
     var response = await homeData.getData(); // getting the data
     statusRequest = handlingData(response); //TO handle the response status
     if (StatusRequest.success == statusRequest) {
-
-      data.addAll(response['data']);}
-    else {
+      // data.addAll(response['data']);
+      print(response['books']);
+    } else {
       statusRequest = StatusRequest.failure;
     }
 
@@ -29,39 +33,6 @@ class HomeController extends GetxController {
     super.onInit();
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*import 'package:eqraa/core/app_export.dart';
 import 'package:get/get.dart';
@@ -215,4 +186,3 @@ class Category {
   }
 }
 */
-
