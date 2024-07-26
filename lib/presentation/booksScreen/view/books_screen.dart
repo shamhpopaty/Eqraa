@@ -97,7 +97,7 @@ class Books_Screen extends StatelessWidget {
                   itemBuilder: (context, i) {
                     return GestureDetector(
                       onTap: () {
-                        Get.to(() => const Description_Books());
+                        Get.to(() =>  Description_Books());
                       },
                       child: Container(
                         height: 100,

@@ -8,9 +8,17 @@ import '../../../widgets/homeScreen/customappbar.dart';
 import '../../send_requestsScreen/screens/send_requests.dart';
 import '../../show_book/view/show_book.dart';
 import '../controller/desc_books_controller.dart';
-
+import 'package:flutter/services.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 class Description_Books extends StatelessWidget {
-  const Description_Books({super.key});
+  final List<Book> books = [
+    Book('Book 1', 'assets/pdf/shmail.pdf'),
+    Book('Book 2', 'assets/pdf/sera.pdf'),
+    Book('Book 3', 'assets/pdf/hart.pdf'),
+  ];
+   Description_Books({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +119,7 @@ class Description_Books extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BookListScreen(),));
+                    builder: (context) => BookDetailScreen(book: books[0]),));
 
                 // Get.toNamed(AppRoutes.showbook, parameters: {'pdfPath': 'assets/pdf/sera.pdf'}
                 // );
@@ -130,6 +138,63 @@ class Description_Books extends StatelessWidget {
         ),
       );
     }
+    );
+  }
+}
+
+class Book {
+  final String title;
+  final String assetPath;
+
+  Book(this.title, this.assetPath);
+}
+
+class BookDetailScreen extends StatefulWidget {
+  final Book book;
+
+  BookDetailScreen({required this.book});
+
+  @override
+  _BookDetailScreenState createState() => _BookDetailScreenState();
+}
+
+class _BookDetailScreenState extends State<BookDetailScreen> {
+  String? localPath;
+
+  @override
+  void initState() {
+    super.initState();
+    fromAsset(widget.book.assetPath, 'temp.pdf').then((f) {
+      setState(() {
+        localPath = f.path;
+      });
+    });
+  }
+
+  Future<File> fromAsset(String asset, String filename) async {
+    try {
+      var dir = await getApplicationDocumentsDirectory();
+      var file = File("${dir.path}/$filename");
+      var data = await rootBundle.load(asset);
+      var bytes = data.buffer.asUint8List();
+      await file.writeAsBytes(bytes, flush: true);
+      return file;
+    } catch (e) {
+      throw Exception("Error copying asset to local storage: $e");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.book.title),
+      ),
+      body: localPath != null
+          ? PDFView(
+        filePath: localPath,
+      )
+          : Center(child: CircularProgressIndicator()),
     );
   }
 }

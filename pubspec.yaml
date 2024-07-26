@@ -137,6 +137,7 @@ flutter:
     - assets/pdf/sera.pdf
     - assets/pdf/doaa.pdf
     - assets/pdf/hart.pdf
+    - assets/pdf/shmail.pdf
 
 
     # An image asset can refer to one or more resolution-specific "variants", see

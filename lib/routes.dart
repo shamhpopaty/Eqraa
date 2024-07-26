@@ -64,7 +64,7 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: AppRoutes.myprofile, page: () => const MyProfile ()),
   GetPage(name: AppRoutes.editigprofile, page: () =>  EditProfile ()),
   //GetPage(name: AppRoutes.showbook, page: () =>   ShowBook (pdfPath: '',)),
-  GetPage(name: AppRoutes.descriptionbook, page: () =>  const Description_Books ()),
+  GetPage(name: AppRoutes.descriptionbook, page: () =>   Description_Books ()),
   GetPage(name: AppRoutes.bookscreen, page: () =>   Books_Screen ()),
 
   GetPage(
