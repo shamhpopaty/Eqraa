@@ -9,69 +9,62 @@ import '../../../widgets/homeScreen/customappbar.dart';
 import '../../description_books/view/desc_books.dart';
 import '../controller/books_screen_controller.dart';
 
-List Books=[
-  {"NameBook": "shmail"},
-  {"NameBook": "sera"},
-  {"NameBook": "hart"},
-  {"NameBook": "doaa"}
-];
+class BooksScreen extends StatelessWidget {
+  final String category;
 
-class Books_Screen extends StatelessWidget {
+  BooksScreen({required this.category});
+
   @override
   Widget build(BuildContext context) {
-    Get.put(BooksScreenControllerImp());
-    return GetBuilder<BooksScreenControllerImp>(
-        builder: (controller)
-    {
-      return SafeArea(
-        child: Scaffold(
-          appBar: const CustomAppBarHome(),
-          drawer: Drawer(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                DrawerHeader(
-                    decoration: const BoxDecoration(
-                      color: AppColor.primaryColor,
+    final BooksScreenControllerImp controller = Get.put(BooksScreenControllerImp(category));
+
+    return Scaffold(
+      appBar: const CustomAppBarHome(),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+                decoration: const BoxDecoration(
+                  color: AppColor.primaryColor,
+                ),
+                child: Column(
+                  children: [
+                    const CircleAvatar(
+                      backgroundImage: AssetImage(AppImageAssets.profileimage),
                     ),
-                    child: Column(children: [
-                      const CircleAvatar(backgroundImage: AssetImage(
-                          AppImageAssets.profileimage),),
-                      const SizedBox(height: 20,),
-                      Text("${controller.myServices.sharedPreferences.getString(
-                          "username")}"),
-
-                    ],)
-                ),
-                // ListTile(
-                //   title: Text("144".tr),
-                //   onTap: () {},
-                // ),
-
-                DropDownList(),
-                DropDownList(isThemeApp:true),
-                // ListTile(
-                //   title: Text("145".tr),
-                //   onTap: () {},
-                // ),
-                ListTile(
-                  title: Text("146".tr),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text("147".tr),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text("56".tr),
-                  onTap: () {
-                    logOut();
-                  },
-                ),
-              ],
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    // Text("${controller.myServices.sharedPreferences.getString("username")}"),
+                  ],
+                )),
+            DropDownList(),
+            DropDownList(isThemeApp: true),
+            ListTile(
+              title: Text("146".tr),
+              onTap: () {},
             ),
-          ),
-          body: SingleChildScrollView(
+            ListTile(
+              title: Text("147".tr),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text("56".tr),
+              onTap: () {
+                logOut();
+              },
+            ),
+          ],
+        ),
+      ),
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          return SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
@@ -84,7 +77,6 @@ class Books_Screen extends StatelessWidget {
                     textBox: '',
                   ),
                 ),
-
                 GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -93,11 +85,11 @@ class Books_Screen extends StatelessWidget {
                     mainAxisSpacing: 5.0,
                     crossAxisSpacing: 5.0,
                   ),
-                  itemCount: Books.length,
+                  itemCount: controller.books.length,
                   itemBuilder: (context, i) {
                     return GestureDetector(
                       onTap: () {
-                        Get.to(() =>  Description_Books());
+                        Get.to(() => DescriptionBooks(book: controller.books[i]));
                       },
                       child: Container(
                         height: 100,
@@ -116,24 +108,28 @@ class Books_Screen extends StatelessWidget {
                         ),
                         child: Column(
                           children: [
-                            Image(image: AssetImage(AppImageAssets.book),
-                              fit: BoxFit.cover,),
+                            controller.books[i].cover != null
+                                ? Image.network(
+                              controller.books[i].cover!,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset('assets/images/camera.jpg', fit: BoxFit.cover);
+                              },
+                            )
+                                : Image.asset('assets/images/camera.jpg', fit: BoxFit.cover),
                             const SizedBox(height: 15,),
-                            Text(Books[i]["NameBook"]),
-
+                            Text(controller.books[i].title ?? ''),
                           ],
                         ),
                       ),
                     );
                   },
                 ),
-
               ],
             ),
-          ),
-        ),
-      );
-    }
+          );
+        }
+      }),
     );
   }
 }

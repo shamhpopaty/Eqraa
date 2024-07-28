@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../presentation/friendScreen/controller/friend_controller.dart';
 
 class FriendsComponent extends StatefulWidget {
-  const FriendsComponent({super.key});
+  final String userName;
+  final int userId;
+
+  const FriendsComponent({
+    Key? key,
+    required this.userName,
+    required this.userId,
+  }) : super(key: key);
 
   @override
   State<FriendsComponent> createState() => _FriendsComponentState();
 }
 
 class _FriendsComponentState extends State<FriendsComponent> {
-  // متغيرات لحفظ حالة الزر
+  final FriendsController controller = Get.find();
+
   bool isFriend = true;
 
   @override
@@ -18,9 +29,12 @@ class _FriendsComponentState extends State<FriendsComponent> {
       leading: CircleAvatar(
         backgroundImage: AssetImage('assets/𝑩𝒂𝒋𝒊✩.jpg'),
       ),
-      title: Text('Haydy al meaaw'),
+      title: Text(widget.userName),
       trailing: MaterialButton(
         onPressed: () {
+          if (isFriend) {
+            controller.sendFriendRequest(widget.userId);
+          }
           setState(() {
             isFriend = !isFriend;
           });
@@ -32,11 +46,11 @@ class _FriendsComponentState extends State<FriendsComponent> {
             Text(
               isFriend ? 'Add Friend' : 'Unfriend',
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 11
+                color: Colors.white,
+                fontSize: 11,
               ),
             ),
-            SizedBox(width: 5), // مسافة صغيرة بين النص والأيقونة
+            SizedBox(width: 5),
             Icon(
               isFriend ? Icons.person_add : Icons.person_remove,
               color: Colors.white,

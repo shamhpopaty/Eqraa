@@ -10,7 +10,6 @@ class MyProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => MyProfileControllerImp());
     return Padding(
       padding: EdgeInsets.all(16),
       child: Center(

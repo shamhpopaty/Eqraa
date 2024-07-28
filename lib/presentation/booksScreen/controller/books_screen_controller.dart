@@ -1,49 +1,42 @@
-import 'package:eqraa/presentation/description_books/view/desc_books.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import '../model/books_model.dart';
 
-import '../../../core/class/status_request.dart';
-import '../../../core/functions/handling_data_controller.dart';
-import '../../../core/services/services.dart';
-import '../../../routes.dart';
-import '../data/books_screen_data.dart';
+class BooksScreenControllerImp extends GetxController {
+  List<Book> books = [];
+  var isLoading = true.obs;
+  final String category;
 
-abstract class DescriptionBooksController extends GetxController {
-  Books_Screen();
-}
-
-
-class BooksScreenControllerImp extends DescriptionBooksController {
-  MyServices myServices = Get.find();
-  BooksScreenData bookscreendata = BooksScreenData(Get.find());
-  StatusRequest statusRequest = StatusRequest.none;
-
-  List data = [];
-
-  dynamic getData() async {
-    statusRequest = StatusRequest.loading;
-    var response = await bookscreendata.getData(); // getting the data
-    statusRequest = handlingData(response); //TO handle the response status
-    if (StatusRequest.success == statusRequest) {
-
-      data.addAll(response['data']);}
-    else {
-      statusRequest = StatusRequest.failure;
-    }
-
-    update();
-  }
+  BooksScreenControllerImp(this.category);
 
   @override
   void onInit() {
-    getData();
     super.onInit();
+    fetchBooks();
   }
 
+  Future<void> fetchBooks() async {
+    final url = 'http://192.168.247.175:8000/api/books?search=category[l]=$category';
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {
+        'Authorization': 'Bearer 5|eEH5v9BDZ3t5lGHTi8zOc9Ga9OkMWwRBFhlrHBw392a3d872',
+      },
+    );
 
+    if (response.statusCode == 200) {
+      List<dynamic> data = jsonDecode(response.body)['books'];
+      print(response.body);
+      isLoading.value = false;
 
-  @override
-  Books_Screen() {
-    Get.toNamed(AppRoutes.bookscreen);
+      books = data.map((book) => Book.fromJson(book)).toList();
+    } else {
+      // Handle errors
+      print('Failed to load books');
+      isLoading.value = false;
+
+    }
 
   }
 }

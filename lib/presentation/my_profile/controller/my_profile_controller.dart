@@ -1,35 +1,40 @@
-import 'package:eqraa/core/app_export.dart';
-import 'package:eqraa/core/services/services.dart';
-import 'package:eqraa/presentation/My_Profile/view/my_profile.dart';
-import 'package:eqraa/widgets/custom_editing_profile.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../../../core/class/status_request.dart';
-import '../../../routes.dart';
+import '../model/profile_model.dart';
 
-abstract class MyProfileController extends GetxController {
-  MyProfile();
-EditProfile();
-}
-class MyProfileControllerImp extends MyProfileController {
-  String? username;
-  MyServices myServices = Get.find();
-  StatusRequest statusRequest = StatusRequest.none;
+class MyProfileController extends GetxController {
+  var userProfile = UserProfileResponse().obs;
+  var statusRequest = StatusRequest.loading.obs;
+
   @override
   void onInit() {
-    // getData();
-    username= myServices.sharedPreferences.getString("username");
-
+    fetchUserProfile();
     super.onInit();
   }
-  @override
-  EditProfile() {
-    Get.toNamed(AppRoutes.editigprofile);
-  }
 
-  @override
-  MyProfile() {
-    Get.toNamed(AppRoutes.myprofile);
+  Future<void> fetchUserProfile() async {
+    statusRequest(StatusRequest.loading);
+    try {
+      final response = await http.get(
+        Uri.parse('http://192.168.247.175:8000/api/users/1'),
+        headers: {
+          'Authorization': 'Bearer 5|eEH5v9BDZ3t5lGHTi8zOc9Ga9OkMWwRBFhlrHBw392a3d872',
+        },
+      );
+print(response.statusCode);
+print(response.body);
+      if (response.statusCode == 200) {
+        userProfile.value = UserProfileResponse.fromJson(json.decode(response.body));
+        statusRequest(StatusRequest.success);
+      } else {
+        statusRequest(StatusRequest.failure);
+      }
+    } catch (e) {
+      statusRequest(StatusRequest.failure);
+      print(e);
+    }
   }
 }

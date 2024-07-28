@@ -1,6 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import '../../../core/class/status_request.dart';
+import '../controller/friend_controller.dart';
 import '../../../widgets/friends_requests/friends_widget.dart';
 
 class Friends extends StatefulWidget {
@@ -11,6 +12,8 @@ class Friends extends StatefulWidget {
 }
 
 class _FriendsState extends State<Friends> {
+  final FriendsController controller = Get.put(FriendsController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,42 +29,39 @@ class _FriendsState extends State<Friends> {
                     'Friends',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      // color: MyColors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ],
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: ListView.separated(
-                itemCount: 10,
-                separatorBuilder: (BuildContext context, int index) {
-                  return Divider(
-                    color: Colors.grey,
-                  );
-                },
-                itemBuilder: (context, index) {
-                  return FriendsComponent();
-                  // return InkWell(
-                  //   onTap: (){
-
-                  //   },
-                  //   child: Row(
-                  //     children: [
-                  //       CircleAvatar(
-                  //         backgroundImage: AssetImage('assets/𝑩𝒂𝒋𝒊✩.jpg'),
-                  //       ),
-
-                  //     ],
-                  //   ),
-                  // );
-                },
-              ),
-            )
+            SizedBox(height: 20),
+            Obx(() {
+              if (controller.statusRequest.value == StatusRequest.loading) {
+                return Center(child: CircularProgressIndicator());
+              } else if (controller.statusRequest.value == StatusRequest.failure) {
+                return Center(child: Text('Failed to load friends'));
+              } else if (controller.friendsList.isEmpty) {
+                return Center(child: Text('No friends found'));
+              } else {
+                return Expanded(
+                  child: ListView.separated(
+                    itemCount: controller.friendsList.length,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return Divider(color: Colors.grey);
+                    },
+                    itemBuilder: (context, index) {
+                      final friend = controller.friendsList[index];
+                      return FriendsComponent(
+                        userName: friend.name!,
+                        userId: friend.id!,
+                      );
+                    },
+                  ),
+                );
+              }
+            }),
           ],
         ),
       ),

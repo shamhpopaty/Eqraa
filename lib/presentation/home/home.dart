@@ -7,7 +7,7 @@ import '../../widgets/auth/custom_text_form.dart';
 import '../booksScreen/view/books_screen.dart';
 import 'home_controller.dart';
 
-List Category=[
+List Category = [
   {"CategoryName": "Religious"},
   {"CategoryName": "Health"},
   {"CategoryName": "Cooking"},
@@ -15,8 +15,10 @@ List Category=[
   {"CategoryName": "History"},
   {"CategoryName": "Philisophy"},
 ];
+
 class Classification extends StatefulWidget {
   const Classification({super.key});
+
   @override
   State<Classification> createState() => _ClassificationState();
 }
@@ -39,7 +41,7 @@ class _ClassificationState extends State<Classification> {
                 textBox: '',
               ),
             ),
-             GridView.builder(
+            GridView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -48,10 +50,11 @@ class _ClassificationState extends State<Classification> {
                 crossAxisSpacing: 5.0,
               ),
               itemCount: Category.length,
-              itemBuilder: (context,  i) {
+              itemBuilder: (context, i) {
                 return GestureDetector(
                   onTap: () {
-                    Get.to(Books_Screen());
+                    String selectedCategory = Category[i]["CategoryName"];
+                    Get.to(() => BooksScreen(category: selectedCategory));
                   },
                   child: Container(
                     height: 100,
@@ -71,7 +74,8 @@ class _ClassificationState extends State<Classification> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 70),
                       child: Text(
-                        Category[i]["CategoryName"],                        textAlign: TextAlign.center,
+                        Category[i]["CategoryName"],
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
