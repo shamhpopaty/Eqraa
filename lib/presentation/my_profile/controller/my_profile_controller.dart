@@ -19,9 +19,9 @@ class MyProfileController extends GetxController {
     statusRequest(StatusRequest.loading);
     try {
       final response = await http.get(
-        Uri.parse('http://192.168.247.175:8000/api/users/1'),
+        Uri.parse('http://localhost:8000/api/users/1'),
         headers: {
-          'Authorization': 'Bearer 5|eEH5v9BDZ3t5lGHTi8zOc9Ga9OkMWwRBFhlrHBw392a3d872',
+          'Authorization': 'Bearer 4|rxGiCljTd2y5xFisUsZ5oLuZNVO2GgcIgdvALVDvf2838b64',
         },
       );
 print(response.statusCode);

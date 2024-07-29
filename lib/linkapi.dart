@@ -36,7 +36,6 @@ class AppLink {
   static const String descriptionbook = "$server/";
 
   //-----bookscreen-----
-  static const String bookscreen = "$server/";
-
+  static const String bookscreen = "$server/books?search=category[l]=";
 
 }

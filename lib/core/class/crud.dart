@@ -57,7 +57,7 @@ class Crud {
   //   return const Left(StatusRequest.offlineFailure);
   // }
   // }
-
+  final TokenManager tokenManager = TokenManager();
   Future<Either<StatusRequest, Map>> getDataWithToken(
     String linkurl,
     String bearerToken,
@@ -66,8 +66,9 @@ class Crud {
       var response = await http.get(
         Uri.parse(linkurl),
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $bearerToken',
+          // 'Content-Type': 'application/json',
+          'Authorization': 'Bearer 3|ikJMh029jho1KjTZme0mUd9LbNxYhFvBgcrYnO5Cb7fa12be',
+          // 'Authorization': 'Bearer ${tokenManager.accessToken?? bearerToken}',
         },
       );
 

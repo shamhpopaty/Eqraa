@@ -17,6 +17,15 @@ class MyServices extends GetxService {
     sharedPreferences = await SharedPreferences.getInstance();
     return this;
   }
+
+  setUserID(String id){
+    return sharedPreferences.setString("id", id);
+
+  }
+  getUserID(){
+   return sharedPreferences.getString("id");
+
+  }
 }
 
 initialServices() async {

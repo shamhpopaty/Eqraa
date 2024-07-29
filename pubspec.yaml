@@ -134,6 +134,7 @@ flutter:
     - assets/lottie/
     - assets/lottie/onboarding/
     - assets/
+    - assets/pdf/
     - assets/pdf/sera.pdf
     - assets/pdf/doaa.pdf
     - assets/pdf/hart.pdf
