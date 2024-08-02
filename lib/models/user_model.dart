@@ -1,8 +1,8 @@
 class UserModel {
-  String? usersId;
+  int? usersId;
   String? usersEmail;
   String? usersName;
-  String? isAdmin;
+  int? isAdmin;
   String? usersUpdated;
   String? usersCreate;
   String? verifiedAt;
@@ -18,7 +18,7 @@ class UserModel {
       this.usersCreate,});
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    usersId = json['id'].toString();
+    usersId = json['id'];
     usersEmail = json['email'];
     usersName = json['name'];
     isAdmin = json['is_admin'];

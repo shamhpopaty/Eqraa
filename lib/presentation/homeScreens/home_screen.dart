@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/functions/logout.dart';
 import '../../widgets/drop_down_list_drawer.dart';
+import '../contact_us/contact_us.dart';
 import '../recieved_requestScreen/screen/recieved_request.dart';
 import '../send_requestsScreen/screens/send_requests.dart';
 import 'homescreen_controller.dart';
@@ -38,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                       child: Column(children: [
                         const CircleAvatar(backgroundImage: AssetImage(AppImageAssets.profileimage),),
                         const SizedBox(height: 20,),
-                        Text("${controller.myServices.sharedPreferences.getString("username")}"),
+                        Text("${controller.myServices.sharedPreferences.getString("username")??"Kheder Youssef"}"),
 
                       ],)
                   ),
@@ -69,6 +70,7 @@ class HomeScreen extends StatelessWidget {
                   ListTile(
                     title: Text( "147".tr),
                     onTap: () {
+                      Get.to(()=>Contact_Us());
                     },
                   ),
                   ListTile(

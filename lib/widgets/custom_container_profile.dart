@@ -36,7 +36,7 @@ Widget container_profile2(IconData icon, String containerName, int number)=>
                 color: AppColor.black,
                 fontWeight: FontWeight.bold
             ),),
-          SizedBox(width:240 ),
+          SizedBox(width:180 ),
          Text("$number"),
         ],
       ),
@@ -55,7 +55,7 @@ Widget container_profile3(IconData icon, String containerName, int number)=>
                 color: AppColor.black,
                 fontWeight: FontWeight.bold
             ),),
-          SizedBox(width:205 ),
+          SizedBox(width:125 ),
           Text("$number"),
         ],
       ),
@@ -74,7 +74,7 @@ Widget container_profile4(IconData icon, String containerName, IconData endicon,
                 color: AppColor.black,
                 fontWeight: FontWeight.bold
             ),),
-          SizedBox(width: 243,),
+          SizedBox(width: 220,),
           IconButton(onPressed: (){},
               icon: Icon(endicon))
         ],

@@ -1,5 +1,6 @@
 // import 'package:device_preview/device_preview.dart';
 
+import 'package:eqraa/presentation/Auth/view/login.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:eqraa/core/app_export.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
           translations: MyTranslation(),
           theme: controller.appTheme,
           //routes: routes,
+          home: Login(),
           getPages: routes,
           initialBinding: InitialBindings(),
         ),

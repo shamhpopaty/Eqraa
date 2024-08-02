@@ -11,17 +11,17 @@ class AppLink {
   static const String test = "$server/test.php";
 
   //***************Auth****************
-  static const String signUp = "$server/auth/sign-up";
-  static const String verifycode = "$server/auth/email-verify";
-  static const String signIn = "$server/auth/sign-in";
-  static const String resend = "$server/auth/resend";
+  static const String signUp = "$server/users/auth/sign-up";
+  static const String verifycode = "$server/users/auth/email-verify";
+  static const String signIn = "$server/users/auth/sign-in";
+  static const String resend = "$server/users/auth/resend";
 
   //--------------resetPassword=============
-  static const String forgotPassword = "$server/auth/forgot-password";
+  static const String forgotPassword = "$server/users/auth/forgot-password";
 
-  static const String resetPassword = "$server/auth/password-reset";
+  static const String resetPassword = "$server/users/auth/password-reset";
   static const String verifyCodePassword =
-      "$server/auth/check-password-reset-code";
+      "$server/users/auth/check-password-reset-code";
 
   //------home-----
   static const String home = "$server/books/";
