@@ -1,6 +1,7 @@
 import 'package:eqraa/core/app_export.dart';
 import 'package:eqraa/core/class/handlingdataview.dart';
 import 'package:eqraa/core/constant/color.dart';
+import 'package:eqraa/presentation/show_book/view/show_book.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -8,6 +9,7 @@ import '../../../core/functions/logout.dart';
 import '../../../widgets/auth/custom_text_form.dart';
 import '../../../widgets/drop_down_list_drawer.dart';
 import '../../../widgets/homeScreen/customappbar.dart';
+import '../../contact_us/contact_us.dart';
 import '../../description_books/view/desc_books.dart';
 import '../controller/books_screen_controller.dart';
 
@@ -45,11 +47,15 @@ class BooksScreen extends StatelessWidget {
             DropDownList(isThemeApp: true),
             ListTile(
               title: Text("146".tr),
-              onTap: () {},
+              onTap: () {
+
+              },
             ),
             ListTile(
               title: Text("147".tr),
-              onTap: () {},
+              onTap: () {
+                Get.to(()=>Contact_Us());
+              },
             ),
             ListTile(
               title: Text("56".tr),
@@ -89,7 +95,8 @@ class BooksScreen extends StatelessWidget {
                         itemBuilder: (context, i) {
                           return GestureDetector(
                             onTap: () {
-                              Get.to(() => DescriptionBooks(book: controller.books[i]));
+                              Get.to(() => BookListScreen());
+                              // Get.to(() => DescriptionBooks(book: controller.books[i]));
                             },
                             child: Container(
                               height: 100,

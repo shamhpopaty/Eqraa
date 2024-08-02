@@ -11,7 +11,7 @@ class FriendRequestsController extends GetxController {
   var isLoading = false.obs;
   var statusRequest = StatusRequest.loading.obs;
 
-  final String token = '4|rxGiCljTd2y5xFisUsZ5oLuZNVO2GgcIgdvALVDvf2838b64';
+  final String token = '9|cV2drVhZ42Ej0XjhUgkBJbdLZ6Tb33s6L5D0uVn1ab59f8c3';
 
   @override
   void onInit() {

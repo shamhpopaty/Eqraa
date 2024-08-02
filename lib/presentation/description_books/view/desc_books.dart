@@ -6,6 +6,8 @@ import '../../../core/functions/logout.dart';
 import '../../../widgets/drop_down_list_drawer.dart';
 import '../../../widgets/homeScreen/customappbar.dart';
 import '../../booksScreen/model/books_model.dart';
+import '../../contact_us/contact_us.dart';
+import '../../recieved_requestScreen/screen/recieved_request.dart';
 import '../../send_requestsScreen/screens/send_requests.dart';
 import '../controller/desc_books_controller.dart';
 import 'package:flutter/services.dart';
@@ -40,42 +42,53 @@ class DescriptionBooks extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 children: [
                   DrawerHeader(
-                      decoration: const BoxDecoration(
+                      decoration:const BoxDecoration(
                         color: AppColor.primaryColor,
                       ),
-                      child: Column(
-                        children: [
-                          const CircleAvatar(
-                            backgroundImage: AssetImage(AppImageAssets.profileimage),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Text("${controller.myServices.sharedPreferences.getString("username")}"),
-                        ],
-                      )),
+                      child: Column(children: [
+                        const CircleAvatar(backgroundImage: AssetImage(AppImageAssets.profileimage),),
+                        const SizedBox(height: 20,),
+                        Text("${controller.myServices.sharedPreferences.getString("username")}"),
+
+                      ],)
+                  ),
+                  // ListTile(
+                  //   title: Text( "144".tr),
+                  //   onTap: () {
+                  //   },
+                  // ),
                   DropDownList(),
-                  DropDownList(isThemeApp: true),
+                  DropDownList(isThemeApp:true),
+                  // ListTile(
+                  //   title: Text("145".tr),
+                  //   onTap: () {
+                  //   },
+                  // ),
                   ListTile(
-                    title: Text("146".tr),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("147".tr),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    title: Text("160".tr),
+                    title: Text( "146".tr),
                     onTap: () {
-                      Get.to(() => Request());
+                      Get.to(()=>RecievedRequests());
                     },
                   ),
                   ListTile(
-                    title: Text("56".tr),
+                    title: Text( "160".tr),
+                    onTap: () {
+                      Get.to(()=>Request());
+                    },
+                  ),
+                  ListTile(
+                    title: Text( "147".tr),
+                    onTap: () {
+                      Get.to(()=>Contact_Us());
+                    },
+                  ),
+                  ListTile(
+                    title: Text( "56".tr),
                     onTap: () {
                       logOut();
                     },
                   ),
+
                 ],
               ),
             ),
@@ -175,7 +188,8 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       appBar: AppBar(
         title: Text(widget.book.title ?? ''),
       ),
-      body: localPath != null
+      body:
+      localPath != null
           ? PDFView(
         filePath: localPath,
       )

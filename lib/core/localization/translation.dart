@@ -177,7 +177,7 @@ class MyTranslation extends Translations {
           "140": "ادخل اسم شارعك",
           "141": "يجب عليك إضافة عنوان للتوصيل",
           "142": "الإشعارات",
-          "143": "المحادثات",
+          "143": "الأصدقاء",
           "144": "اللغة",
           "145": "ثيم التطبيق",
           "146": "طلبات الصداقة",
@@ -195,6 +195,11 @@ class MyTranslation extends Translations {
           "158": "اسم الكاتب",
           "159": "الوصف",
           "160": "طلبات الإرسال",
+          "161": "مرحباً بك في قسم المساعدة : برنامجنا يساعدك في تسهيل تجربة القراءة إذا كانت لديك أي شكاوى أو اقتراحات، يُرجى",
+          "162": "التواصل معنا",
+          "163": "المساعدة",
+
+
 
 
 
@@ -400,6 +405,9 @@ class MyTranslation extends Translations {
           "158": "WriterBook",
           "159": "Description",
           "160": "SendRequest",
+          "161": "Welcome to the Help Section: Our software helps you to facilitate the reading experience, If you have any complaints or suggestions, please",
+          "162": "contact us",
+          "163": "Helping",
 
 
 

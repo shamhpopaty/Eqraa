@@ -83,7 +83,7 @@ class LoginControllerImp extends LoginController {
               .setString("token", token!);
           // data.addAll(response['data']);
           print("Success Response :  $response");
-          myServices.sharedPreferences.setString("id", userModel.usersId!);
+          myServices.sharedPreferences.setString("id", userModel.usersId!.toString());
           myServices.sharedPreferences
               .setString("username", userModel.usersName!);
           myServices.sharedPreferences
@@ -110,7 +110,7 @@ class LoginControllerImp extends LoginController {
 
           if(userModel.isAdmin==0){Get.offAllNamed(AppRoutes.homePage);}else {
             //TODO: Admin Home Page
-
+            Get.offAllNamed(AppRoutes.homePage);
           }
 
           // Case the account is not verified.

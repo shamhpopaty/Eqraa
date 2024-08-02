@@ -89,6 +89,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         title: Text(widget.book.title),
       ),
       body: localPath != null
+
           ? PDFView(
         filePath: localPath,
       )

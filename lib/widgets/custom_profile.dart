@@ -61,7 +61,7 @@ class Custom_Profile extends StatelessWidget {
                 children: [
                   Container(
                     height: 50,
-                    width: 400,
+                    width: 300,
                     child: Row(
                       children: [
                         const Icon(Icons.account_box_outlined),
