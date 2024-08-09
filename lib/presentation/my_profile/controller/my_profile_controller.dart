@@ -1,4 +1,5 @@
 import 'package:eqraa/core/services/services.dart';
+import 'package:eqraa/data/token_manager.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -19,10 +20,12 @@ class MyProfileController extends GetxController {
   Future<void> fetchUserProfile() async {
     statusRequest(StatusRequest.loading);
     try {
+      String accessToken = await TokenManager().accessToken;
+
       final response = await http.get(
         Uri.parse('http://localhost:8000/api/users/1'),
         headers: {
-          'Authorization': 'Bearer 9|cV2drVhZ42Ej0XjhUgkBJbdLZ6Tb33s6L5D0uVn1ab59f8c3',
+          'Authorization': 'Bearer $accessToken',
         },
       );
 print(response.statusCode);

@@ -265,6 +265,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.3"
+  decimal:
+    dependency: transitive
+    description:
+      name: decimal
+      sha256: "24a261d5d5c87e86c7651c417a5dbdf8bcd7080dd592533910e8d0505a279f21"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.3"
   dropdown_search:
     dependency: "direct main"
     description:
@@ -414,6 +422,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.2"
+  flutter_charts:
+    dependency: "direct main"
+    description:
+      name: flutter_charts
+      sha256: eb9d2bf98bfc779c1da9cf1fe80afd598094aed33e536cf04845d8f266f48c11
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.2"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -584,6 +600,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.6.6"
+  google_fonts:
+    dependency: transitive
+    description:
+      name: google_fonts
+      sha256: "6b6f10f0ce3c42f6552d1c70d2c28d764cf22bb487f50f66cca31dcd5194f4d6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.4"
   graphs:
     dependency: transitive
     description:
@@ -720,6 +744,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  logger:
+    dependency: transitive
+    description:
+      name: logger
+      sha256: "697d067c60c20999686a0add96cf6aba723b3aa1f83ecf806a8097231529ec32"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.0"
   lottie:
     dependency: "direct main"
     description:
@@ -952,6 +984,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
+  rational:
+    dependency: transitive
+    description:
+      name: rational
+      sha256: cb808fb6f1a839e6fc5f7d8cb3b0a10e1db48b3be102de73938c627f0b636336
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.3"
   responsive_builder:
     dependency: "direct main"
     description:
@@ -1213,6 +1253,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.8.0"
+  tuple:
+    dependency: transitive
+    description:
+      name: tuple
+      sha256: a97ce2013f240b2f3807bcbaf218765b6f301c3eff91092bcfa23a039e7dd151
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   typed_data:
     dependency: transitive
     description:

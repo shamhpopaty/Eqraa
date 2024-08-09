@@ -197,7 +197,9 @@ class MyTranslation extends Translations {
           "160": "طلبات الإرسال",
           "161": "مرحباً بك في قسم المساعدة : برنامجنا يساعدك في تسهيل تجربة القراءة إذا كانت لديك أي شكاوى أو اقتراحات، يُرجى",
           "162": "التواصل معنا",
-          "163": "المساعدة",
+          "163": "تواصل معنا",
+          "164": "لقد انتهت مدة القراءة هل تريد المتابعة",
+
 
 
 
@@ -408,6 +410,7 @@ class MyTranslation extends Translations {
           "161": "Welcome to the Help Section: Our software helps you to facilitate the reading experience, If you have any complaints or suggestions, please",
           "162": "contact us",
           "163": "Helping",
+          "164":"Reading time has expired. Do you want to continue?",
 
 
 

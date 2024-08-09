@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import '../../../core/functions/logout.dart';
 import '../../../widgets/auth/custom_text_form.dart';
+import '../../../widgets/custom_alarm.dart';
 import '../../../widgets/drop_down_list_drawer.dart';
 import '../../../widgets/homeScreen/customappbar.dart';
 import '../../contact_us/contact_us.dart';
@@ -20,8 +21,9 @@ class BooksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BooksScreenControllerImp controller = Get.put(BooksScreenControllerImp(category));
-
+    final BooksScreenControllerImp controller =
+        Get.put(BooksScreenControllerImp(category));
+    DateTime selectedTime = DateTime.now();
     return Scaffold(
       appBar: const CustomAppBarHome(),
       drawer: Drawer(
@@ -47,14 +49,12 @@ class BooksScreen extends StatelessWidget {
             DropDownList(isThemeApp: true),
             ListTile(
               title: Text("146".tr),
-              onTap: () {
-
-              },
+              onTap: () {},
             ),
             ListTile(
               title: Text("147".tr),
               onTap: () {
-                Get.to(()=>Contact_Us());
+                Get.to(() => Contact_Us());
               },
             ),
             ListTile(
@@ -67,77 +67,116 @@ class BooksScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 8.0, right: 8, top: 8, bottom: 8),
-                  child: AuthTextFormField(
-                    hintText: "148".tr,
-                    iconPrefix: Icons.search,
-                    textBox: '',
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.only(left: 8.0, right: 8, top: 8, bottom: 8),
+              child: AuthTextFormField(
+                hintText: "148".tr,
+                iconPrefix: Icons.search,
+                textBox: '',
+              ),
+            ),
+            GetBuilder<BooksScreenControllerImp>(builder: (controller) {
+              return HandlingDataView(
+                statusRequest: controller.statusRequest,
+                widget: GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 5.0,
+                    crossAxisSpacing: 5.0,
                   ),
-                ),
-                GetBuilder<BooksScreenControllerImp>(
-                  builder: (controller) {
-                    return HandlingDataView(
-                      statusRequest: controller.statusRequest,
-                      widget: GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 5.0,
-                          crossAxisSpacing: 5.0,
+                  itemCount: controller.books.length,
+                  itemBuilder: (context, i) {
+                    return GestureDetector(
+                      onTap: () {
+                        Get.to(
+                          () => BookListScreen(
+                            endTimeMillisecond:
+                                selectedTime.millisecondsSinceEpoch,
+                          ),
+                        );
+                        // Get.to(() => DescriptionBooks(book: controller.books[i]));
+                      },
+                      child: Container(
+                        height: 100,
+                        width: 200,
+                        margin: const EdgeInsets.only(
+                            right: 10, left: 10, bottom: 10, top: 15),
+                        decoration: BoxDecoration(
+                          color: AppColor.fourthColor,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black,
+                              blurRadius: 3,
+                            )
+                          ],
                         ),
-                        itemCount: controller.books.length,
-                        itemBuilder: (context, i) {
-                          return GestureDetector(
-                            onTap: () {
-                              Get.to(() => BookListScreen());
-                              // Get.to(() => DescriptionBooks(book: controller.books[i]));
-                            },
-                            child: Container(
-                              height: 100,
-                              width: 200,
-                              margin: const EdgeInsets.only(
-                                  right: 10, left: 10, bottom: 10, top: 15),
-                              decoration: BoxDecoration(
-                                color: AppColor.fourthColor,
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 3,
-                                  )
-                                ],
-                              ),
-                              child: Column(
-                                children: [
-                                  controller.books[i].cover != null
-                                      ? Image.network(
-                                    controller.books[i].cover!,
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Image.asset('assets/images/camera.jpg', fit: BoxFit.cover);
-                                    },
-                                  )
-                                      : Image.asset('assets/images/camera.jpg', fit: BoxFit.cover),
-                                  const SizedBox(height: 15,),
-                                  Text(controller.books[i].title ?? ''),
-                                ],
-                              ),
+                        child: Column(
+                          children: [
+                            controller.books[i].cover != null
+                                ? SizedBox(
+                                  child: Image.network(
+                                      controller.books[i].cover!,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (context, error, stackTrace) {
+                                        return Image.asset(
+                                            'assets/images/camera.jpg',
+                                            fit: BoxFit.cover);
+                                      },
+                                    ),
+                              height: 75,
+                                )
+                                : SizedBox(
+                                  child: Image.asset('assets/images/camera.jpg',
+                                      fit: BoxFit.cover),
+                            height: 10,
                             ),
-                          );
-                        },
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Text(controller.books[i].title ?? ''),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            IconButton(
+                                onPressed: () async {
+                                  TimeOfDay timeOfDay = await showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return TimePickerDialog(
+                                        initialTime: TimeOfDay.fromDateTime(
+                                            DateTime.now()),
+                                        confirmText: "ok",
+                                        cancelText: "cancel",
+                                      );
+                                    },
+                                  );
+                                  DateTime now = DateTime.now();
+                                  selectedTime = DateTime(
+                                    now.year,
+                                    now.month,
+                                    now.day,
+                                    timeOfDay.hour,
+                                    timeOfDay.minute,
+                                  );
+                                },
+                                icon: Icon(Icons.alarm)),
+                          ],
+                        ),
                       ),
                     );
-                  }
+                  },
                 ),
-              ],
-            ),
-
+              );
+            }),
+          ],
+        ),
       ),
     );
   }

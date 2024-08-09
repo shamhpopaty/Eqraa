@@ -44,7 +44,7 @@ class HomeScreenControllerImp extends HomeScreenController {
     },
     {
       "title": "143".tr,
-      "icon": Icons.chat,
+      "icon": Icons.person_add_sharp,
     },
 
   ];

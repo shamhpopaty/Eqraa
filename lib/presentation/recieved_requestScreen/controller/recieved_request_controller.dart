@@ -1,3 +1,4 @@
+import 'package:eqraa/data/token_manager.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -22,10 +23,11 @@ class FriendRequestsController extends GetxController {
   Future<void> fetchFriendRequests() async {
     statusRequest(StatusRequest.loading);
     try {
+      String accessToken = await TokenManager().accessToken;
       final response = await http.get(
         Uri.parse('http://localhost:8000/api/users/friendship/received-friend-requests'),
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer $accessToken',
         },
       );
 print(response.statusCode);

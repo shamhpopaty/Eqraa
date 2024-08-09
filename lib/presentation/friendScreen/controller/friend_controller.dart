@@ -1,3 +1,4 @@
+import 'package:eqraa/data/token_manager.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -10,7 +11,7 @@ class FriendsController extends GetxController {
   var isLoading = false.obs;
   var statusRequest = StatusRequest.loading.obs;
 
-  final String token = '9|cV2drVhZ42Ej0XjhUgkBJbdLZ6Tb33s6L5D0uVn1ab59f8c3';
+  final String token = '14|Q9bUYgsFAbqoIXiVnjNeyygoNZbU93etJ3NBYS3Sc2c40fc2';
 
   @override
   void onInit() {
@@ -21,10 +22,11 @@ class FriendsController extends GetxController {
   Future<void> fetchFriends() async {
     statusRequest(StatusRequest.loading);
     try {
+      String accessToken = await TokenManager().accessToken;
       final response = await http.get(
         Uri.parse('http://localhost:8000/api/users?search'),
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer $accessToken',
         },
       );
 
