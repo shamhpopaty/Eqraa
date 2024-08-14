@@ -1,13 +1,25 @@
+import 'package:eqraa/core/app_export.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../localization/changelocal.dart';
 
 class AppColor {
   static const Color gray = Color(0xff595a5d);
 
   // ----------------Light Theme
   static const Color primaryColor = Color(0xff6c7245);
+  static const Color primaryColorDark = Color(0x000);
+
   static const Color secondColor = Color(0xffe09132);
+  static const Color secondColorDark = Color(0x5e4400);
+
   static const Color thirdColor = Color(0xffa58e74);
+  static const Color thirdColorDark = Color(0xffa58e);
+
   static const Color fourthColor = Color(0xffffefcd);
+  static const Color fourthColorDark = Color(0x565600);
+
   // static const Color fifthColor = Color(0xff6c7245);
 
   //**********************************************

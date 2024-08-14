@@ -11,6 +11,7 @@ class Book_Modele {
   String? createdAt;
   String? updatedAt;
 
+
   Book_Modele(
       {this.id,
         this.title,
@@ -22,7 +23,8 @@ class Book_Modele {
         this.path,
         this.numberOfPages,
         this.createdAt,
-        this.updatedAt});
+        this.updatedAt,
+     });
 
   Book_Modele.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -36,6 +38,8 @@ class Book_Modele {
     numberOfPages = json['number_of_pages'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+
+
   }
 
   Map<String, dynamic> toJson() {

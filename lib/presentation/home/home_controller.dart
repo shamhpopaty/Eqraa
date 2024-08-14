@@ -11,6 +11,7 @@ class HomeController extends GetxController {
   HomeData homeData = HomeData(Get.find());
 
   List data = [];
+  // List data = [];
   late StatusRequest statusRequest;
 
   getData() async {

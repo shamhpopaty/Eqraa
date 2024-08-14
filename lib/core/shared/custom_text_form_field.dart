@@ -1,6 +1,9 @@
+import 'package:eqraa/core/app_export.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../constant/color.dart';
+import '../localization/changelocal.dart';
 
 class CustomTextFormFields extends StatelessWidget {
   final String? textBox;
@@ -9,7 +12,7 @@ class CustomTextFormFields extends StatelessWidget {
   final TextEditingController? mycontroller;
   final String? Function(String?)? validator;
   final TextInputType? keyboardtype;
-  const CustomTextFormFields({
+   CustomTextFormFields({
     super.key,
     required this.textBox,
     this.hintText,
@@ -18,6 +21,7 @@ class CustomTextFormFields extends StatelessWidget {
     this.keyboardtype,
     this.validator,
   });
+  LocaleController localController = Get.put(LocaleController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,7 @@ class CustomTextFormFields extends StatelessWidget {
       margin: const EdgeInsets.only(top: 15),
       child: TextFormField(
         style: TextStyle(
-          color: AppColor.primaryColor,
+          color:(!localController.isDark)? AppColor.primaryColor:AppColor.primaryColorDark,
           fontSize: 18,
         ),
         textDirection: TextDirection.ltr,
@@ -47,7 +51,8 @@ class CustomTextFormFields extends StatelessWidget {
             hintText: hintText,
             suffixIcon: Icon(
               iconPrefix,
-              color: AppColor.primaryColor,
+                color:(!localController.isDark)? AppColor.fourthColor:AppColor.primaryColorDark,
+
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),

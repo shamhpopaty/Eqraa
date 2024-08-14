@@ -1,18 +1,23 @@
 import 'package:eqraa/core/app_export.dart';
+import 'package:eqraa/core/localization/changelocal.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../core/constant/apptheme.dart';
+import '../core/constant/color.dart';
+import '../core/functions/alert_alarm.dart';
 import '../core/services/services.dart';
 
 class DropDownList extends StatelessWidget {
    DropDownList({super.key,this.isThemeApp= false});
   bool isThemeApp =false;
   MyServices myServices = Get.find();
+   LocaleController controller = Get.put(LocaleController());
    Locale? language;
 
    ThemeData appTheme = themeEnglish;
 
+   // controller.change
    changeLang(String langcode) {
      Locale locale = Locale(langcode);
      myServices.sharedPreferences.setString("lang", langcode);
@@ -31,7 +36,8 @@ class DropDownList extends StatelessWidget {
             child: Text(
               isThemeApp?"145".tr: "144".tr,
               // textAlign: TextAlign.left,
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color:(!localController.isDark)? AppColor.black:AppColor.white,
+              ),
             )),
       ),
       underline: Divider(
@@ -41,7 +47,7 @@ class DropDownList extends StatelessWidget {
       isExpanded: true,
       items:isThemeApp?[
         "light",
-        "dart"
+        "dark"
       ].map((e) => DropdownMenuItem<String>(
       child: Text(e),
       value: e,
@@ -59,16 +65,17 @@ class DropDownList extends StatelessWidget {
         if(!isThemeApp)
         {
           if(value == 'Ar'){
-            changeLang('ar');
+            // changeLang('ar');
+            controller.changeLang('ar');
+
           }else {
-            changeLang('en');
+            controller.changeLang('en');
           }
         }else {
-
           if(value == 'light'){
-            // changeLang('ar');
+            controller.changeTheme(false);
           }else {
-            // changeLang('en');
+            controller.changeTheme(true);
           }
         }
 

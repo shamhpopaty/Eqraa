@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, unused_local_variable
 
 import 'package:cool_alert/cool_alert.dart';
+import 'package:eqraa/presentation/home/home.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -40,7 +41,6 @@ class LoginControllerImp extends LoginController {
   List messageFailure = [];
   RxBool secure = true.obs;
 
-
   StatusRequest statusRequest = StatusRequest.none;
 
   MyServices myServices = Get.find();
@@ -78,17 +78,16 @@ class LoginControllerImp extends LoginController {
         // if (response['status'] == "success") {
         userModel = UserModel.fromJson(response['user']);
         if (userModel.verifiedAt != null) {
-          String? token= response['token'];
-          myServices.sharedPreferences
-              .setString("token", token!);
+          String? token = response['token'];
+          myServices.sharedPreferences.setString("token", token!);
           // data.addAll(response['data']);
           print("Success Response :  $response");
-          myServices.sharedPreferences.setString("id", userModel.usersId!.toString());
+          myServices.sharedPreferences
+              .setString("id", userModel.usersId!.toString());
           myServices.sharedPreferences
               .setString("username", userModel.usersName!);
           myServices.sharedPreferences
               .setString("email", userModel.usersEmail!);
-
 
           myServices.sharedPreferences.setString("step", "2");
           String? userid = myServices.sharedPreferences.getString("id");
@@ -108,9 +107,12 @@ class LoginControllerImp extends LoginController {
               backgroundColor: AppColor.primaryColor,
               isDismissible: true);
 
-          if(userModel.isAdmin==0){Get.offAllNamed(AppRoutes.homePage);}else {
+          if (userModel.isAdmin == 0) {
+            Get.offAllNamed(AppRoutes.homePage);
+          } else {
             //TODO: Admin Home Page
             Get.offAllNamed(AppRoutes.homePage);
+            // Get.to(() => Classification());
           }
 
           // Case the account is not verified.

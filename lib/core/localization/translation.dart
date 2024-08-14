@@ -199,6 +199,22 @@ class MyTranslation extends Translations {
           "162": "التواصل معنا",
           "163": "تواصل معنا",
           "164": "لقد انتهت مدة القراءة هل تريد المتابعة",
+          "165": "ديني",
+          "166": "تاريخي",
+          "167": "دراما",
+          "168": "علمي",
+          "169": "طبخ",
+          "170": "تنمية بشرية",
+          "171": "فلسفة",
+          "172": "رعب",
+          "173": "الملاحظات",
+
+
+
+
+
+
+
 
 
 
@@ -411,6 +427,17 @@ class MyTranslation extends Translations {
           "162": "contact us",
           "163": "Helping",
           "164":"Reading time has expired. Do you want to continue?",
+          "165": "Religious",
+          "166": "History",
+          "167": "Drama",
+          "168": "Scientific",
+          "169": "Cooking",
+          "170": "Personal Development",
+          "171": "Philosophy",
+          "172": "Horror",
+          "173": "Notes",
+
+
 
 
 

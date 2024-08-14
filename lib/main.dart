@@ -11,6 +11,7 @@ import 'core/localization/changelocal.dart';
 import 'core/localization/translation.dart';
 import 'core/services/services.dart';
 import 'core/utils/logger.dart';
+import 'presentation/home/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,14 +33,17 @@ class MyApp extends StatelessWidget {
       LocaleController controller = Get.put(LocaleController());
       return SafeArea(
         child: GetMaterialApp(
+
           debugShowCheckedModeBanner: false,
           locale: controller.language,
           // builder: DevicePreview.appBuilder,
           title: 'Eqraa',
-          translations: MyTranslation(),
+          translations:  MyTranslation(),
+
           theme: controller.appTheme,
           //routes: routes,
-          home: Login(),
+          //home: Login(),
+          home: const Classification(),
           getPages: routes,
           initialBinding: InitialBindings(),
         ),

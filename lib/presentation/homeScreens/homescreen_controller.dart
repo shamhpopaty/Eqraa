@@ -1,6 +1,7 @@
 import 'package:eqraa/presentation/Auth/view/login.dart';
 import 'package:eqraa/presentation/Auth/view/signup.dart';
 import 'package:eqraa/presentation/My_Profile/view/my_profile.dart';
+import 'package:eqraa/presentation/My_favoriteScreen/view/my_favorite_screen.dart';
 import 'package:eqraa/presentation/forgot_password/screens/forgotpassword.dart';
 import 'package:eqraa/presentation/homeScreens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +23,8 @@ class HomeScreenControllerImp extends HomeScreenController {
   MyServices myServices = Get.find();
 
   List<Widget> listPage = [
-
     Classification(),
-    SignUp(),
+    MyFavorite(),
     MyProfile(),
     Friends(),
   ];
@@ -46,13 +46,16 @@ class HomeScreenControllerImp extends HomeScreenController {
       "title": "143".tr,
       "icon": Icons.person_add_sharp,
     },
-
   ];
   initialData() {
-    lang = myServices.sharedPreferences.getString("lang");
-    username = myServices.sharedPreferences.getString("username");
-    id = myServices.sharedPreferences.getString("id");
-    phone = myServices.sharedPreferences.getString("phone");
+    // lang = myServices.sharedPreferences.getString("lang");
+    // username = myServices.sharedPreferences.getString("username");
+    // id = myServices.sharedPreferences.getString("id");
+    // phone = myServices.sharedPreferences.getString("phone");
+    lang = '';
+    username = '';
+    id = '';
+    phone = '';
   }
 
   @override
@@ -65,7 +68,6 @@ class HomeScreenControllerImp extends HomeScreenController {
   @override
   changePage(int i) {
     currentPage = i;
-
     update();
   }
 

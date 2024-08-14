@@ -7,7 +7,8 @@ import 'package:get/get.dart';
 
 import '../constant/apptheme.dart';
 import '../constant/color.dart';
-
+import '../localization/changelocal.dart';
+LocaleController localController = Get.put(LocaleController());
 Future<bool> alertalarmApp() {
 
 
@@ -23,8 +24,9 @@ Future<bool> alertalarmApp() {
       btnCancelOnPress: () {},
       btnOkText: "61".tr,
       btnOkOnPress: (){  Get.toNamed(AppRoutes.homePage);},
-      btnOkColor: AppColor.primaryColor,
-      btnCancelColor: AppColor.gray)
+      btnOkColor:(!localController.isDark)? AppColor.primaryColor:AppColor.primaryColorDark,
+
+  btnCancelColor: AppColor.gray)
       .show();
   return Future.value(true);
 }

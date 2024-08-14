@@ -15,9 +15,7 @@ import '../../../core/functions/alert_exit_app.dart';
 import '../../widgets/homeScreen/custom_bottom_app_bar_home.dart';
 import '../../widgets/homeScreen/customappbar.dart';
 
-
 class HomeScreen extends StatelessWidget {
-
   const HomeScreen({super.key});
 
   @override
@@ -28,65 +26,68 @@ class HomeScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           appBar: const CustomAppBarHome(),
-            drawer: Drawer(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  DrawerHeader(
-                      decoration:const BoxDecoration(
-                        color: AppColor.primaryColor,
-                      ),
-                      child: Column(children: [
-                        const CircleAvatar(backgroundImage: AssetImage(AppImageAssets.profileimage),),
-                        const SizedBox(height: 20,),
-                        Text("${controller.myServices.sharedPreferences.getString("username")??"Kheder Youssef"}"),
-
-                      ],)
-                  ),
-                  // ListTile(
-                  //   title: Text( "144".tr),
-                  //   onTap: () {
-                  //   },
-                  // ),
-                  DropDownList(),
-                  DropDownList(isThemeApp:true),
-                  // ListTile(
-                  //   title: Text("145".tr),
-                  //   onTap: () {
-                  //   },
-                  // ),
-                  ListTile(
-                    title: Text( "146".tr),
-                    onTap: () {
-                      Get.to(()=>RecievedRequests());
-                    },
-                  ),
-                  ListTile(
-                    title: Text( "160".tr),
-                    onTap: () {
-                      Get.to(()=>Request());
-                    },
-                  ),
-                  ListTile(
-                    title: Text( "147".tr),
-                    onTap: () {
-                      Get.to(()=>Contact_Us());
-                    },
-                  ),
-                  ListTile(
-                    title: Text( "56".tr),
-                    onTap: () {
-                      logOut();
-                    },
-                  ),
-
-                ],
-              ),
+          drawer: Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                DrawerHeader(
+                    decoration: const BoxDecoration(
+                      color: AppColor.primaryColor,
+                    ),
+                    child: Column(
+                      children: [
+                        const CircleAvatar(
+                          backgroundImage:
+                              AssetImage(AppImageAssets.profileimage),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        // Text("${controller.myServices.sharedPreferences.getString("username")??"Kheder Youssef"}"),
+                      ],
+                    )),
+                // ListTile(
+                //   title: Text( "144".tr),
+                //   onTap: () {
+                //   },
+                // ),
+                DropDownList(),
+                DropDownList(isThemeApp: true),
+                // ListTile(
+                //   title: Text("145".tr),
+                //   onTap: () {
+                //   },
+                // ),
+                ListTile(
+                  title: Text("146".tr),
+                  onTap: () {
+                    Get.to(() => RecievedRequests());
+                  },
+                ),
+                ListTile(
+                  title: Text("160".tr),
+                  onTap: () {
+                    Get.to(() => Request());
+                  },
+                ),
+                ListTile(
+                  title: Text("147".tr),
+                  onTap: () {
+                    Get.to(() => Contact_Us());
+                  },
+                ),
+                ListTile(
+                  title: Text("56".tr),
+                  onTap: () {
+                    logOut();
+                  },
+                ),
+              ],
             ),
-            bottomNavigationBar: const CustomBottomAppBarHome(),
-            body:
-                controller.listPage.elementAt(controller.currentPage),
-          );
+          ),
+          bottomNavigationBar: const CustomBottomAppBarHome(),
+          body: controller.listPage.elementAt(controller.currentPage),
+        );
       },
     );
   }

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../routes.dart';
 import '../constant/color.dart';
+import '../localization/changelocal.dart';
 import '../services/services.dart';
-
+LocaleController localController = Get.put(LocaleController());
 @override
 logOut() {
   MyServices myServices = Get.find();
@@ -13,8 +14,9 @@ logOut() {
     cancelBtnText: "62".tr,
     confirmBtnText: "61".tr,
     showCancelBtn: true,
-    backgroundColor: AppColor.primaryColor,
-    animType: CoolAlertAnimType.rotate,
+    backgroundColor:(!localController.isDark)? AppColor.primaryColor:AppColor.primaryColorDark,
+
+  animType: CoolAlertAnimType.rotate,
     borderRadius: BorderSide.strokeAlignCenter,
     type: CoolAlertType.warning,
     loopAnimation: true,

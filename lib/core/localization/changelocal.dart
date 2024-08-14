@@ -8,14 +8,30 @@ class LocaleController extends GetxController {
   MyServices myServices = Get.find();
 
   ThemeData appTheme = themeEnglish;
+  bool isDark = false;
+  String lang = 'en';
 
   changeLang(String langcode) {
+    lang = langcode;
     Locale locale = Locale(langcode);
     myServices.sharedPreferences.setString("lang", langcode);
-    appTheme = langcode == "en" ? themeEnglish : themeArabic;
+    appTheme = langcode == "en" ? (!isDark)? themeEnglish : themeEnglishDark
+              : (!isDark)? themeArabic : themeArabicDark;
     Get.updateLocale(locale);
     Get.changeTheme(appTheme);
                 }
+
+  changeTheme(bool iDark){
+    isDark=iDark;
+    Locale locale = Locale(lang);
+    myServices.sharedPreferences.setString("lang", lang);
+    appTheme = lang == "en" ? (!isDark)? themeEnglish : themeEnglishDark
+        : (!isDark)? themeArabic : themeArabicDark;
+    Get.updateLocale(locale);
+    Get.changeTheme(appTheme);
+  }
+
+
 
   @override
   void onInit() {

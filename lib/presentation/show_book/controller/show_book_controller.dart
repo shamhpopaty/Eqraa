@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/class/status_request.dart';
@@ -9,7 +10,6 @@ import '../data/show_book_data.dart';
 abstract class ShowBookController extends GetxController {
   ShowBook();
 }
-
 
 class ShowBookControllerImp extends ShowBookController {
   MyServices myServices = Get.find();
@@ -23,9 +23,8 @@ class ShowBookControllerImp extends ShowBookController {
     var response = await showbookdata.getData(); // getting the data
     statusRequest = handlingData(response); //TO handle the response status
     if (StatusRequest.success == statusRequest) {
-
-      data.addAll(response['data']);}
-    else {
+      data.addAll(response['data']);
+    } else {
       statusRequest = StatusRequest.failure;
     }
 
@@ -41,6 +40,5 @@ class ShowBookControllerImp extends ShowBookController {
   @override
   ShowBook() {
     Get.toNamed(AppRoutes.showbook);
-
   }
 }

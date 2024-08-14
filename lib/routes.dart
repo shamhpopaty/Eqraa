@@ -6,6 +6,7 @@ import 'package:eqraa/presentation/forgot_password/screens/forgotpassword.dart';
 import 'package:eqraa/presentation/forgot_password/screens/resetpassword.dart';
 import 'package:eqraa/presentation/forgot_password/screens/successresetpassword.dart';
 import 'package:eqraa/presentation/forgot_password/screens/verifycode.dart';
+import 'package:eqraa/presentation/notesScreen/view/notes_screen.dart';
 import 'package:eqraa/presentation/show_book/view/show_book.dart';
 import 'package:eqraa/widgets/custom_editing_profile.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,7 @@ class AppRoutes {
   static const String language = '/language';
   static const String forgotPassword = '/forgotPassword';
   static const String splashScreen = '/splashScreen';
-  static const String homePage = '/homePage';
+  static const String homePage = '/classification';
   static const String verifyCode = '/verifyCode';
   static const String resetPassword = '/resetPassword';
   static const String successResetPassword = '/successResetPassword';
@@ -32,6 +33,7 @@ class AppRoutes {
   static const String showbook = '/showbook';
   static const String descriptionbook = '/descriptionbook';
   static const String bookscreen = '/bookscreen';
+  static const String notesscreen = '/notesscreen';
 
 
   //------------
@@ -48,7 +50,7 @@ List<GetPage<dynamic>>? routes = [
   //Auth
   GetPage(
     name: AppRoutes.login,
-    page: () => const HomeScreen(),
+    page: () => const Login(),
     // page: () => const Login(),
   ),
   GetPage(
@@ -57,21 +59,23 @@ List<GetPage<dynamic>>? routes = [
   ),
   //HomePage
   GetPage(name: AppRoutes.homePage, page: () => const HomeScreen()),
-  GetPage(name: AppRoutes.resetPassword, page: () => const ResetPassword ()),
-  GetPage(name: AppRoutes.successResetPassword, page: () => const SuccessResetPassword ()),
-    GetPage(name: AppRoutes.verifyCode, page: () => const VerifyCode ()),
-  GetPage(name: AppRoutes.forgotPassword, page: () => const ForgotPassword ()),
-  GetPage(name: AppRoutes.myprofile, page: () => const MyProfile ()),
-  GetPage(name: AppRoutes.editigprofile, page: () =>  EditProfile ()),
+  GetPage(name: AppRoutes.resetPassword, page: () => const ResetPassword()),
+  GetPage(
+      name: AppRoutes.successResetPassword,
+      page: () => const SuccessResetPassword()),
+  GetPage(name: AppRoutes.verifyCode, page: () => const VerifyCode()),
+  GetPage(name: AppRoutes.forgotPassword, page: () => const ForgotPassword()),
+  GetPage(name: AppRoutes.myprofile, page: () => const MyProfile()),
+  GetPage(name: AppRoutes.editigprofile, page: () => EditProfile()),
   // GetPage(name: AppRoutes.bookscreen
-  //     , page: () =>  BookScreen ()),
+  //     , pzage: () =>  BookScreen ()),
   //GetPage(name: AppRoutes.showbook, page: () =>   ShowBook (pdfPath: '',)),
+  GetPage(name: AppRoutes.notesscreen, page: () => NotesScreen()),
 
   GetPage(
       name: AppRoutes.onBoarding,
       page: () => const OnBoarding(),
-      middlewares: [MyMiddleware()]
-  ),
+      middlewares: [MyMiddleware()]),
 ];
 
 // };

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:eqraa/core/shared/custom_text_form_field.dart';
+import 'package:eqraa/models/book_model.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
@@ -10,58 +12,16 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../core/functions/alert_alarm.dart';
-
-class BookListScreen extends StatelessWidget {
-  final List<Book> books = [
-    Book('Book 1', 'assets/pdf/doaa.pdf'),
-    Book('Book 2', 'assets/pdf/sera.pdf'),
-    Book('Book 3', 'assets/pdf/hart.pdf'),
-  ];
-
-  final int endTimeMillisecond;
-
-  BookListScreen({super.key, this.endTimeMillisecond = -1});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Books'),
-      ),
-      body: ListView.builder(
-        itemCount: books.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(books[index].title),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BookDetailScreen(
-                    book: books[index],
-                    endTimeMillisecond: endTimeMillisecond,
-                  ),
-                ),
-              );
-            },
-          );
-        },
-      ),
-    );
-  }
-}
-
-class Book {
-  final String title;
-  final String assetPath;
-
-  Book(this.title, this.assetPath);
-}
+import '../../booksScreen/model/books_model.dart';
 
 class BookDetailScreen extends StatefulWidget {
-  final Book book;
+  final Map<String, String> books = {
+    'Alsera_Alnabawea': 'assets/pdf/Alsera_Alnabawea.pdf',
+    'sera': 'assets/pdf/sera.pdf',
+    'healthy book': 'assets/pdf/healthy book.pdf',
+  };
   final int endTimeMillisecond;
-
+  final Book book;
   BookDetailScreen({
     required this.book,
     this.endTimeMillisecond = -1,
@@ -73,12 +33,16 @@ class BookDetailScreen extends StatefulWidget {
 
 class _BookDetailScreenState extends State<BookDetailScreen> {
   String? localPath;
+  int totalPages = 0;
+  int currentPage = 0;
+  TextEditingController noteController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     startTimer();
-    fromAsset(widget.book.assetPath, 'temp.pdf').then((f) {
+    fromAsset(widget.books[widget.book.title!].toString(), 'temp.pdf')
+        .then((f) {
       setState(() {
         localPath = f.path;
       });
@@ -113,7 +77,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     _timer = Timer.periodic(
       oneSec,
       (Timer timer) {
-        if(_durationEnded()){
+        if (_durationEnded()) {
           setState(() {
             _timer.cancel();
             alertalarmApp();
@@ -126,6 +90,16 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   Widget _buildBody() {
     if (localPath != null) {
       return PDFView(
+        onRender: (pages) {
+          setState(() {
+            totalPages = pages!;
+          });
+        },
+        onPageChanged: (int? page, int? total) {
+          setState(() {
+            currentPage = page!;
+          });
+        },
         filePath: localPath,
         enableSwipe: true,
       );
@@ -138,9 +112,67 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.book.title),
+        title: Text(widget.book.title!),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.bookmark_add_outlined,
+          ),
+          onPressed: () {
+            showMyDialog(context);
+          },
+        ),
       ),
       body: _buildBody(),
+    );
+  }
+
+  Future<void> showMyDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button to close the dialog
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('ملاحظات'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                // Text('This is a simple dialog.'),
+                // Text('Would you like to continue?'),
+                TextField(
+                  controller:
+                      noteController, ///////  هذا بجبلي قيم النص وما شابه
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null, // Allows the text field to expand as needed
+                  decoration: const InputDecoration(
+                    hintText: 'اكتب ...',
+                    border:
+                        OutlineInputBorder(), ////// تعديل شكل المربع تبع الملاحظات
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('الغاء'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Closes the dialog
+              },
+            ),
+            TextButton(
+              child: const Text('حفظ'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Closes the dialog
+                print(noteController.text);
+                print(currentPage);
+                print(widget.book.title!);
+
+                
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
