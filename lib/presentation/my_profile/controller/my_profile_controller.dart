@@ -43,3 +43,31 @@ print(response.body);
     }
   }
 }
+
+
+
+class EditProfileController extends GetxController {
+  var profile = ProfileModel(
+    imageUrl: 'https://via.placeholder.com/150', // رابط الصورة الافتراضية
+    bio: 'This is a default bio.',
+    socialLink: 'https://sociallink.com',
+  ).obs;
+
+  void updateImage(String newImageUrl) {
+    profile.update((val) {
+      val?.imageUrl = newImageUrl;
+    });
+  }
+
+  void updateBio(String newBio) {
+    profile.update((val) {
+      val?.bio = newBio;
+    });
+  }
+
+  void updateSocialLink(String newSocialLink) {
+    profile.update((val) {
+      val?.socialLink = newSocialLink;
+    });
+  }
+}

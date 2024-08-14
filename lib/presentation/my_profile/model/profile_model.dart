@@ -106,3 +106,15 @@ class UserProfileResponse {
     );
   }
 }
+
+class ProfileModel {
+  String imageUrl;
+  String bio;
+  String socialLink;
+
+  ProfileModel({
+    required this.imageUrl,
+    required this.bio,
+    required this.socialLink,
+  });
+}
