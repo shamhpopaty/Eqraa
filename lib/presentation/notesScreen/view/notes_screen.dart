@@ -1,36 +1,30 @@
 import 'package:eqraa/core/app_export.dart';
-import 'package:eqraa/core/constant/apptheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/class/handlingdataview.dart';
 import '../../../core/constant/color.dart';
 import '../../../core/constant/imageassets.dart';
 import '../../../core/functions/logout.dart';
-import '../../../core/localization/changelocal.dart';
 import '../../../widgets/custom_note_item.dart';
 import '../../../widgets/drop_down_list_drawer.dart';
 import '../../../widgets/homeScreen/customappbar.dart';
 import '../../contact_us/contact_us.dart';
 import '../../recieved_requestScreen/screen/recieved_request.dart';
 import '../../send_requestsScreen/screens/send_requests.dart';
-import '../controller/notes_screen_controller.dart';
 
 class NotesScreen extends StatefulWidget {
-  NotesScreen({super.key});
-  LocaleController localController = Get.put(LocaleController());
+  const NotesScreen({super.key});
 
   @override
   State<NotesScreen> createState() => _NotesScreenState();
 }
 
-
 class _NotesScreenState extends State<NotesScreen> {
-
-  LocaleController localController = Get.put(LocaleController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: (!localController.isDark)? AppColor.white:AppColor.black,
+
       appBar: const CustomAppBarHome(),
       drawer: Drawer(
         child: ListView(
@@ -38,7 +32,7 @@ class _NotesScreenState extends State<NotesScreen> {
           children: [
             DrawerHeader(
                 decoration: const BoxDecoration(
-                  color:AppColor.primaryColor,
+                  color: AppColor.primaryColor,
                 ),
                 child: Column(
                   children: [
@@ -102,40 +96,28 @@ class _NotesScreenState extends State<NotesScreen> {
         padding: const EdgeInsets.all(25),
         child: SingleChildScrollView(
           child: Column(
-          children: [
-    GetBuilder<NotesScreenControllerImp>(builder: (controller) {
-    LocaleController localController = Get.put(LocaleController());
-    return HandlingDataView(
-    statusRequest: controller.statusRequest, widget:
-        Column(
-    children: [
-    NoteItem(),
-    SizedBox(height: 20,),
-    NoteItem(),
-    SizedBox(height: 20,),
-    NoteItem(),
-    SizedBox(height: 20,),
-    NoteItem(),
-    SizedBox(height: 20,),
-    NoteItem(),
-    SizedBox(height: 20,),
-    NoteItem(),
-    SizedBox(height: 20,),
-    NoteItem(),
-    SizedBox(height: 20,),
-    NoteItem(),
-    SizedBox(height: 20,),
-
-    ],
-    )
+              children: [
+                 NoteItem(),
+                SizedBox(height: 20,),
+                NoteItem(),
+                SizedBox(height: 20,),
+                NoteItem(),
+                SizedBox(height: 20,),
+                NoteItem(),
+                SizedBox(height: 20,),
+                NoteItem(),
+                SizedBox(height: 20,),
+                NoteItem(),
+                SizedBox(height: 20,),
+                NoteItem(),
+                SizedBox(height: 20,),
 
 
-    );
-    }),
-        ]
-    ),
+              ],
+            ),
+        ),
       ),
 
-    ),);
+    );
   }
 }

@@ -40,6 +40,7 @@ class _BooksScreenState extends State<BooksScreen> {
         Get.put(BooksScreenControllerImp(widget.category));
     DateTime selectedTime = DateTime.now();
     return Scaffold(
+
       appBar: const CustomAppBarHome(),
       drawer: Drawer(
         child: ListView(
