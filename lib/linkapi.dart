@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+
 class AppLink {
 
   static const String ip = "localhost";
@@ -39,6 +41,14 @@ class AppLink {
   static const String bookscreen = "$server/books/?category[eq]=";
 
   static const String notesscreen = "$server/";
+
+  static const String addBookMark = '$server/bookmarks';
+  static const String getBookMark='$server/bookmarks';
+  static String addFavoriteBook(int id) {
+    return '$server/books/$id/add-to-favorite';
+  }
+  static const String getfavoritebook='$server/books/my-favorite';
+
 
 
 }

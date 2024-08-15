@@ -24,7 +24,7 @@ class HomeScreenControllerImp extends HomeScreenController {
 
   List<Widget> listPage = [
     Classification(),
-    MyFavorite(),
+    MyFavorite(category: '',),
     MyProfile(),
     Friends(),
   ];

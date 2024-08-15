@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:eqraa/core/app_export.dart';
 import 'package:eqraa/core/shared/custom_text_form_field.dart';
 import 'package:eqraa/models/book_model.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../core/functions/alert_alarm.dart';
+import '../../booksScreen/controller/books_screen_controller.dart';
 import '../../booksScreen/model/books_model.dart';
 
 class BookDetailScreen extends StatefulWidget {
@@ -64,13 +66,13 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   }
 
   bool _durationEnded() {
-
     if (widget.endTimeMillisecond == null || widget.endTimeMillisecond == -1) {
       return false;
     }
     int currentMillisecond = DateTime.now().millisecondsSinceEpoch;
     return (currentMillisecond >= widget.endTimeMillisecond);
   }
+
   final oneSec = const Duration(seconds: 1);
   late final Timer _timer;
 
@@ -121,7 +123,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         title: Text(widget.book.title!),
         leading: IconButton(
           icon: const Icon(
-            Icons.bookmark_add_outlined,
+            Icons.add,
           ),
           onPressed: () {
             showMyDialog(context);
@@ -167,13 +169,18 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             ),
             TextButton(
               child: const Text('حفظ'),
-              onPressed: () {
-                Navigator.of(context).pop(); // Closes the dialog
-                print(noteController.text);
-                print(currentPage);
-                print(widget.book.title!);
+              onPressed: () async {
+                BooksScreenControllerImp booksScreenController =
+                    Get.put(BooksScreenControllerImp('null'));
 
-                
+                await booksScreenController.addBookMark(noteController.text,
+                    widget.book.id!, currentPage, noteController.text);
+
+                Navigator.of(context).pop();
+                noteController.clear();
+                // print(noteController.text);
+                // print(currentPage);
+                // print(widget.book.title!);
               },
             ),
           ],
