@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import '../../../core/functions/logout.dart';
 import '../../../core/localization/changelocal.dart';
+import '../../../linkapi.dart';
 import '../../../widgets/auth/custom_text_form.dart';
 import '../../../widgets/drop_down_list_drawer.dart';
 import '../../../widgets/homeScreen/customappbar.dart';
@@ -39,7 +40,7 @@ class _BooksScreenState extends State<BooksScreen> {
   Widget build(BuildContext context) {
     final BooksScreenControllerImp controller =
         Get.put(BooksScreenControllerImp(widget.category));
-    DateTime selectedTime = DateTime.now();
+    DateTime? selectedTime = DateTime.now();
     return Scaffold(
 
       appBar: const CustomAppBarHome(),
@@ -63,18 +64,8 @@ class _BooksScreenState extends State<BooksScreen> {
                     // Text("${controller.myServices.sharedPreferences.getString("username")??"Kheder Youssef"}"),
                   ],
                 )),
-            // ListTile(
-            //   title: Text( "144".tr),
-            //   onTap: () {
-            //   },
-            // ),
             DropDownList(),
             DropDownList(isThemeApp: true),
-            // ListTile(
-            //   title: Text("145".tr),
-            //   onTap: () {
-            //   },
-            // ),
             ListTile(
               title: Text("146".tr),
               onTap: () {
@@ -90,7 +81,7 @@ class _BooksScreenState extends State<BooksScreen> {
             ListTile(
               title: Text("173".tr),
               onTap: () {
-                Get.to(() => EditProfileView());
+                Get.to(() => NotesScreen());
               },
             ),
             ListTile(
@@ -153,7 +144,9 @@ class _BooksScreenState extends State<BooksScreen> {
                         Get.to(() => DescriptionBooks(
                               book: controller.books[i],
                               endTimeMillisecond:
-                                  selectedTime.millisecondsSinceEpoch,
+                              selectedTime != null
+                                  ? selectedTime!.millisecondsSinceEpoch
+                                  : -1,
                             ));
                       },
                       child: Container(
@@ -181,12 +174,11 @@ class _BooksScreenState extends State<BooksScreen> {
                             controller.books[i].cover != null
                                 ? SizedBox(
                                     child: Image.network(
-                                      controller.books[i].cover!,
-                                      fit: BoxFit.cover,
+                                      "${AppLink.server}/${controller.books[i].cover!}",                                  fit: BoxFit.cover,
                                       errorBuilder:
                                           (context, error, stackTrace) {
                                         return Image.asset(
-                                            'assets/images/camera.jpg',
+                                           AppImageAssets.camera,
                                             fit: BoxFit.cover);
                                       },
                                     ),
@@ -194,7 +186,7 @@ class _BooksScreenState extends State<BooksScreen> {
                                   )
                                 : SizedBox(
                                     child: Image.asset(
-                                        'assets/images/camera.jpg',
+                                        AppImageAssets.camera,
                                         fit: BoxFit.cover),
                                     height: 10,
                                   ),
@@ -220,14 +212,21 @@ class _BooksScreenState extends State<BooksScreen> {
                                           );
                                         },
                                       );
-                                      DateTime now = DateTime.now();
-                                      selectedTime = DateTime(
-                                        now.year,
-                                        now.month,
-                                        now.day,
-                                        timeOfDay.hour,
-                                        timeOfDay.minute,
-                                      );
+
+                                      if (timeOfDay != null) {
+
+                                        DateTime now = DateTime.now();
+                                        selectedTime = DateTime(
+                                          now.year,
+                                          now.month,
+                                          now.day,
+                                          timeOfDay.hour,
+                                          timeOfDay.minute,
+                                        );
+                                      } else {
+                                        // If no time is selected, set selectedTime to null or -1
+                                        selectedTime = null; // or another placeholder
+                                      }
                                     },
                                     icon: Icon(Icons.alarm)),
                                 IconButton(

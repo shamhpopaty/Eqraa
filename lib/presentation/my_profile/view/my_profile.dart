@@ -13,11 +13,13 @@ class MyProfile extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(16),
       child: Center(
-        child: Column(
-          children: [
-            Custom_Profile(),
-
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Custom_Profile(),
+          
+            ],
+          ),
         ),
       ),
     );

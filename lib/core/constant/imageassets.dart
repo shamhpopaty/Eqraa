@@ -15,6 +15,7 @@ class AppImageAssets {
   static const String book = "$root/book.jpg";
   static const String islamicbook = "$root/islamicbook.jpg";
   static const String forgotpassword = "$root/forgotpassword.jpg";
+  // static const String camera = "assets/images/camera.jpg";
 
 
   static const String onBoardingImageOne = "$rootLottie/onboarding/1.json";

@@ -1,4 +1,5 @@
 import 'package:eqraa/core/app_export.dart';
+import 'package:eqraa/presentation/notesScreen/view/notes_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../core/constant/color.dart';
 import '../../../core/functions/logout.dart';
@@ -44,27 +45,16 @@ class DescriptionBooks extends StatelessWidget {
                     children: [
                       const CircleAvatar(
                         backgroundImage:
-                            AssetImage(AppImageAssets.profileimage),
+                        AssetImage(AppImageAssets.profileimage),
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                      Text(
-                          "${controller.myServices.sharedPreferences.getString("username")}"),
+                      // Text("${controller.myServices.sharedPreferences.getString("username")??"Kheder Youssef"}"),
                     ],
                   )),
-              // ListTile(
-              //   title: Text( "144".tr),
-              //   onTap: () {
-              //   },
-              // ),
               DropDownList(),
               DropDownList(isThemeApp: true),
-              // ListTile(
-              //   title: Text("145".tr),
-              //   onTap: () {
-              //   },
-              // ),
               ListTile(
                 title: Text("146".tr),
                 onTap: () {
@@ -75,6 +65,12 @@ class DescriptionBooks extends StatelessWidget {
                 title: Text("160".tr),
                 onTap: () {
                   Get.to(() => Request());
+                },
+              ),
+              ListTile(
+                title: Text("173".tr),
+                onTap: () {
+                  Get.to(() => NotesScreen());
                 },
               ),
               ListTile(

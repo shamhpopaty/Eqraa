@@ -42,14 +42,14 @@ backgroundColor: (!localController.isDark)? AppColor.white:AppColor.black,
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8),
-              child: AuthTextFormField(
-                hintText: "148".tr,
-                iconPrefix: Icons.search,
-                textBox: '',
-              ),
-            ),
-            GridView.builder(
+             padding: const EdgeInsets.only(left: 8.0, right: 8),
+            //   child: AuthTextFormField(
+            //     hintText: "148".tr,
+            //     iconPrefix: Icons.search,
+            //     textBox: '',
+            //   ),
+            // ),
+            child: GridView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -97,9 +97,10 @@ backgroundColor: (!localController.isDark)? AppColor.white:AppColor.black,
                 );
               },
             ),
+            ),
           ],
+    ),
         ),
-      ),
     );
   }
 }

@@ -46,18 +46,8 @@ class _NotesScreenState extends State<NotesScreen> {
                     // Text("${controller.myServices.sharedPreferences.getString("username")??"Kheder Youssef"}"),
                   ],
                 )),
-            // ListTile(
-            //   title: Text( "144".tr),
-            //   onTap: () {
-            //   },
-            // ),
             DropDownList(),
             DropDownList(isThemeApp: true),
-            // ListTile(
-            //   title: Text("145".tr),
-            //   onTap: () {
-            //   },
-            // ),
             ListTile(
               title: Text("146".tr),
               onTap: () {

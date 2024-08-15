@@ -15,6 +15,7 @@ import '../../../core/functions/alert_alarm.dart';
 import '../../booksScreen/model/books_model.dart';
 
 class BookDetailScreen extends StatefulWidget {
+  ///TODO: add all books here
   final Map<String, String> books = {
     'Alsera_Alnabawea': 'assets/pdf/Alsera_Alnabawea.pdf',
     'sera': 'assets/pdf/sera.pdf',
@@ -63,17 +64,22 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   }
 
   bool _durationEnded() {
-    if (widget.endTimeMillisecond == -1) {
+
+    if (widget.endTimeMillisecond == null || widget.endTimeMillisecond == -1) {
       return false;
     }
     int currentMillisecond = DateTime.now().millisecondsSinceEpoch;
     return (currentMillisecond >= widget.endTimeMillisecond);
   }
-
   final oneSec = const Duration(seconds: 1);
   late final Timer _timer;
 
   void startTimer() {
+    if (widget.endTimeMillisecond == -1) {
+      // No valid timer is set, do not start the timer
+      return;
+    }
+    print("TIMER : ${widget.endTimeMillisecond}");
     _timer = Timer.periodic(
       oneSec,
       (Timer timer) {

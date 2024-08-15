@@ -33,17 +33,13 @@ class MyApp extends StatelessWidget {
       LocaleController controller = Get.put(LocaleController());
       return SafeArea(
         child: GetMaterialApp(
-
           debugShowCheckedModeBanner: false,
           locale: controller.language,
           // builder: DevicePreview.appBuilder,
           title: 'Eqraa',
-          translations:  MyTranslation(),
-
+          translations: MyTranslation(),
           theme: controller.appTheme,
           //routes: routes,
-          //home: Login(),
-          home: const Classification(),
           getPages: routes,
           initialBinding: InitialBindings(),
         ),

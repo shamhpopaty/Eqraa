@@ -4,6 +4,7 @@ import 'package:eqraa/core/constant/color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../presentation/my_profile/controller/my_profile_controller.dart';
+import '../presentation/my_profile/view/editing_profile.dart';
 import 'custom_container_profile.dart';
 import 'custom_editing_profile.dart';
 
@@ -49,7 +50,7 @@ class Custom_Profile extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {
-                    Get.to(EditProfile());
+                    Get.to(EditProfileView());
                   },
                   icon: const Icon(Icons.edit),
                 ),
