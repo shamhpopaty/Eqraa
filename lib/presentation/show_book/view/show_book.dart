@@ -15,6 +15,7 @@ import 'package:path_provider/path_provider.dart';
 import '../../../core/functions/alert_alarm.dart';
 import '../../booksScreen/controller/books_screen_controller.dart';
 import '../../booksScreen/model/books_model.dart';
+import '../controller/show_book_controller.dart';
 
 class BookDetailScreen extends StatefulWidget {
   ///TODO: add all books here
@@ -38,7 +39,9 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   String? localPath;
   int totalPages = 0;
   int currentPage = 0;
+  int highestPageReached = 0;
   TextEditingController noteController = TextEditingController();
+  ShowBookControllerImp controller = Get.put(ShowBookControllerImp());
 
   @override
   void initState() {
@@ -95,6 +98,18 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     );
   }
 
+  @override
+  void dispose() {
+    saveHighestPageReached(); // Save the highest page before disposing the widget
+    super.dispose();
+  }
+
+  void saveHighestPageReached() {
+    // Call your controller to save the highest page reached
+
+    controller.saveHighestPage(widget.book.id!, highestPageReached);
+  }
+
   Widget _buildBody() {
     if (localPath != null) {
       return PDFView(
@@ -106,6 +121,9 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         onPageChanged: (int? page, int? total) {
           setState(() {
             currentPage = page!;
+            if (currentPage > highestPageReached) {
+              highestPageReached = currentPage; // Update highest page reached
+            }
           });
         },
         filePath: localPath,

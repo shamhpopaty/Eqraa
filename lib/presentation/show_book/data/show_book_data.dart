@@ -1,4 +1,3 @@
-
 import '../../../core/class/crud.dart';
 import '../../../linkapi.dart';
 
@@ -8,7 +7,7 @@ class ShowBookData {
 
   /// you just need to use the link, and to insert the form data
   dynamic getData() async {
-    var response = await crud.postData(AppLink.showbook, {});
+    var response = await crud.getDataWithToken(AppLink.showbook, "");
     return response.fold((l) => l, (r) => r);
   }
 }

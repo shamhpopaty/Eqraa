@@ -37,6 +37,14 @@ class ShowBookControllerImp extends ShowBookController {
     super.onInit();
   }
 
+  ///TODO : ريكويست تتبع الكتاب
+  Future<void> saveHighestPage(int bookId, int page) async {
+    // Implement the logic to save the highest page number in the database or shared preferences
+    // You can call an API or use local storage to save the data
+    print("Saving highest page reached: $page for book ID: $bookId");
+    // Example: Save it using shared preferences or call an API to save it on the server
+  }
+
   @override
   ShowBook() {
     Get.toNamed(AppRoutes.showbook);
