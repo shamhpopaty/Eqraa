@@ -10,7 +10,8 @@ class FavoriteScreenData {
   // Fetch favorite books
   Future<dynamic> getData() async {
     String accessToken = await tokenManager.accessToken;
-    var response = await crud.getDataWithToken(AppLink.getfavoritebook, accessToken);
+    var response =
+        await crud.getDataWithToken(AppLink.getfavoritebook, accessToken);
     return response.fold((l) => l, (r) => r);
   }
 
@@ -25,7 +26,7 @@ class FavoriteScreenData {
   Future<dynamic> addFavoriteBook(int id) async {
     String accessToken = await tokenManager.accessToken;
     String url = '${AppLink.server}/books/$id/add-to-favorite';
-    var response = await crud.postDataWithToken(url, accessToken);
+    var response = await crud.postDataWithToken(url, accessToken, {});
     return response.fold((l) => l, (r) => r);
   }
 }

@@ -43,6 +43,12 @@ class ShowBookControllerImp extends ShowBookController {
     // You can call an API or use local storage to save the data
     print("Saving highest page reached: $page for book ID: $bookId");
     myServices.sharedPreferences.setString(bookId.toString(), page.toString());
+    var response = await showbookdata.saveHighestPage(bookId, page);
+    if (response is StatusRequest) {
+      print("Failed to save on backend: $response");
+    } else {
+      print("Successfully saved on backend: $response");
+    }
     // Example: Save it using shared preferences or call an API to save it on the server
   }
 

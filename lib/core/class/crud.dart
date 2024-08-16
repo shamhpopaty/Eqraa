@@ -89,11 +89,12 @@ class Crud {
       return const Left(StatusRequest.failure);
     }
   }
+
   Future<Either<StatusRequest, Map>> deleteDataWithToken(
-      String linkurl,
-      {
-        Map<String, dynamic>? body, // Optional body parameter for the DELETE request
-      }) async {
+    String linkurl, {
+    Map<String, dynamic>?
+        body, // Optional body parameter for the DELETE request
+  }) async {
     try {
       String accessToken = await TokenManager().accessToken;
 
@@ -103,9 +104,11 @@ class Crud {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $accessToken',
         },
-        body: body != null ? jsonEncode(body) : null, // Encode the body as JSON if provided
+        body: body != null
+            ? jsonEncode(body)
+            : null, // Encode the body as JSON if provided
       );
-        print("URL : $linkurl");
+      print("URL : $linkurl");
       print('Response Status Code: ${response.statusCode}');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -124,13 +127,12 @@ class Crud {
     }
   }
 
-
   Future<Either<StatusRequest, Map>> postDataWithToken(
     String linkurl,
-    String bearerToken, {
-    Map<String, dynamic>?
+    String bearerToken,
+    Map<String, dynamic>
         body, // Add an optional body parameter for POST requests
-  }) async {
+  ) async {
     try {
       var response = await http.post(
         Uri.parse(linkurl),
