@@ -9,7 +9,7 @@ class ContactUsData {
 
   /// you just need to use the link, and to insert the form data
   getData() async {
-    var response = await crud.postData(AppLink.test, {});
+    var response = await crud.postData(AppLink.addcomplaints, {});
     return response.fold((l) => l, (r) => r);
   }
 }

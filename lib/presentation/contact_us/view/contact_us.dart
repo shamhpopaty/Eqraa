@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../contact_us_controller/contact_us_controller.dart';
+
 final Uri _url = Uri.parse('https://github.com/Kheder-YSF/Eqraa');
 
 class Contact_Us extends StatefulWidget {
@@ -14,6 +16,9 @@ class Contact_Us extends StatefulWidget {
 }
 
 class _Contact_UsState extends State<Contact_Us> {
+  TextEditingController complaints = TextEditingController();
+  ContactUsController complaintscontroller = Get.put(ContactUsController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +67,7 @@ class _Contact_UsState extends State<Contact_Us> {
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
                         ),),
-                        onTap: _launchUrl,
+                        onTap: (){},
                         ),
                       ],
                     ),
@@ -73,9 +78,58 @@ class _Contact_UsState extends State<Contact_Us> {
 
       );
   }
-}
-Future<void> _launchUrl() async {
-  if (!await launchUrl(_url)) {
-    throw Exception('Could not launch $_url');
+  Future<void> showMyDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button to close the dialog
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('ملاحظات'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                // Text('This is a simple dialog.'),
+                // Text('Would you like to continue?'),
+                TextField(
+                  controller:
+                  complaints, ///////  هذا بجبلي قيم النص وما شابه
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null, // Allows the text field to expand as needed
+                  decoration: const InputDecoration(
+                    hintText: 'اكتب ...',
+                    border:
+                    OutlineInputBorder(), ////// تعديل شكل المربع تبع الملاحظات
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('الغاء'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Closes the dialog
+              },
+            ),
+            TextButton(
+              child: const Text('حفظ'),
+              onPressed: () async {
+                ContactUsController complaintscontroller =
+                Get.put(ContactUsController());
+
+                await complaintscontroller.addComplaints(complaints.text);
+
+                Navigator.of(context).pop();
+                complaints.clear();
+                // print(noteController.text);
+                // print(currentPage);
+                // print(widget.book.title!);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
+
 }

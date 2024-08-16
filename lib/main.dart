@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:eqraa/core/app_export.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pdftron_flutter/pdftron_flutter.dart';
 
 import 'core/binding/initinalbinding.dart';
 import 'core/localization/changelocal.dart';
@@ -15,6 +16,8 @@ import 'core/utils/logger.dart';
 import 'presentation/home/home.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PdftronFlutter.initialize("YOUR_LICENSE_KEY_HERE");
   WidgetsFlutterBinding.ensureInitialized();
   await initialServices();
   Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);

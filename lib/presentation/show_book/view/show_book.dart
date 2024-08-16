@@ -1,16 +1,11 @@
 import 'dart:async';
 
 import 'package:eqraa/core/app_export.dart';
-import 'package:eqraa/core/shared/custom_text_form_field.dart';
-import 'package:eqraa/models/book_model.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../../../core/functions/alert_alarm.dart';
 import '../../booksScreen/controller/books_screen_controller.dart';

@@ -56,5 +56,7 @@ class AppLink {
   static String saveHighestPage(int id) {
     return '$server/books/$id/read';
   }
+  static const String addcomplaints='$server/complaints';
+
 
 }

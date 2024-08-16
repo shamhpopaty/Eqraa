@@ -34,19 +34,19 @@ class ContactUsController extends GetxController {
     getData();
     super.onInit();
   }
-}
-Future<void> addComplaints(String content) async {
-  String accessToken = await TokenManager().accessToken;
-  var response = await http.post(Uri.parse(AppLink.addBookMark), body: {
-    "content": content,
-  }, headers: {
-    "Accept": "application/json",
-    'Authorization': 'Bearer $accessToken',
-  });
-  print(response.statusCode);
-  if (response.statusCode == 201) {
-    Get.snackbar('success', 'تمت ارسال الشكوى بنجاح');
-  } else {
-    Get.snackbar('notSuccess', jsonDecode(response.body).toString());
+  Future<void> addComplaints(String content) async {
+    String accessToken = await TokenManager().accessToken;
+    var response = await http.post(Uri.parse(AppLink.addcomplaints), body: {
+      "content": content,
+    }, headers: {
+      "Accept": "application/json",
+      'Authorization': 'Bearer $accessToken',
+    });
+    print(response.statusCode);
+    if (response.statusCode == 201) {
+      Get.snackbar('success', 'تمت ارسال الشكوى بنجاح');
+    } else {
+      Get.snackbar('notSuccess', jsonDecode(response.body).toString());
+    }
   }
 }
