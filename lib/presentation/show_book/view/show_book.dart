@@ -47,10 +47,13 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   void initState() {
     super.initState();
     startTimer();
+    highestPageReached = controller.getLastSavedPage(widget.book.id!);
+
     fromAsset(widget.books[widget.book.title!].toString(), 'temp.pdf')
         .then((f) {
       setState(() {
         localPath = f.path;
+        currentPage = highestPageReached; // Start from the highest page reached
       });
     });
   }
@@ -113,6 +116,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   Widget _buildBody() {
     if (localPath != null) {
       return PDFView(
+        defaultPage: currentPage,
         onRender: (pages) {
           setState(() {
             totalPages = pages!;

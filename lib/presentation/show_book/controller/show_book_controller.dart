@@ -42,7 +42,14 @@ class ShowBookControllerImp extends ShowBookController {
     // Implement the logic to save the highest page number in the database or shared preferences
     // You can call an API or use local storage to save the data
     print("Saving highest page reached: $page for book ID: $bookId");
+    myServices.sharedPreferences.setString(bookId.toString(), page.toString());
     // Example: Save it using shared preferences or call an API to save it on the server
+  }
+
+  getLastSavedPage(int bookId) async {
+    String? savedPage =
+        myServices.sharedPreferences.getString(bookId.toString());
+    return savedPage != null ? int.tryParse(savedPage) ?? 0 : 0;
   }
 
   @override
