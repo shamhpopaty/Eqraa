@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../../../core/constant/imageassets.dart';
 import '../../../linkapi.dart';
 import '../../../models/book_model.dart';
-
 import '../model/books_model.dart';
 
 class BookCard extends StatelessWidget {
@@ -11,7 +10,7 @@ class BookCard extends StatelessWidget {
   final bool isFavorite;
   final VoidCallback onFavoriteToggle;
   final DateTime? selectedTime;
-  final VoidCallback onTimePicked;
+  final Function(DateTime? pickedTime) onTimePicked;
   final bool isDark;
   void Function()? onTap;
 
@@ -22,35 +21,28 @@ class BookCard extends StatelessWidget {
     required this.selectedTime,
     required this.onTimePicked,
     required this.isDark,
-     this.onTap,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
-      onTap:onTap,
+      onTap: onTap,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         color: isDark ? Colors.grey[850] : Colors.white,
         elevation: 5,
         child: Column(
           children: [
-        Image.network(
-        "${AppLink.baseServer}/storage/${book.cover!}",
-          fit: BoxFit.cover,
-          height: 120,
-          errorBuilder: (context, error,
-              stackTrace) {
-            return Image.asset(
-                height: 120,
-                AppImageAssets.camera,
-                fit: BoxFit.cover);
-          },
-        ),
-
-
-
+            Image.network(
+              "${AppLink.baseServer}/storage/${book.cover!}",
+              fit: BoxFit.cover,
+              height: 120,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset(
+                    height: 120, AppImageAssets.camera, fit: BoxFit.cover);
+              },
+            ),
             const SizedBox(height: 2),
             Text(book.title ?? ''),
             const SizedBox(height: 2),
@@ -59,7 +51,32 @@ class BookCard extends StatelessWidget {
               children: [
                 IconButton(
                   icon: Icon(Icons.alarm),
-                  onPressed: onTimePicked,
+                  onPressed: () async {
+                    TimeOfDay? timeOfDay = await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return TimePickerDialog(
+                          initialTime: TimeOfDay.fromDateTime(DateTime.now()),
+                          confirmText: "ok",
+                          cancelText: "cancel",
+                        );
+                      },
+                    );
+
+                    if (timeOfDay != null) {
+                      DateTime now = DateTime.now();
+                      DateTime pickedTime = DateTime(
+                        now.year,
+                        now.month,
+                        now.day,
+                        timeOfDay.hour,
+                        timeOfDay.minute,
+                      );
+                      onTimePicked(pickedTime);
+                    } else {
+                      onTimePicked(null);
+                    }
+                  },
                 ),
                 IconButton(
                   icon: Icon(
@@ -76,4 +93,3 @@ class BookCard extends StatelessWidget {
     );
   }
 }
-

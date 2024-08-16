@@ -22,10 +22,8 @@ import '../../send_requestsScreen/screens/send_requests.dart';
 import '../controller/books_screen_controller.dart';
 import 'book_card.dart';
 
-
 class BooksScreen extends StatefulWidget {
   final String category;
-
 
   BooksScreen({required this.category});
 
@@ -34,13 +32,14 @@ class BooksScreen extends StatefulWidget {
 }
 
 class _BooksScreenState extends State<BooksScreen> {
-
   var isFavorate = [];
+
   @override
   Widget build(BuildContext context) {
-    final FavoriteScreenControllerImp favoriteController = Get.put(FavoriteScreenControllerImp());
+    final FavoriteScreenControllerImp favoriteController =
+        Get.put(FavoriteScreenControllerImp());
     final BooksScreenControllerImp controller =
-    Get.put(BooksScreenControllerImp(widget.category));
+        Get.put(BooksScreenControllerImp(widget.category));
     DateTime? selectedTime = DateTime.now();
 
     return Scaffold(
@@ -56,8 +55,7 @@ class _BooksScreenState extends State<BooksScreen> {
                 child: Column(
                   children: [
                     const CircleAvatar(
-                      backgroundImage:
-                      AssetImage(AppImageAssets.profileimage),
+                      backgroundImage: AssetImage(AppImageAssets.profileimage),
                     ),
                     const SizedBox(
                       height: 20,
@@ -105,8 +103,8 @@ class _BooksScreenState extends State<BooksScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                  left: 8.0, right: 8, top: 8, bottom: 8),
+              padding:
+                  const EdgeInsets.only(left: 8.0, right: 8, top: 8, bottom: 8),
               child: AuthTextFormField(
                 hintText: "بحث بالعنوان",
                 iconPrefix: Icons.search,
@@ -117,8 +115,7 @@ class _BooksScreenState extends State<BooksScreen> {
               ),
             ),
             GetBuilder<BooksScreenControllerImp>(builder: (controller) {
-              LocaleController localController =
-              Get.put(LocaleController());
+              LocaleController localController = Get.put(LocaleController());
               if (controller.filteredBooks.isNotEmpty) {
                 for (int i = 0; i < controller.filteredBooks.length; i++) {
                   isFavorate.add(false);
@@ -129,8 +126,7 @@ class _BooksScreenState extends State<BooksScreen> {
                 widget: GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  gridDelegate:
-                  const SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 5.0,
                     crossAxisSpacing: 5.0,
@@ -138,47 +134,38 @@ class _BooksScreenState extends State<BooksScreen> {
                   itemCount: controller.filteredBooks.length,
                   itemBuilder: (context, i) {
                     final book = controller.filteredBooks[i];
-                    final isFavorite = favoriteController.isBookFavorite(book.id!);
+
                     return // Inside your widget build method
-                      BookCard(onTap: (){
-                        Get.to(() => DescriptionBooks(
-                            book: controller.books[i], endTimeMillisecond: selectedTime!.millisecondsSinceEpoch));
-                        },
-                        book: book,
-                        isFavorite: isFavorite,
-                        onFavoriteToggle: () async {
-                          await favoriteController.toggleFavoriteBook(book);
-                        },
-                        selectedTime: null,
-                        onTimePicked:() async {
-                          TimeOfDay timeOfDay = await showDialog(
-                            context: context,
-                            builder: (context) {
-                              return TimePickerDialog(
-                                initialTime: TimeOfDay.fromDateTime(DateTime.now()),
-                                confirmText: "ok",
-                                cancelText: "cancel",
-                              );
-                            },
-                          );
+                        Obx(() {
+                      final book = controller.filteredBooks[i];
+                      final isFavorite =
+                          favoriteController.isBookFavorite(book.id!);
 
-                          if (timeOfDay != null) {
-                            DateTime now = DateTime.now();
-                            selectedTime = DateTime(
-                              now.year,
-                              now.month,
-                              now.day,
-                              timeOfDay.hour,
-                              timeOfDay.minute,
-                            );
-                          } else {
-                            selectedTime = null;
-                          }
-                        },
-                        isDark: false, // Replace with the actual dark mode state
+                      return HandlingDataView(
+                        statusRequest: favoriteController.statusRequest.value,
+                        imageHeight: 100,
+                        widget: BookCard(
+                          onTap: () {
+                            Get.to(() => DescriptionBooks(
+                                book: controller.books[i],
+                                endTimeMillisecond:
+                                    selectedTime!.millisecondsSinceEpoch));
+                          },
+                          book: book,
+                          isFavorite: isFavorite,
+                          onFavoriteToggle: () async {
+                            await favoriteController.toggleFavoriteBook(book);
+                          },
+                          selectedTime: selectedTime,
+                          onTimePicked: (pickedTime) {
+                            setState(() {
+                              selectedTime = pickedTime;
+                            });
+                          },
+                          isDark: false,
+                        ),
                       );
-                     
-
+                    });
                   },
                 ),
               );

@@ -195,7 +195,8 @@ class MyTranslation extends Translations {
           "158": "اسم الكاتب",
           "159": "الوصف",
           "160": "طلبات الإرسال",
-          "161": "مرحباً بك في قسم المساعدة : برنامجنا يساعدك في تسهيل تجربة القراءة إذا كانت لديك أي شكاوى أو اقتراحات، يُرجى",
+          "161":
+              "مرحباً بك في قسم المساعدة : برنامجنا يساعدك في تسهيل تجربة القراءة إذا كانت لديك أي شكاوى أو اقتراحات، يُرجى",
           "162": "التواصل معنا",
           "163": "تواصل معنا",
           "164": "لقد انتهت مدة القراءة هل تريد المتابعة",
@@ -208,25 +209,7 @@ class MyTranslation extends Translations {
           "171": "فلسفة",
           "172": "رعب",
           "173": "الملاحظات",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          "174": "خيالي",
         },
         "en": {
           "lbl": "إدارة شاملة ",
@@ -423,10 +406,11 @@ class MyTranslation extends Translations {
           "158": "WriterBook",
           "159": "Description",
           "160": "SendRequest",
-          "161": "Welcome to the Help Section: Our software helps you to facilitate the reading experience, If you have any complaints or suggestions, please",
+          "161":
+              "Welcome to the Help Section: Our software helps you to facilitate the reading experience, If you have any complaints or suggestions, please",
           "162": "contact us",
           "163": "Helping",
-          "164":"Reading time has expired. Do you want to continue?",
+          "164": "Reading time has expired. Do you want to continue?",
           "165": "Religious",
           "166": "History",
           "167": "Drama",
@@ -436,15 +420,7 @@ class MyTranslation extends Translations {
           "171": "Philosophy",
           "172": "Horror",
           "173": "Notes",
-
-
-
-
-
-
-
-
-
+          "174": "Fantasy",
         }
       };
 }
