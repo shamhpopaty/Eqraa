@@ -123,6 +123,10 @@ class _BooksScreenState extends State<BooksScreen> {
               }
               return HandlingDataView(
                 statusRequest: controller.statusRequest,
+                text: "175".tr,
+                onOffline: () {
+                  controller.fetchBooks();
+                },
                 widget: GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -133,8 +137,6 @@ class _BooksScreenState extends State<BooksScreen> {
                   ),
                   itemCount: controller.filteredBooks.length,
                   itemBuilder: (context, i) {
-                    final book = controller.filteredBooks[i];
-
                     return // Inside your widget build method
                         Obx(() {
                       final book = controller.filteredBooks[i];

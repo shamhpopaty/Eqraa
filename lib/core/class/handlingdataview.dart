@@ -12,6 +12,7 @@ class HandlingDataView extends StatelessWidget {
   final StatusRequest statusRequest;
   final Widget widget;
   final bool? shimmer;
+  final String? text;
   final double? width;
   final double? height;
   final double? imageWidth;
@@ -27,7 +28,7 @@ class HandlingDataView extends StatelessWidget {
     this.imageHeight,
     this.imageWidth,
     this.onOffline,
-    this.shimmer,
+    this.shimmer, this.text,
   });
   LocaleController localController = Get.put(LocaleController());
 
@@ -113,7 +114,33 @@ class HandlingDataView extends StatelessWidget {
                         ),
                       ],
                     ),
-                  )
+                  ):
+    statusRequest == StatusRequest.empty
+        ? SizedBox(
+      height: height,
+      width: width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Text(text??"49".tr),
+          ),
+          Center(
+            child: Lottie.asset(AppImageAssets.noData,
+                repeat: false),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: AppColor.primaryColor),
+            onPressed: onOffline,
+            child: const Icon(
+              Icons.refresh_outlined,
+              color: AppColor.white,
+            ),
+          ),
+        ],
+      ),
+    )
                 : statusRequest == StatusRequest.serverFailure
                     ? Center(
                         child: Lottie.asset(AppImageAssets.server),

@@ -29,6 +29,10 @@ class FavoriteScreenControllerImp extends GetxController {
     if (statusRequest.value == StatusRequest.success && response is List) {
       favoriteBooks.value =
           response.map((json) => Book.fromJson(json)).toList();
+      print("Books: ${favoriteBooks}");
+      // if (favoriteBooks.isEmpty) {
+      //   statusRequest.value = StatusRequest.empty;
+      // }
     } else {
       Get.snackbar('Error', 'Failed to fetch favorite books.');
       statusRequest.value = StatusRequest.failure;

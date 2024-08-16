@@ -3,6 +3,7 @@ enum StatusRequest {
   loading,
   success,
   failure,
+  empty,
   serverFailure,
   offlineFailure,
 }

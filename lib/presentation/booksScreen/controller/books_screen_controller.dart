@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:eqraa/core/app_export.dart';
+import 'package:eqraa/linkapi.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 import '../../../core/class/status_request.dart';
 import '../../../core/functions/handling_data_controller.dart';
 import '../../../data/token_manager.dart';
@@ -25,13 +26,14 @@ class BooksScreenControllerImp extends GetxController {
   void onInit() {
     super.onInit();
     fetchBooks();
-    searchQuery.listen((query) => filterBooks()); // Listen to changes in search query
+    searchQuery
+        .listen((query) => filterBooks()); // Listen to changes in search query
   }
+
   Future<void> addBookMark(
       String name, int bookId, int pageNumber, String note) async {
     String accessToken = await TokenManager().accessToken;
-    var response = await http
-        .post(Uri.parse('http://127.0.0.1:8000/api/bookmarks'), body: {
+    var response = await http.post(Uri.parse(AppLink.addBookMark), body: {
       "name": name,
       "book_id": bookId.toString(),
       "page_number": pageNumber.toString(),
@@ -59,6 +61,10 @@ class BooksScreenControllerImp extends GetxController {
           .map((book) => Book.fromJson(book as Map<String, dynamic>))
           .toList();
       filteredBooks = books; // Initialize filteredBooks
+
+      if (filteredBooks.isEmpty) {
+        statusRequest = StatusRequest.empty;
+      }
     } else {
       statusRequest = StatusRequest.failure;
     }
@@ -70,7 +76,9 @@ class BooksScreenControllerImp extends GetxController {
       filteredBooks = books;
     } else {
       filteredBooks = books.where((book) {
-        return book.title!.toLowerCase().contains(searchQuery.value.toLowerCase());
+        return book.title!
+            .toLowerCase()
+            .contains(searchQuery.value.toLowerCase());
       }).toList();
     }
     update();

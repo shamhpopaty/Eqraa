@@ -210,6 +210,8 @@ class MyTranslation extends Translations {
           "172": "رعب",
           "173": "الملاحظات",
           "174": "خيالي",
+          "175": "لا يوجد كتب ضمن هذا التصنيف",
+          "176": "لا يوجد كتب في المفضلة",
         },
         "en": {
           "lbl": "إدارة شاملة ",
@@ -421,6 +423,8 @@ class MyTranslation extends Translations {
           "172": "Horror",
           "173": "Notes",
           "174": "Fantasy",
+          "175": "No Books In This Category.",
+          "176": "You don't have any favorite book.",
         }
       };
 }
