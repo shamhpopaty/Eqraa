@@ -1,12 +1,11 @@
-import 'package:eqraa/presentation/Auth/view/login.dart';
-import 'package:eqraa/presentation/Auth/view/signup.dart';
+
 import 'package:eqraa/presentation/My_Profile/view/my_profile.dart';
 import 'package:eqraa/presentation/My_favoriteScreen/view/my_favorite_screen.dart';
-import 'package:eqraa/presentation/forgot_password/screens/forgotpassword.dart';
-import 'package:eqraa/presentation/homeScreens/home_screen.dart';
+import 'package:eqraa/presentation/my_profile/view/my_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/services/services.dart';
+import '../../widgets/custom_profile.dart';
 import '../friendScreen/screen/friends.dart';
 import '../home/home.dart';
 
@@ -24,8 +23,8 @@ class HomeScreenControllerImp extends HomeScreenController {
 
   List<Widget> listPage = [
     Classification(),
-    MyFavorite(category: '',),
-    MyProfile(),
+    MyFavoriteScreen(),
+    Custom_Profile(),
     Friends(),
   ];
 

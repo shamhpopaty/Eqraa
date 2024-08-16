@@ -1,87 +1,89 @@
 import 'dart:convert';
-
-import 'package:dartz/dartz.dart';
-import 'package:eqraa/models/book_model.dart';
 import 'package:get/get.dart';
-
 import '../../../core/class/status_request.dart';
+import '../../../core/functions/handling_data_controller.dart';
 import '../../../data/token_manager.dart';
-import '../../booksScreen/model/books_model.dart';
+import '../../../models/book_model.dart';
 import '../data/my_favorite_data.dart';
-import 'package:http/http.dart'as http;
+import '../../booksScreen/model/books_model.dart';
 
 class FavoriteScreenControllerImp extends GetxController {
-  // List for filtered books
-  var isFavorite = false.obs;
-  List<Book> filteredBooks = []; // List for filtered books
-
-
-  void toggleFavorite() {
-    isFavorite.value = !isFavorite.value;
-  }
-
-  var isLoading = true.obs;
-  List<Book_Modele> favorite = [];
-
-  var searchQuery = ''.obs; // Observable for search query
+  List<Book> favoriteBooks = <Book>[].obs;
   StatusRequest statusRequest = StatusRequest.none;
   FavoriteScreenData favoriteScreenData = FavoriteScreenData(Get.find());
-
-  FavoriteScreenControllerImp();
-
   final TokenManager tokenManager = TokenManager();
 
   @override
   void onInit() {
     super.onInit();
-    getfavoritebook();
-    // Listen to changes in search query
+    fetchFavoriteBooks();
   }
 
+  // Fetch favorite books from API
+  Future<void> fetchFavoriteBooks() async {
+    statusRequest = StatusRequest.loading;
+    update();
 
-  Future<void> getfavoritebook() async {
-    String accessToken = await TokenManager().accessToken;
-    //var response = await favoriteScreenData.getData();
+    var response = await favoriteScreenData.getData();
+    statusRequest = handlingData(response);
 
-    var response = await http.get(
-      Uri.parse('http://127.0.0.1:8000/api/books/my-favorite'),
-      headers: {
-        "Accept": "application/json",
-        'Authorization': 'Bearer $accessToken',
-      },
-    );
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-
-      List temp = jsonDecode(response.body);
-      favorite = temp.map((item) => Book_Modele()).toList();
-      statusRequest = StatusRequest.success; // تغيير حالة الطلب إلى success
+    if (statusRequest == StatusRequest.success && response is List) {
+      favoriteBooks = response.map((json) => Book.fromJson(json)).toList().obs;
     } else {
-      Get.snackbar('notSuccess', jsonDecode(response.body).toString());
-      statusRequest = StatusRequest.failure; // تغيير حالة الطلب إلى failure في حالة الفشل
+      Get.snackbar('Error', 'Failed to fetch favorite books.');
+      statusRequest = StatusRequest.failure;
     }
 
     update();
   }
-  Future<void> addFavoriteBook(int id) async {
-    String accessToken = await TokenManager().accessToken;
-    var response = await http.post(
-      Uri.parse('http://127.0.0.1:8000/api/books/$id/add-to-favorite'),
-      headers: {
-        "Accept": "application/json",
-        'Authorization': 'Bearer $accessToken',
-      },
-    );
 
-    print(response.statusCode);
-
-
-    if (response.statusCode == 200) {
-     //Get.snackbar('Success', 'تمت اضافة الكتاب بنجاح');
+  // Toggle favorite status of a book
+  Future<void> toggleFavoriteBook(Book book) async {
+    if (isBookFavorite(book.id!)) {
+      await removeFavoriteBook(book);
     } else {
-      Get.snackbar('not Success', jsonDecode(response.body).toString());
+      await addFavoriteBook(book);
     }
   }
 
-}
+  // Add a book to favorites
+  Future<void> addFavoriteBook(Book book) async {
+    statusRequest = StatusRequest.loading;
+    update();
 
+    var response = await favoriteScreenData.addFavoriteBook(book.id!);
+
+    if (response is Map && response.containsKey('success')) {
+      favoriteBooks.add(book);
+      Get.snackbar('Success', 'Book added to favorites');
+    } else {
+      Get.snackbar('Error', 'Failed to add book to favorites');
+    }
+
+    statusRequest = StatusRequest.success;
+    update();
+  }
+
+  // Remove a book from favorites
+  Future<void> removeFavoriteBook(Book book) async {
+    statusRequest = StatusRequest.loading;
+    update();
+
+    var response = await favoriteScreenData.removeFavoriteBook(book.id!);
+
+    if (response is Map && response.containsKey('success')) {
+      favoriteBooks.removeWhere((b) => b.id == book.id);
+      Get.snackbar('Success', 'Book removed from favorites');
+    } else {
+      Get.snackbar('Error', 'Failed to remove book from favorites');
+    }
+
+    statusRequest = StatusRequest.success;
+    update();
+  }
+
+  // Check if a book is in the favorite list
+  bool isBookFavorite(int id) {
+    return favoriteBooks.any((book) => book.id == id);
+  }
+}

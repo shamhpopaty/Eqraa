@@ -4,6 +4,7 @@ class AppLink {
 
   static const String ip = "localhost";
   static const String server = "http://$ip:8000/api";
+  static const String baseServer = "http://$ip:8000";
 
 
   //============Image=============================
@@ -48,7 +49,9 @@ class AppLink {
     return '$server/books/$id/add-to-favorite';
   }
   static const String getfavoritebook='$server/books/my-favorite';
-
+  static String removeFavoriteBook(int id) {
+    return '$server/books/$id/remove-from-favorite';
+  }
 
 
 }

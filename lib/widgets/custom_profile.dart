@@ -62,7 +62,7 @@ class Custom_Profile extends StatelessWidget {
                 children: [
                   Container(
                     height: 50,
-                    width: 300,
+                    width: 400,
                     child: Row(
                       children: [
                         const Icon(Icons.account_box_outlined),
@@ -127,14 +127,9 @@ class Custom_Profile extends StatelessWidget {
                   container_profile(
                     Icons.stacked_bar_chart_outlined,
                     "150".tr,
-                    Icons.arrow_circle_left_outlined,
+                    Icons.arrow_circle_right_outlined,
                   ),
-                  const Divider(),
-                  container_profile4(
-                    Icons.table_chart_rounded,
-                    "156".tr,
-                    Icons.arrow_circle_left_outlined,
-                  ),
+
                 ],
               ),
             ),

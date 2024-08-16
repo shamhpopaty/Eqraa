@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:eqraa/core/app_export.dart';
 import 'package:eqraa/core/class/handlingdataview.dart';
 import 'package:eqraa/core/constant/color.dart';
@@ -22,11 +20,12 @@ import '../../my_profile/view/editing_profile.dart';
 import '../../recieved_requestScreen/screen/recieved_request.dart';
 import '../../send_requestsScreen/screens/send_requests.dart';
 import '../controller/books_screen_controller.dart';
+import 'book_card.dart';
 
 
 class BooksScreen extends StatefulWidget {
   final String category;
-  final FavoriteScreenControllerImp favoriteController = Get.put(FavoriteScreenControllerImp());
+
 
   BooksScreen({required this.category});
 
@@ -35,9 +34,11 @@ class BooksScreen extends StatefulWidget {
 }
 
 class _BooksScreenState extends State<BooksScreen> {
+
   var isFavorate = [];
   @override
   Widget build(BuildContext context) {
+    final FavoriteScreenControllerImp favoriteController = Get.put(FavoriteScreenControllerImp());
     final BooksScreenControllerImp controller =
     Get.put(BooksScreenControllerImp(widget.category));
     DateTime? selectedTime = DateTime.now();
@@ -136,125 +137,48 @@ class _BooksScreenState extends State<BooksScreen> {
                   ),
                   itemCount: controller.filteredBooks.length,
                   itemBuilder: (context, i) {
-                    return GestureDetector(
-                      onTap: () {
+                    final book = controller.filteredBooks[i];
+                    final isFavorite = favoriteController.isBookFavorite(book.id!);
+                    return // Inside your widget build method
+                      BookCard(onTap: (){
                         Get.to(() => DescriptionBooks(
-                          book: controller.filteredBooks[i],
-                          endTimeMillisecond: selectedTime != null
-                              ? selectedTime!.millisecondsSinceEpoch
-                              : -1,
-                        ));
-                      },
-                      child: Container(
-                        height: 100,
-                        width: 200,
-                        margin: const EdgeInsets.only(
-                            right: 10, left: 10, bottom: 10, top: 15),
-                        decoration: BoxDecoration(
-                          color: (!localController.isDark)
-                              ? AppColor.fourthColor
-                              : AppColor.primaryColorDark,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black,
-                              blurRadius: 3,
-                            )
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            controller.filteredBooks[i].cover != null
-                                ? SizedBox(
-                              child: Image.network(
-                                "${AppLink.server}/${controller.filteredBooks[i].cover!}",
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error,
-                                    stackTrace) {
-                                  return Image.asset(
-                                      AppImageAssets.camera,
-                                      fit: BoxFit.cover);
-                                },
-                              ),
-                              height: 75,
-                            )
-                                : SizedBox(
-                              child: Image.asset(
-                                  AppImageAssets.camera,
-                                  fit: BoxFit.cover),
-                              height: 10,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(controller.filteredBooks[i].title ?? ''),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                    Row(
-                    children: [
-                    IconButton(
-                    onPressed: () async {
-                    TimeOfDay timeOfDay = await showDialog(
-                    context: context,
-                    builder: (context) {
-                    return TimePickerDialog(
-                    initialTime: TimeOfDay.fromDateTime(
-                    DateTime.now()),
-                    confirmText: "ok",
-                    cancelText: "cancel",
-                    );
-                    },
-                    );
+                            book: controller.books[i], endTimeMillisecond: selectedTime!.millisecondsSinceEpoch));
+                        },
+                        book: book,
+                        isFavorite: isFavorite,
+                        onFavoriteToggle: () async {
+                          await favoriteController.toggleFavoriteBook(book);
+                        },
+                        selectedTime: null,
+                        onTimePicked:() async {
+                          TimeOfDay timeOfDay = await showDialog(
+                            context: context,
+                            builder: (context) {
+                              return TimePickerDialog(
+                                initialTime: TimeOfDay.fromDateTime(DateTime.now()),
+                                confirmText: "ok",
+                                cancelText: "cancel",
+                              );
+                            },
+                          );
 
-                    if (timeOfDay != null) {
-
-                    DateTime now = DateTime.now();
-                    selectedTime = DateTime(
-                    now.year,
-                    now.month,
-                    now.day,
-                    timeOfDay.hour,
-                    timeOfDay.minute,
-                    );
-                    } else {
-                    // If no time is selected, set selectedTime to null or -1
-                    selectedTime = null; // or another placeholder
-                    }
-                    },
-                    icon: Icon(Icons.alarm)),
-                      IconButton(
-                        icon: Icon(
-                          isFavorate[i] ? Icons.favorite : Icons.favorite_border,
-                          color: isFavorate[i] ? Colors.red : Colors.grey,
-                        ),
-                        onPressed: () async {
-                          setState(() {
-                            isFavorate[i] = !isFavorate[i];
-                          });
-
-                          if (isFavorate[i]) { // فقط إذا تحولت الأيقونة إلى حمراء
-                            FavoriteScreenControllerImp favoriteScreenController = Get.put(FavoriteScreenControllerImp());
-
-                            int? bookId = controller.books[i].id; // الحصول على الـ id الصحيح من الكائن Book
-
-                            await favoriteScreenController.addFavoriteBook(bookId!); // مرر الـ id هنا
-
-                            Get.snackbar('Success', 'تمت اضافة الكتاب بنجاح');
+                          if (timeOfDay != null) {
+                            DateTime now = DateTime.now();
+                            selectedTime = DateTime(
+                              now.year,
+                              now.month,
+                              now.day,
+                              timeOfDay.hour,
+                              timeOfDay.minute,
+                            );
                           } else {
-                            Get.snackbar('Success', "تم ازالة الكتاب");
+                            selectedTime = null;
                           }
                         },
-                      ),
+                        isDark: false, // Replace with the actual dark mode state
+                      );
+                     
 
-
-                    ],
-                    ),
-
-                    ],
-                    ),
-                    ),
-                    );
                   },
                 ),
               );
