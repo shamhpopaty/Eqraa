@@ -9,16 +9,25 @@ import '../booksScreen/view/books_screen.dart';
 import '../send_requestsScreen/screens/send_requests.dart';
 import 'home_controller.dart';
 
-List Category = [
-  {"CategoryName": "165".tr},
-  {"CategoryName": "166".tr},
-  {"CategoryName": "174".tr},
-  {"CategoryName": "172".tr},
-  {"CategoryName": "167".tr},
-  {"CategoryName": "168".tr},
-  {"CategoryName": "169".tr},
-  {"CategoryName": "170".tr},
-  {"CategoryName": "171".tr},
+final Map<String, String> categoryTranslations = {
+  "165": "Religious",
+  "166": "History",
+  "167": "Drama",
+  "168": "Scientific",
+  "169": "Cooking",
+  "171": "Philosophy",
+  "172": "Horror",
+  "174": "Fantasy",
+};
+List<Map<String, String>> Category = [
+  {"CategoryName": "165".tr, "EnglishName": categoryTranslations["165"]!},
+  {"CategoryName": "166".tr, "EnglishName": categoryTranslations["166"]!},
+  {"CategoryName": "174".tr, "EnglishName": categoryTranslations["174"]!},
+  {"CategoryName": "167".tr, "EnglishName": categoryTranslations["167"]!},
+  {"CategoryName": "168".tr, "EnglishName": categoryTranslations["168"]!},
+  {"CategoryName": "169".tr, "EnglishName": categoryTranslations["169"]!},
+  {"CategoryName": "171".tr, "EnglishName": categoryTranslations["171"]!},
+  {"CategoryName": "172".tr, "EnglishName": categoryTranslations["172"]!},
 ];
 
 class Classification extends StatefulWidget {
@@ -62,7 +71,7 @@ class _ClassificationState extends State<Classification> {
                 itemBuilder: (context, i) {
                   return GestureDetector(
                     onTap: () {
-                      String selectedCategory = Category[i]["CategoryName"];
+                      String selectedCategory = Category[i]["EnglishName"]!;
                       Get.to(() => BooksScreen(category: selectedCategory));
                       // Get.to(() =>
                       // DescriptionBooks(book: selectedCategory));
@@ -87,7 +96,7 @@ class _ClassificationState extends State<Classification> {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 70),
                         child: Text(
-                          Category[i]["CategoryName"],
+                          Category[i]["CategoryName"]!,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 25,
