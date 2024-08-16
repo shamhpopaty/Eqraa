@@ -53,5 +53,8 @@ class AppLink {
     return '$server/books/$id/remove-from-favorite';
   }
 
+  static String saveHighestPage(int id) {
+    return '$server/books/$id/read';
+  }
 
 }

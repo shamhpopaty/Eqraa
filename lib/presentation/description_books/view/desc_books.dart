@@ -3,9 +3,10 @@ import 'package:eqraa/presentation/notesScreen/view/notes_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../core/constant/color.dart';
 import '../../../core/functions/logout.dart';
+import '../../../linkapi.dart';
 import '../../../widgets/drop_down_list_drawer.dart';
 import '../../booksScreen/model/books_model.dart';
-import '../../contact_us/contact_us.dart';
+import '../../contact_us/view/contact_us.dart';
 import '../../recieved_requestScreen/screen/recieved_request.dart';
 import '../../send_requestsScreen/screens/send_requests.dart';
 import '../../show_book/view/show_book.dart';
@@ -44,8 +45,7 @@ class DescriptionBooks extends StatelessWidget {
                   child: Column(
                     children: [
                       const CircleAvatar(
-                        backgroundImage:
-                        AssetImage(AppImageAssets.profileimage),
+                        backgroundImage: AssetImage(AppImageAssets.profileimage),
                       ),
                       const SizedBox(
                         height: 20,
@@ -99,7 +99,7 @@ class DescriptionBooks extends StatelessWidget {
                 ),
                 child: book.cover != null
                     ? Image.network(
-                        book.cover!,
+                  "${AppLink.baseServer}/storage/${book.cover!}",
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return Image.asset('assets/images/camera.jpg',

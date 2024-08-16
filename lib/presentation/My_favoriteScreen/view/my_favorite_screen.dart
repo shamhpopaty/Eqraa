@@ -1,16 +1,18 @@
 import 'package:eqraa/core/app_export.dart';
 import 'package:eqraa/core/constant/apptheme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import '../../../core/functions/logout.dart';
+import '../../../widgets/drop_down_list_drawer.dart';
 import '../../booksScreen/view/book_card.dart';
+import '../../contact_us/view/contact_us.dart';
 import '../../description_books/view/desc_books.dart';
+import '../../notesScreen/view/notes_screen.dart';
+import '../../recieved_requestScreen/screen/recieved_request.dart';
+import '../../send_requestsScreen/screens/send_requests.dart';
 import '../controller/my_favorite_controller.dart';
 import 'package:get/get.dart';
 import '../../../core/class/handlingdataview.dart';
 import '../../../core/constant/color.dart';
-import '../../../core/functions/alert_alarm.dart';
 import '../../../core/localization/changelocal.dart';
 
 class MyFavoriteScreen extends StatefulWidget {
@@ -35,22 +37,54 @@ class _MyFavoriteScreenState extends State<MyFavoriteScreen> {
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
-          children: const [
+          children: [
             DrawerHeader(
-              decoration: BoxDecoration(
-                color: AppColor.primaryColor,
-              ),
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage(AppImageAssets.profileimage),
-                  ),
-                  SizedBox(height: 20),
-                  // Text("${controller.myServices.sharedPreferences.getString("username")??"Kheder Youssef"}"),
-                ],
-              ),
+                decoration: const BoxDecoration(
+                  color: AppColor.primaryColor,
+                ),
+                child: Column(
+                  children: [
+                    const CircleAvatar(
+                      backgroundImage: AssetImage(AppImageAssets.profileimage),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    // Text("${controller.myServices.sharedPreferences.getString("username")??"Kheder Youssef"}"),
+                  ],
+                )),
+            DropDownList(),
+            DropDownList(isThemeApp: true),
+            ListTile(
+              title: Text("146".tr),
+              onTap: () {
+                Get.to(() => RecievedRequests());
+              },
             ),
-            // بقية الكود الخاص بالـ Drawer
+            ListTile(
+              title: Text("160".tr),
+              onTap: () {
+                Get.to(() => Request());
+              },
+            ),
+            ListTile(
+              title: Text("173".tr),
+              onTap: () {
+                Get.to(() => NotesScreen());
+              },
+            ),
+            ListTile(
+              title: Text("147".tr),
+              onTap: () {
+                Get.to(() => Contact_Us());
+              },
+            ),
+            ListTile(
+              title: Text("56".tr),
+              onTap: () {
+                logOut();
+              },
+            ),
           ],
         ),
       ),
