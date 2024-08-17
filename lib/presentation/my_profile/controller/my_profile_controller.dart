@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:eqraa/core/services/services.dart';
 import 'package:eqraa/data/token_manager.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../../../core/class/status_request.dart';
+import '../../../linkapi.dart';
 import '../model/profile_model.dart';
 
 class MyProfileController extends GetxController {
@@ -23,7 +25,7 @@ class MyProfileController extends GetxController {
       String accessToken = await TokenManager().accessToken;
 
       final response = await http.get(
-        Uri.parse('http://localhost:8000/api/users/1'),
+        Uri.parse(AppLink.myprofile(id as int)),
         headers: {
           'Authorization': 'Bearer $accessToken',
         },

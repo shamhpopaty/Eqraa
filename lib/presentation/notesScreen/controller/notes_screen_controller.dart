@@ -1,5 +1,6 @@
 import 'package:eqraa/core/class/status_request.dart';
 import 'package:eqraa/core/functions/handling_data_controller.dart';
+import 'package:eqraa/linkapi.dart';
 import 'package:eqraa/models/book_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +27,7 @@ class NotesScreenControllerImp extends GetxController {
     String accessToken = await TokenManager().accessToken;
 
     var response = await http.get(
-      Uri.parse('http://127.0.0.1:8000/api/bookmarks'),
+      Uri.parse(AppLink.getbookmarks),
       headers: {
         "Accept": "application/json",
         'Authorization': 'Bearer $accessToken',
@@ -51,7 +52,7 @@ class NotesScreenControllerImp extends GetxController {
     String accessToken = await TokenManager().accessToken;
 
     var response = await http.delete(
-      Uri.parse('http://127.0.0.1:8000/api/bookmarks/$noteId'),
+      Uri.parse(AppLink.removebookmark(noteId)),
       headers: {
         "Accept": "application/json",
         'Authorization': 'Bearer $accessToken',

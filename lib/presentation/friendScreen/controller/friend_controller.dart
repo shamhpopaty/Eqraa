@@ -1,4 +1,5 @@
 import 'package:eqraa/data/token_manager.dart';
+import 'package:eqraa/linkapi.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -24,7 +25,7 @@ class FriendsController extends GetxController {
     try {
       String accessToken = await TokenManager().accessToken;
       final response = await http.get(
-        Uri.parse('http://localhost:8000/api/users?search'),
+        Uri.parse(AppLink.friends),
         headers: {
           'Authorization': 'Bearer $accessToken',
         },
@@ -46,7 +47,7 @@ class FriendsController extends GetxController {
   Future<void> sendFriendRequest(int userId) async {
     try {
       final response = await http.post(
-        Uri.parse('http://192.168.247.175:8000/api/users/friendship/send-friend-request'),
+        Uri.parse(AppLink.sendrequest),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',

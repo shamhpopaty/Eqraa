@@ -44,6 +44,14 @@ class NoteItem extends StatelessWidget {
                 ),
               ),
             ),
+            trailing: IconButton(
+              onPressed: () async {
+                // استدعاء التابع لحذف الملاحظة عند الضغط على أيقونة الحذف
+                await controller.deleteNote(note.id!);
+              },
+              icon: Icon(Icons.delete),
+              color: Colors.red,
+            ),
           ),
           SizedBox(height: 10),
           Align(

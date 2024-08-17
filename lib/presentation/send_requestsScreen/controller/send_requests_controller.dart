@@ -1,4 +1,5 @@
 import 'package:eqraa/data/token_manager.dart';
+import 'package:eqraa/linkapi.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -25,7 +26,7 @@ class SentFriendRequestsController extends GetxController {
     statusRequest(StatusRequest.loading);
     try {
       final response = await http.get(
-        Uri.parse('http://localhost:8000/api/users/friendship/sent-friend-requests'),
+        Uri.parse(AppLink.sendrequest),
         headers: {
           'Authorization': 'Bearer $accessToken',
         },

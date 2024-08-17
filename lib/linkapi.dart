@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 
 class AppLink {
 
-  static const String ip = "localhost";
+  static const String ip = "192.168.137.1";
   static const String server = "http://$ip:8000/api";
   static const String baseServer = "http://$ip:8000";
 
@@ -29,8 +29,7 @@ class AppLink {
   //------home-----
   static const String home = "$server/books/";
 
-  //------profile------
-  static const String profile = "$server/";
+
 
   //------showbook-----
   static const String showbook = "$server/";
@@ -57,6 +56,18 @@ class AppLink {
     return '$server/books/$id/read';
   }
   static const String addcomplaints='$server/complaints';
+  static const String friends='$server/users/friendship/my-friends';
+  static const String sendrequest='$server/users/friendship/send-friend-request';
+  static const String recievedrequest='$server/users/friendship/received-friend-requests';
+  static const String getbookmarks='$server/bookmarks';
+  static String removebookmark(int id) {
+    return '$server/bookmarks/$id';
+  }
+  static String myprofile(int id) {
+    return '$server/users/$id';
+  }
+
+
 
 
 }

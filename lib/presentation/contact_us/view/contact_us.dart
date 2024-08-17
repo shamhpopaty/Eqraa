@@ -51,15 +51,15 @@ class _Contact_UsState extends State<Contact_Us> {
           ),
         ),
       ),
-                SizedBox(height: 200,),
+                SizedBox(height: 2,),
                 Padding(
-            padding: const EdgeInsets.only(top: 20.0, right: 50, left: 30),
+            padding: const EdgeInsets.only(top: 2.0, right: 50, left: 30),
                   child: Center(
                     child: Column(
                       children: [
                         Text("161".tr,
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 10,
                         ),),
                         InkWell(child: Text("162".tr,
                         style: TextStyle(
@@ -67,7 +67,10 @@ class _Contact_UsState extends State<Contact_Us> {
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
                         ),),
-                        onTap: (){},
+                        onTap: (){
+                          showMyDialog(context);
+
+                        },
                         ),
                       ],
                     ),
@@ -84,7 +87,7 @@ class _Contact_UsState extends State<Contact_Us> {
       barrierDismissible: false, // user must tap button to close the dialog
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('ملاحظات'),
+          title: Text("178".tr),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -95,8 +98,8 @@ class _Contact_UsState extends State<Contact_Us> {
                   complaints, ///////  هذا بجبلي قيم النص وما شابه
                   keyboardType: TextInputType.multiline,
                   maxLines: null, // Allows the text field to expand as needed
-                  decoration: const InputDecoration(
-                    hintText: 'اكتب ...',
+                  decoration:  InputDecoration(
+                    hintText: '179 ...'.tr,
                     border:
                     OutlineInputBorder(), ////// تعديل شكل المربع تبع الملاحظات
                   ),
@@ -106,13 +109,13 @@ class _Contact_UsState extends State<Contact_Us> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('الغاء'),
+              child:  Text('180'.tr),
               onPressed: () {
                 Navigator.of(context).pop(); // Closes the dialog
               },
             ),
             TextButton(
-              child: const Text('حفظ'),
+              child:  Text('33'.tr),
               onPressed: () async {
                 ContactUsController complaintscontroller =
                 Get.put(ContactUsController());

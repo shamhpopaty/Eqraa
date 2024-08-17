@@ -30,7 +30,7 @@ class BookCard extends StatelessWidget {
       onTap: onTap,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        color: isDark ? Colors.grey[850] : Colors.white,
+        color: isDark ? Colors.grey : Colors.white,
         elevation: 5,
         child: Column(
           children: [

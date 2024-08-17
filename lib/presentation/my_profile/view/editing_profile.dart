@@ -3,6 +3,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../core/constant/color.dart';
+import '../../../core/functions/alert_alarm.dart';
 import '../controller/my_profile_controller.dart';
 
 class EditProfileView extends StatefulWidget {
@@ -29,6 +31,8 @@ class _EditProfileViewState extends State<EditProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+      (!localController.isDark) ? AppColor.white : AppColor.black,
       appBar: AppBar(
         title: Text('Edit Profile'),
       ),

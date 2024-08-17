@@ -212,6 +212,20 @@ class MyTranslation extends Translations {
           "174": "خيالي",
           "175": "لا يوجد كتب ضمن هذا التصنيف",
           "176": "لا يوجد كتب في المفضلة",
+          "177": "بحث في العنوان",
+          "178": "ملاحظات",
+          "179": "اكتب",
+          "180": "الغاء",
+          "181": "اسم الكتاب",
+          "182": "اسم الكاتب",
+          "183": "الوصف ",
+          "184": "افتح الكتاب ",
+          "185": "الاصدقاء ",
+          "187": "طلبات الاصدقاء ",
+
+
+
+
         },
         "en": {
           "lbl": "إدارة شاملة ",
@@ -425,6 +439,20 @@ class MyTranslation extends Translations {
           "174": "Fantasy",
           "175": "No Books In This Category.",
           "176": "You don't have any favorite book.",
+          "177": "Search",
+          "178": "Notes",
+          "179": "Write",
+          "180": "cancel",
+          "181": "Book Name",
+          "182": "Author name",
+          "183": "Description ",
+          "184": "Open Book ",
+          "185": "Friends ",
+          "187": "recieved request",
+
+
+
+
         }
       };
 }

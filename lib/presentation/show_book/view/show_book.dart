@@ -157,7 +157,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       barrierDismissible: false, // user must tap button to close the dialog
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('ملاحظات'),
+          title:  Text('178'.tr),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -168,8 +168,8 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       noteController, ///////  هذا بجبلي قيم النص وما شابه
                   keyboardType: TextInputType.multiline,
                   maxLines: null, // Allows the text field to expand as needed
-                  decoration: const InputDecoration(
-                    hintText: 'اكتب ...',
+                  decoration:  InputDecoration(
+                    hintText: '179 ...'.tr,
                     border:
                         OutlineInputBorder(), ////// تعديل شكل المربع تبع الملاحظات
                   ),
@@ -179,13 +179,13 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('الغاء'),
+              child:  Text('180'.tr),
               onPressed: () {
                 Navigator.of(context).pop(); // Closes the dialog
               },
             ),
             TextButton(
-              child: const Text('حفظ'),
+              child:  Text('33'.tr),
               onPressed: () async {
                 BooksScreenControllerImp booksScreenController =
                     Get.put(BooksScreenControllerImp('null'));

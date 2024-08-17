@@ -24,6 +24,8 @@ class DescriptionBooks extends StatelessWidget {
     Get.put(DescriptionBooksControllerImp());
     return GetBuilder<DescriptionBooksControllerImp>(builder: (controller) {
       return Scaffold(
+        backgroundColor:
+        (!localController.isDark) ? AppColor.white : AppColor.black,
         appBar: AppBar(
           backgroundColor: AppColor.primaryColor,
           actions: [
@@ -112,16 +114,16 @@ class DescriptionBooks extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Text("اسم الكتاب: ${book.title}"),
+              Text("181: ${book.title}".tr),
               SizedBox(
                 height: 5,
               ),
-              Text("اسم الكاتب: ${book.author}"),
+              Text("182: ${book.author}".tr),
               SizedBox(
                 height: 25,
               ),
               Text(
-                "الوصف :",
+                "183".tr,
                 textAlign: TextAlign.start,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -147,7 +149,7 @@ class DescriptionBooks extends StatelessWidget {
                 },
                 color:(!localController.isDark)? AppColor.secondColor:AppColor.secondColorDark,
                 child: Text(
-                  "Open Book",
+                  "184".tr,
                   style: TextStyle(fontSize: 20,
                   ),
                 ),

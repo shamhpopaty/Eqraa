@@ -2,6 +2,8 @@ import 'package:eqraa/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/class/status_request.dart';
+import '../../../core/constant/color.dart';
+import '../../../core/functions/alert_alarm.dart';
 import '../../../widgets/friends_requests/send_request_widget.dart';
 import '../controller/send_requests_controller.dart';
 
@@ -18,6 +20,8 @@ class _RequestState extends State<Request> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+      (!localController.isDark) ? AppColor.white : AppColor.black,
       body: Padding(
         padding: const EdgeInsets.only(top: 50.0, right: 30, left: 30),
         child: Column(

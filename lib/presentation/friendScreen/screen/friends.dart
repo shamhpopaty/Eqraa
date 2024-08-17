@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/class/status_request.dart';
+import '../../../core/constant/color.dart';
+import '../../../core/functions/alert_alarm.dart';
 import '../controller/friend_controller.dart';
 import '../../../widgets/friends_requests/friends_widget.dart';
 
@@ -17,6 +19,8 @@ class _FriendsState extends State<Friends> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+      (!localController.isDark) ? AppColor.white : AppColor.black,
       body: Padding(
         padding: const EdgeInsets.only(top: 50.0, right: 30, left: 30),
         child: Column(
@@ -26,7 +30,7 @@ class _FriendsState extends State<Friends> {
                 IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
                 Expanded(
                   child: Text(
-                    'Friends',
+                    '185'.tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
