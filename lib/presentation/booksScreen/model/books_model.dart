@@ -4,12 +4,12 @@ class Book {
   String? category;
   String? author;
   String? description;
-  int? rating;
+  double? rating;
   String? cover;
   String? path;
   int? numberOfPages;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  String? createdAt;
+  String? updatedAt;
 
   Book({
     this.id,
@@ -32,12 +32,13 @@ class Book {
       category: json['category'],
       author: json['author'],
       description: json['description'],
-      rating: json['rating'],
+      // Safely cast rating to double even if it's provided as an integer
+      rating: json['rating'] is int ? (json['rating'] as int).toDouble() : json['rating'],
       cover: json['cover'],
       path: json['path'],
       numberOfPages: json['number_of_pages'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      createdAt: json['created_at'],
+      updatedAt: json['updated_at'],
     );
   }
 }

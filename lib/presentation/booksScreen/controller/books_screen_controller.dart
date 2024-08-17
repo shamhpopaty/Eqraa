@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:eqraa/core/app_export.dart';
+import 'package:eqraa/core/services/services.dart';
 import 'package:eqraa/linkapi.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:http/http.dart' as http;
@@ -13,7 +14,7 @@ import '../model/books_model.dart';
 class BooksScreenControllerImp extends GetxController {
   List<Book> books = [];
   List<Book> filteredBooks = []; // List for filtered books
-
+   MyServices myServices  = Get.find();
   var isLoading = true.obs;
   var searchQuery = ''.obs; // Observable for search query
   final String category;

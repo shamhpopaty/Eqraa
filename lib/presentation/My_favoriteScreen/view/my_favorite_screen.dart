@@ -89,7 +89,7 @@ class _MyFavoriteScreenState extends State<MyFavoriteScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(25),
+        padding: const EdgeInsets.all(15),
         child: SingleChildScrollView(
           child: Column(
             children: [

@@ -116,11 +116,11 @@ class DescriptionBooks extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              Text("181: ${book.title}".tr),
+              Text("Book name : ${book.title}".tr),
               SizedBox(
                 height: 5,
               ),
-              Text("182: ${book.author}".tr),
+              Text("Author name: ${book.author}".tr),
               SizedBox(
                 height: 25,
               ),
@@ -133,14 +133,14 @@ class DescriptionBooks extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
-              Text(book.description ?? ''),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(book.description ?? ''),
+              ),
               SizedBox(
                 height: 20,
               ),
-              Text(book.description ?? ''),
-              SizedBox(
-                height: 20,
-              ),
+
               MaterialButton(
                 onPressed: () {
                   Get.to(() => BookDetailScreen(
@@ -156,7 +156,7 @@ class DescriptionBooks extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 5,
               ),
               // زر تقييم الكتاب
               MaterialButton(
@@ -164,7 +164,7 @@ class DescriptionBooks extends StatelessWidget {
                   _showRatingDialog(context, controller);
                 },
                 color: AppColor.primaryColor,
-                child: Text(
+                child: const Text(
                   "Rate Book",
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),

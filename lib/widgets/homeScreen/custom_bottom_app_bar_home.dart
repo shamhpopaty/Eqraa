@@ -13,6 +13,7 @@ class CustomBottomAppBarHome extends StatelessWidget {
         color: AppColor.white,
         height: 69,
         notchMargin: 10,
+
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

@@ -77,7 +77,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   }
 
   bool _durationEnded() {
-    if (widget.endTimeMillisecond == null || widget.endTimeMillisecond == -1) {
+    if (widget.endTimeMillisecond == -1) {
       return false;
     }
     int currentMillisecond = DateTime.now().millisecondsSinceEpoch;
@@ -88,15 +88,10 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   late final Timer _timer;
 
   void startTimer() {
-    if (widget.endTimeMillisecond == -1) {
-      // No valid timer is set, do not start the timer
-      return;
-    }
-    print("TIMER : ${widget.endTimeMillisecond}");
     _timer = Timer.periodic(
       oneSec,
-      (Timer timer) {
-        if (_durationEnded()) {
+          (Timer timer) {
+        if(_durationEnded()){
           setState(() {
             _timer.cancel();
             alertalarmApp();
@@ -105,6 +100,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       },
     );
   }
+
 
   @override
   void dispose() {

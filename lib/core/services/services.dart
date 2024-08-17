@@ -26,6 +26,10 @@ class MyServices extends GetxService {
    return sharedPreferences.getString("id");
 
   }
+  getBookID(){
+    return sharedPreferences.getString("bookID");
+
+  }
 }
 
 initialServices() async {

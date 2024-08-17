@@ -143,10 +143,11 @@ class _BooksScreenState extends State<BooksScreen> {
                         imageHeight: 100,
                         widget: BookCard(
                           onTap: () {
+                            controller.myServices.sharedPreferences.setString("bookID", book.id.toString());
                             Get.to(() => DescriptionBooks(
-                                book: controller.books[i],
-                                endTimeMillisecond:
-                                    selectedTime!.millisecondsSinceEpoch));
+                              book: controller.books[i],
+                              endTimeMillisecond: selectedTime!.millisecondsSinceEpoch,
+                            ));
                           },
                           book: book,
                           isFavorite: isFavorite,
@@ -160,7 +161,8 @@ class _BooksScreenState extends State<BooksScreen> {
                             });
                           },
                           isDark: false,
-                        ),
+                        )
+
                       );
                     });
                   },

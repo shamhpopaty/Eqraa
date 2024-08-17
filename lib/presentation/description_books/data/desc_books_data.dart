@@ -1,4 +1,5 @@
 
+import 'package:dartz/dartz.dart';
 import 'package:eqraa/core/app_export.dart';
 import 'package:eqraa/core/services/services.dart';
 
@@ -14,8 +15,8 @@ MyServices myServices = Get.find();
     var response = await crud.postData(AppLink.descriptionbook, {});
     return response.fold((l) => l, (r) => r);
   }
-  dynamic rateBook(String rating) async {
-    var response = await crud.postData(AppLink.rateBooks(myServices.getUserID()), {"rating":rating});
+  dynamic rateBook(String rating,int bookID) async {
+    var response = await crud.postDataWithToken(AppLink.rateBooks(bookID),"", {"rating":rating});
     return response.fold((l) => l, (r) => r);
   }
 }

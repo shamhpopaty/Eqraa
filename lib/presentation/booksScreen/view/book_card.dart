@@ -37,15 +37,15 @@ class BookCard extends StatelessWidget {
             Image.network(
               "${AppLink.baseServer}/storage/${book.cover!}",
               fit: BoxFit.cover,
-              height: 120,
+              height: 80,
               errorBuilder: (context, error, stackTrace) {
                 return Image.asset(
-                    height: 120, AppImageAssets.camera, fit: BoxFit.cover);
+                    height: 80, AppImageAssets.camera, fit: BoxFit.cover);
               },
             ),
-            const SizedBox(height: 2),
+
             Text(book.title ?? ''),
-            const SizedBox(height: 2),
+            const SizedBox(height: 1),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

@@ -22,44 +22,28 @@ class _Contact_UsState extends State<Contact_Us> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title:   Text(
+        "163".tr,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 18,
+          //fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),),
       body: Column(
+mainAxisAlignment: MainAxisAlignment.center,
               children: [
-        Expanded(
-          flex: 0,
-          child: Container(
-            color: AppColor.primaryColor,
-            child:
-            Row(
-                children: [
-                IconButton(
-                onPressed: () {
-        Get.back();
-        },
-          icon: Icon(Icons.arrow_back),
-        ),
-        SizedBox(width: 250,),
-            Text(
-              "163".tr,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 25,
-                //fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-        ],
-          ),
-        ),
-      ),
-                SizedBox(height: 2,),
+
+
                 Padding(
-            padding: const EdgeInsets.only(top: 2.0, right: 50, left: 30),
+            padding: const EdgeInsets.only(top: 2.0, right: 5, left: 5),
                   child: Center(
                     child: Column(
                       children: [
                         Text("161".tr,
                         style: TextStyle(
-                          fontSize: 10,
+                          fontSize: 18,
                         ),),
                         InkWell(child: Text("162".tr,
                         style: TextStyle(
@@ -99,7 +83,7 @@ class _Contact_UsState extends State<Contact_Us> {
                   keyboardType: TextInputType.multiline,
                   maxLines: null, // Allows the text field to expand as needed
                   decoration:  InputDecoration(
-                    hintText: '179 ...'.tr,
+                    hintText: '179'.tr,
                     border:
                     OutlineInputBorder(), ////// تعديل شكل المربع تبع الملاحظات
                   ),

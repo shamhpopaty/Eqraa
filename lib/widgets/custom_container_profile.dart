@@ -36,8 +36,9 @@ Widget container_profile2(IconData icon, String containerName, int number)=>
                 color: AppColor.black,
                 fontWeight: FontWeight.bold
             ),),
-          SizedBox(width:180 ),
+          Spacer(),
          Text("$number"),
+          SizedBox(width: 15,),
         ],
       ),
     );
@@ -55,8 +56,9 @@ Widget container_profile3(IconData icon, String containerName, int number)=>
                 color: AppColor.black,
                 fontWeight: FontWeight.bold
             ),),
-          SizedBox(width:125 ),
+         Spacer(),
           Text("$number"),
+          SizedBox(width: 15,)
         ],
       ),
     );

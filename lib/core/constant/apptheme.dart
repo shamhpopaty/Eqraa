@@ -325,7 +325,7 @@ class MyTextStyle {
   );
   static TextStyle bodySmall = theme.textTheme.headlineMedium!.copyWith(
     color: AppColor.gray,
-    fontSize: 16,
+    fontSize: 12,
     fontFamily: 'Inter',
     fontWeight: FontWeight.w400,
   );

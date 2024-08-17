@@ -123,12 +123,8 @@ class Custom_Profile extends StatelessWidget {
                     "155".tr,
                     controller.userProfile.value.userBooks?.length ?? 0,
                   ),
-                  const Divider(),
-                  container_profile(
-                    Icons.stacked_bar_chart_outlined,
-                    "150".tr,
-                    Icons.arrow_circle_right_outlined,
-                  ),
+
+
 
                 ],
               ),

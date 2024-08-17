@@ -36,7 +36,7 @@ class DescriptionBooksControllerImp extends DescriptionBooksController {
 
   dynamic rateBook() async {
     statusRequest = StatusRequest.loading;
-    var response = await descriptionbookdata.rateBook(rating.toString()); // getting the data
+    var response = await descriptionbookdata.rateBook(rating.toString(),int.parse(myServices.getBookID())); // getting the data
     statusRequest = handlingData(response); //TO handle the response status
     if (StatusRequest.success == statusRequest) {
 

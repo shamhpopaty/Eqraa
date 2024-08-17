@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:eqraa/core/constant/apptheme.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -42,9 +43,8 @@ class CustomBottomAppBarButton extends StatelessWidget {
               period: const Duration(seconds: 4),
               child: Text(
                 title,
-                style: TextStyle(
-                  color: active == true ? AppColor.primaryColor : color,
-                ),
+
+                style: MyTextStyle.bodySmall.copyWith(  color: active == true ? AppColor.primaryColor : color,fontSize: 12)
               ),
             ),
           ],

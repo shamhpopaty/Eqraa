@@ -48,7 +48,7 @@ class UserBooks {
   final String? category;
   final String? author;
   final String? description;
-  final int? rating;
+  final double? rating;
   final String? cover;
   final String? path;
   final int? numberOfPages;
@@ -76,7 +76,7 @@ class UserBooks {
       category: json['category'] ?? '',
       author: json['author'] ?? '',
       description: json['description'] ?? '',
-      rating: json['rating'] ?? 0,
+      rating: json['rating'] is int ? (json['rating'] as int).toDouble() : json['rating'],
       cover: json['cover'] ?? '',
       path: json['path'] ?? '',
       numberOfPages: json['number_of_pages'] ?? 0,

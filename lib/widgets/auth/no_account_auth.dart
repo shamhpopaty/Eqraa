@@ -17,14 +17,14 @@ class NoAccountAuth extends StatelessWidget {
       children: [
         Text(
           text,
-          style: MyTextStyle.body,
+          style: MyTextStyle.bodySmall,
         ),
         const Padding(padding: EdgeInsets.all(5)),
         InkWell(
           onTap: onTap,
           child: Text(
             buttonText,
-            style: MyTextStyle.bodyLarge,
+            style: MyTextStyle.bodySmall,
           ),
         )
       ],
