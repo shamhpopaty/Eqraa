@@ -23,7 +23,7 @@ class MyFavoriteScreen extends StatefulWidget {
 }
 
 class _MyFavoriteScreenState extends State<MyFavoriteScreen> {
-  DateTime? selectedTime;
+  DateTime? selectedTime = DateTime.now();
 
   @override
   Widget build(BuildContext context) {

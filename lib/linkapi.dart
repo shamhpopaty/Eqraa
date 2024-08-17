@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:eqraa/core/app_export.dart';
+import 'package:eqraa/core/services/services.dart';
 
 class AppLink {
-
-  static const String ip = "192.168.137.1";
+MyServices myServices = Get.find();
+  static const String ip = "192.168.43.202";
   static const String server = "http://$ip:8000/api";
   static const String baseServer = "http://$ip:8000";
 
@@ -41,6 +43,10 @@ class AppLink {
   static const String bookscreen = "$server/books/?category[eq]=";
 
   static const String notesscreen = "$server/";
+static String rateBooks(int id) {
+   return "$server/books/$id/rate";
+}
+
 
   static const String addBookMark = '$server/bookmarks';
   static const String getBookMark='$server/bookmarks';

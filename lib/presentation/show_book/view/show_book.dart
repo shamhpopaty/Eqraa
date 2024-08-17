@@ -18,10 +18,20 @@ class BookDetailScreen extends StatefulWidget {
     'Alsera_Alnabawea': 'assets/pdf/Alsera_Alnabawea.pdf',
     'sera': 'assets/pdf/sera.pdf',
     'healthy book': 'assets/pdf/healthy book.pdf',
+    'Doaa': 'assets/pdf/Doaa.pdf',
+    'AllahIsTheRealLove': 'assets/pdf/AllahIsTheRealLove.pdf',
+    'Arbaoon': 'assets/pdf/Arbaoon.pdf',
+    'Ahlam': 'assets/pdf/Ahlam.pdf',
+    'NLP': 'assets/pdf/NLP.pdf',
+    'TheWizardAndTheStone': 'assets/pdf/TheWizardAndTheStone.pdf',
+    'YouCantHurtMe': 'assets/pdf/YouCantHurtMe.pdf',
+    'Shamail': 'assets/pdf/Shamail.pdf',
+    'Leannak_Allah': 'assets/pdf/Leannak_Allah.pdf',
+    'CookingBook': 'assets/pdf/CookingBook.pdf',
   };
   final int endTimeMillisecond;
   final Book book;
-  BookDetailScreen({
+  BookDetailScreen({super.key,
     required this.book,
     this.endTimeMillisecond = -1,
   });

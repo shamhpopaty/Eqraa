@@ -1,6 +1,8 @@
 import 'package:eqraa/core/app_export.dart';
 import 'package:eqraa/presentation/notesScreen/view/notes_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';  // استيراد مكتبة لتقييم النجوم
 import '../../../core/constant/color.dart';
 import '../../../core/functions/logout.dart';
 import '../../../linkapi.dart';
@@ -21,11 +23,12 @@ class DescriptionBooks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // استخدام الـ controller
     Get.put(DescriptionBooksControllerImp());
+
     return GetBuilder<DescriptionBooksControllerImp>(builder: (controller) {
       return Scaffold(
-        backgroundColor:
-        (!localController.isDark) ? AppColor.white : AppColor.black,
+        backgroundColor: (!localController.isDark) ? AppColor.white : AppColor.black,
         appBar: AppBar(
           backgroundColor: AppColor.primaryColor,
           actions: [
@@ -52,7 +55,6 @@ class DescriptionBooks extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      // Text("${controller.myServices.sharedPreferences.getString("username")??"Kheder Youssef"}"),
                     ],
                   )),
               DropDownList(),
@@ -102,14 +104,14 @@ class DescriptionBooks extends StatelessWidget {
                 child: book.cover != null
                     ? Image.network(
                   "${AppLink.baseServer}/storage/${book.cover!}",
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.asset('assets/images/camera.jpg',
-                              fit: BoxFit.cover);
-                        },
-                      )
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset('assets/images/camera.jpg',
+                        fit: BoxFit.cover);
+                  },
+                )
                     : Image.asset('assets/images/camera.jpg',
-                        fit: BoxFit.cover),
+                    fit: BoxFit.cover),
               ),
               SizedBox(
                 height: 20,
@@ -135,17 +137,16 @@ class DescriptionBooks extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
+              Text(book.description ?? ''),
+              SizedBox(
+                height: 20,
+              ),
               MaterialButton(
                 onPressed: () {
                   Get.to(() => BookDetailScreen(
-                        book: book,
-                        endTimeMillisecond: endTimeMillisecond,
-                      ));
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => BookDetailScreen(book: book),
-                  //     ));
+                    book: book,
+                    endTimeMillisecond: endTimeMillisecond,
+                  ));
                 },
                 color:(!localController.isDark)? AppColor.secondColor:AppColor.secondColorDark,
                 child: Text(
@@ -154,60 +155,65 @@ class DescriptionBooks extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 20,
+              ),
+              // زر تقييم الكتاب
+              MaterialButton(
+                onPressed: () {
+                  _showRatingDialog(context, controller);
+                },
+                color: AppColor.primaryColor,
+                child: Text(
+                  "Rate Book",
+                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+              ),
             ],
           ),
         ),
       );
     });
   }
+
+  // دالة لعرض حوار تقييم النجوم
+  void _showRatingDialog(BuildContext context, DescriptionBooksControllerImp controller) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Rate this book"),
+          content: RatingBar.builder(
+            initialRating: 0,
+            minRating: 1,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            itemCount: 5,
+            itemBuilder: (context, _) => Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            onRatingUpdate: (rating) {
+              controller.rating = rating.toInt();
+            },
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                controller.rateBook();
+                Navigator.pop(context);
+              },
+              child: Text("Confirm"),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
-
-// class BookDetailScreen extends StatefulWidget {
-//   final Book book;
-
-//   BookDetailScreen({required this.book});
-
-//   @override
-//   _BookDetailScreenState createState() => _BookDetailScreenState();
-// }
-
-// class _BookDetailScreenState extends State<BookDetailScreen> {
-//   String? localPath;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     fromAsset(widget.book.path ?? '', 'temp.pdf').then((f) {
-//       setState(() {
-//         localPath = f.path;
-//       });
-//     });
-//   }
-
-//   Future<File> fromAsset(String asset, String filename) async {
-//     try {
-//       var dir = await getApplicationDocumentsDirectory();
-//       var file = File("${dir.path}/$filename");
-//       var data = await rootBundle.load(asset);
-//       var bytes = data.buffer.asUint8List();
-//       await file.writeAsBytes(bytes, flush: true);
-//       return file;
-//     } catch (e) {
-//       throw Exception("Error copying asset to local storage: $e");
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(widget.book.title ?? ''),
-//       ),
-//       body: localPath != null
-//           ? PDFView(
-//               filePath: localPath,
-//             )
-//           : Center(child: CircularProgressIndicator()),
-//     );
-//   }
-// }

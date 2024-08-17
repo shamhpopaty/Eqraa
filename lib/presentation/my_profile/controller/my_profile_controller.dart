@@ -25,7 +25,7 @@ class MyProfileController extends GetxController {
       String accessToken = await TokenManager().accessToken;
 
       final response = await http.get(
-        Uri.parse(AppLink.myprofile(id as int)),
+        Uri.parse(AppLink.myprofile(int.parse(myServices.getUserID()) )),
         headers: {
           'Authorization': 'Bearer $accessToken',
         },

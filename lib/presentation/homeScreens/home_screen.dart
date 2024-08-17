@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:eqraa/core/app_export.dart';
+import 'package:eqraa/core/constant/apptheme.dart';
 import 'package:eqraa/core/constant/color.dart';
 import 'package:eqraa/presentation/My_Profile/view/my_profile.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        // Text("${controller.myServices.sharedPreferences.getString("username")??"Kheder Youssef"}"),
+                        Text("${controller.myServices.sharedPreferences.getString("username")??"Kheder Youssef"}",style: MyTextStyle.title.copyWith(color: AppColor.white),),
                       ],
                     )),
                 DropDownList(),
